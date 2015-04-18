@@ -9,15 +9,13 @@
 
 	"pixelDrivers": [
 		{
-			"module": "lib/PixelNode_Driver_FadeCandy",
+			"module": "pixelnode-driver-fadecandy",
 			"address": "127.0.0.1",
 			"port": 7890,
 			"delay": 50
 		},
 		{
-			"module": "lib/PixelNode_Driver_WebSimulator",
-			"address": "127.0.0.1",
-			"port": 7890,
+			"module": "pixelnode-driver-websimulator",
 			"delay": 50
 		}
 	],
@@ -26,42 +24,73 @@
 		{
 			"name": "touch",
 			"module": "PixelNode_Input_Touch",
-			"tmp_module": "../lib/PixelNode_InputSource.js"
+			"tmp_module": "../lib/PixelNode_Input.js"
 		},
 		{
 			"name": "rgb1",
 			"module": "PixelNode_Input_RGB",
-			"tmp_module": "../lib/PixelNode_InputSource.js"
+			"tmp_module": "../lib/PixelNode_Input.js"
 		},
 		{
 			"name": "rgb2",
 			"module": "PixelNode_Input_RGB",
-			"tmp_module": "../lib/PixelNode_InputSource.js"
+			"tmp_module": "../lib/PixelNode_Input.js"
 		},
 		{
 			"name": "nunchuk1",
 			"module": "PixelNode_Input_Nunchuk",
-			"tmp_module": "../lib/PixelNode_InputSource.js"
+			"tmp_module": "../lib/PixelNode_Input.js"
 		},
 		{
 			"name": "nunchuk2",
 			"module": "PixelNode_Input_Nunchuk",
-			"tmp_module": "../lib/PixelNode_InputSource.js"
+			"tmp_module": "../lib/PixelNode_Input.js"
 		}
 	],
 
 	"effects": [
 		{
-			"name": "Rain",
-			"module": "PixelNode_Effect_Rain",
+			"name": "RainBow2",
+			"module": "./PixelNode_Effect_Rainbow",
 			"inputs": {
 				"color1": "rgb1.color",
 				"color2": "rgb2.color",
 				"stopper": "touch.values"
 			},
 			"outputs": [
-				"domePixels.strips",
-				"heart2.leaves"
+				{
+					"name": "rainbow",
+					"targets": [
+						"domePixels.rings",
+						"touch.strips"
+					]
+				},
+				{
+					"name": "black",
+					"targets": [
+						"player1.rings",
+						"player2.rings"
+					]
+				}
+			]
+		},		
+		{
+			"name": "RedBlue",
+			"module": "./PixelNode_Effect_RedBlue",
+			"inputs": {
+				"color1": "rgb1.color",
+				"color2": "rgb2.color",
+				"stopper": "touch.values"
+			},
+			"outputs": [
+				{
+					"name": "glow",
+					"targets": [
+						"domePixels.rings",
+						"player1.strips",
+						"player2.strips"
+					]
+				}
 			]
 		}
 	]
