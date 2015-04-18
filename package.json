@@ -1,0 +1,34 @@
+{
+  "name": "pixelnode",
+  "version": "0.0.1",
+  "description": "Controlling LED strips with different drivers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwisk/PixelNode.git"
+  },
+  "author": "Amely Kling <mail@dwi.sk> (http://dwi.sk)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dwisk/PixelNode/issues"
+  },
+  "homepage": "https://github.com/dwisk/PixelNode#readme",
+  "dependencies": {
+    "express": "^4.12.3",
+    "jade": "^1.9.2",
+    "socket.io": "~1.3.5",
+    "clone": "~1.0.2",
+    "underscore": "~1.8.3",
+    "colors": "~1.0.3"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-less": "~1.0.1",
+    "grunt-contrib-concat": "~0.5.1",
+    "main-bower-files": "~2.6.2",
+    "grunt-contrib-clean": "~0.6.0"
+  }
+}

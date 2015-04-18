@@ -1,0 +1,11 @@
+doctype
+html
+	head
+		title= options.title
+		link(rel='stylesheet', href='/layout.css')
+		block head
+	body(ng-app="myApp")
+		block body
+
+		script(src='/libs.min.js')
+		block foot

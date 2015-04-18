@@ -1,0 +1,49 @@
+{
+	"title": "PixelNode",
+	"pixelDriver": "FadeCandy",
+	"inputMode": "client",
+
+	"inputs": [
+		{
+			"name": "touch",
+			"module": "PixelNode_Input_Touch",
+			"tmp_module": "../lib/PixelNode_InputSource.js"
+		},
+		{
+			"name": "rgb1",
+			"module": "PixelNode_Input_RGB",
+			"tmp_module": "../lib/PixelNode_InputSource.js"
+		},
+		{
+			"name": "rgb2",
+			"module": "PixelNode_Input_RGB",
+			"tmp_module": "../lib/PixelNode_InputSource.js"
+		},
+		{
+			"name": "nunchuk1",
+			"module": "PixelNode_Input_Nunchuk",
+			"tmp_module": "../lib/PixelNode_InputSource.js"
+		},
+		{
+			"name": "nunchuk2",
+			"module": "PixelNode_Input_Nunchuk",
+			"tmp_module": "../lib/PixelNode_InputSource.js"
+		}
+	],
+
+	"effects": [
+		{
+			"name": "Rain",
+			"module": "PixelNode_Effect_Rain",
+			"inputs": {
+				"color1": "rgb1.color",
+				"color2": "rgb2.color",
+				"stopper": "touch.values"
+			},
+			"outputs": [
+				"domePixels.strips",
+				"heart2.leaves"
+			]
+		}
+	]
+}

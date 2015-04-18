@@ -1,0 +1,68 @@
+{
+	"title": "PixelNode",
+	"inputMode": "server",
+
+	"webServer": {
+		"start": true,
+		"port": 3001
+	},
+
+	"pixelDrivers": [
+		{
+			"module": "lib/PixelNode_Driver_FadeCandy",
+			"address": "127.0.0.1",
+			"port": 7890,
+			"delay": 50
+		},
+		{
+			"module": "lib/PixelNode_Driver_WebSimulator",
+			"address": "127.0.0.1",
+			"port": 7890,
+			"delay": 50
+		}
+	],
+
+	"inputs": [
+		{
+			"name": "touch",
+			"module": "PixelNode_Input_Touch",
+			"tmp_module": "../lib/PixelNode_InputSource.js"
+		},
+		{
+			"name": "rgb1",
+			"module": "PixelNode_Input_RGB",
+			"tmp_module": "../lib/PixelNode_InputSource.js"
+		},
+		{
+			"name": "rgb2",
+			"module": "PixelNode_Input_RGB",
+			"tmp_module": "../lib/PixelNode_InputSource.js"
+		},
+		{
+			"name": "nunchuk1",
+			"module": "PixelNode_Input_Nunchuk",
+			"tmp_module": "../lib/PixelNode_InputSource.js"
+		},
+		{
+			"name": "nunchuk2",
+			"module": "PixelNode_Input_Nunchuk",
+			"tmp_module": "../lib/PixelNode_InputSource.js"
+		}
+	],
+
+	"effects": [
+		{
+			"name": "Rain",
+			"module": "PixelNode_Effect_Rain",
+			"inputs": {
+				"color1": "rgb1.color",
+				"color2": "rgb2.color",
+				"stopper": "touch.values"
+			},
+			"outputs": [
+				"domePixels.strips",
+				"heart2.leaves"
+			]
+		}
+	]
+}
