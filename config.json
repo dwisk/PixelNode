@@ -47,6 +47,24 @@
 		}
 	],
 
+	"effects_off": {
+		"name": "off",
+		"module": "./PixelNode_Effect_off",
+		"inputs": {
+		},
+		"outputs": [
+			{
+				"name": "black",
+				"targets": [
+					"domePixels.rings",
+					"touch.rings",
+					"inside.rings",
+					"player1.rings",
+					"player2.rings"
+				]
+			}
+		]
+	},		
 	"effects": [
 		{
 			"name": "RainBow2",
