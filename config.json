@@ -67,7 +67,43 @@
 	},		
 	"effects": [
 		{
-			"name": "RainBow2",
+			"name": "Ray",
+			"module": "./PixelNode_Effect_Ray",
+			"inputs": {
+				"color1": "rgb1.color",
+				"color2": "rgb2.color",
+				"stopper": "touch.values"
+			},
+			"outputs": [
+				{
+					"name": "glow",
+					"targets": [
+						"domePixels.strips"
+					]
+				}
+			]
+		},
+		{
+			"name": "Glitter",
+			"module": "./PixelNode_Effect_Glitter",
+			"inputs": {
+				"color1": "rgb1.color",
+				"color2": "rgb2.color",
+				"stopper": "touch.values"
+			},
+			"outputs": [
+				{
+					"name": "glow",
+					"targets": [
+						"domePixels.rings",
+						"player1.strips",
+						"player2.strips"
+					]
+				}
+			]
+		},
+		{
+			"name": "RainBow",
 			"module": "./PixelNode_Effect_Rainbow",
 			"inputs": {
 				"color1": "rgb1.color",
@@ -78,7 +114,7 @@
 				{
 					"name": "rainbow",
 					"targets": [
-						"domePixels.rings",
+						"domePixels.strips",
 						"touch.strips"
 					]
 				},
@@ -103,7 +139,7 @@
 				{
 					"name": "glow",
 					"targets": [
-						"domePixels.rings",
+						"domePixels.strips",
 						"player1.strips",
 						"player2.strips"
 					]
