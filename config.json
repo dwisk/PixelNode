@@ -23,28 +23,27 @@
 	"inputs": [
 		{
 			"name": "touch",
-			"module": "PixelNode_Input_Touch",
-			"tmp_module": "../lib/PixelNode_Input.js"
+			"module": "./PixelNode_Input"
 		},
 		{
 			"name": "rgb1",
-			"module": "PixelNode_Input_RGB",
-			"tmp_module": "../lib/PixelNode_Input.js"
+			"module": "./PixelNode_Input"
 		},
 		{
 			"name": "rgb2",
-			"module": "PixelNode_Input_RGB",
-			"tmp_module": "../lib/PixelNode_Input.js"
+			"module": "./PixelNode_Input"
 		},
 		{
 			"name": "nunchuk1",
-			"module": "PixelNode_Input_Nunchuk",
-			"tmp_module": "../lib/PixelNode_Input.js"
+			"module": "./PixelNode_Input"
 		},
 		{
 			"name": "nunchuk2",
-			"module": "PixelNode_Input_Nunchuk",
-			"tmp_module": "../lib/PixelNode_Input.js"
+			"module": "./PixelNode_Input"
+		},
+		{
+			"name": "switch",
+			"module": "./PixelNode_Input_WebSocket"
 		}
 	],
 

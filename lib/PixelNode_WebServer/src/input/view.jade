@@ -1,0 +1,19 @@
+extends /layout/basic
+
+block head
+	link(rel='stylesheet', href='/input.css')
+
+block foot
+	script(src='/socket.io/socket.io.js')
+	script(src='/input.js')
+
+block body
+	h1 Inputs
+	div(ng-controller="SimulatorCtrl")
+		h2 Current Effect
+		p {{effect.name}}
+		p autoplay
+			input(type='checkbox' ng-model='autoplay')
+		p force_off
+			input(type='checkbox' ng-model='force_off')
+		
