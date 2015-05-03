@@ -3,9 +3,14 @@ html
 	head
 		title= options.title
 		link(rel='stylesheet', href='/layout.css')
+		link(rel='stylesheet', href='/libs.css')
+		
 		block head
 	body(ng-app="myApp")
 		block body
 
+		script(src='/libs/jquery/dist/jquery.min.js')
+		script(src='/libs/slick-carousel/slick/slick.min.js')
 		script(src='/libs.min.js')
+		script(src='/libs/angular-slick/dist/slick.min.js')
 		block foot

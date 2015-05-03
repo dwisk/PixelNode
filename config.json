@@ -43,11 +43,11 @@
 		},
 		{
 			"name": "switch",
-			"module": "./PixelNode_Input_WebSocket"
+			"module": "../inputs/PixelNode_Input_WebSocket"
 		},
 		{
 			"name": "touchrgb",
-			"module": "./PixelNode_Input_TouchRGB",
+			"module": "../inputs/PixelNode_Input_TouchRGB",
 			"effect_select": "ColorRing",
 			"effect_ring1": "ColorPlayer1",
 			"effect_ring2": "ColorPlayer2"
@@ -66,7 +66,7 @@
 	"effects": [
 		{
 			"name": "Color",
-			"module": "./PixelNode_Effect_Color",
+			"module": "../effects/PixelNode_Effect_Color",
 			"inputs": {
 			},
 			"outputs": [
@@ -94,7 +94,7 @@
 		},
 		{
 			"name": "Off",
-			"module": "./PixelNode_Effect_off",
+			"module": "../effects/PixelNode_Effect_off",
 			"inputs": {
 			},
 			"outputs": [
@@ -112,7 +112,7 @@
 		},
 		{
 			"name": "Ray",
-			"module": "./PixelNode_Effect_Ray",
+			"module": "../effects/PixelNode_Effect_Ray",
 			"inputs": {
 				"color1": "rgb1.color",
 				"color2": "rgb2.color",
@@ -131,7 +131,7 @@
 		},
 		{
 			"name": "Glitter",
-			"module": "./PixelNode_Effect_Glitter",
+			"module": "../effects/PixelNode_Effect_Glitter",
 			"inputs": {
 				"color1": "rgb1.color",
 				"color2": "rgb2.color",
@@ -150,7 +150,7 @@
 		},
 		{
 			"name": "RainBow",
-			"module": "./PixelNode_Effect_Rainbow",
+			"module": "../effects/PixelNode_Effect_Rainbow",
 			"scale": 10,
 			"speed": 1,
 			"inputs": {
@@ -177,7 +177,7 @@
 		},		
 		{
 			"name": "ColorRing",
-			"module": "./PixelNode_Effect_Rainbow",
+			"module": "../effects/PixelNode_Effect_Rainbow",
 			"scale": 1,
 			"speed": 0,
 			"inputs": {
@@ -196,7 +196,7 @@
 		},		
 		{
 			"name": "RainBowRings",
-			"module": "./PixelNode_Effect_Rainbow",
+			"module": "../effects/PixelNode_Effect_Rainbow",
 			"scale": 1,
 			"speed": 100,
 			"inputs": {
@@ -217,7 +217,7 @@
 		},		
 		{
 			"name": "RedBlue",
-			"module": "./PixelNode_Effect_RedBlue",
+			"module": "../effects/PixelNode_Effect_RedBlue",
 			"inputs": {
 				"color1": "rgb1.color",
 				"color2": "rgb2.color",

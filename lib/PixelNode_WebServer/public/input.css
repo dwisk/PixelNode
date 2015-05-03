@@ -2,3 +2,36 @@
   width: 15px;
   height: 15px;
 }
+h2,
+p {
+  /* GLORY EFFECT: */
+  font-family: HelveticaNeue-Thin;
+  font-weight: 100;
+  font-size: 62px;
+  color: #FFFFFF;
+  line-height: 38px;
+  text-align: center;
+  text-transform: uppercase;
+}
+p {
+  font-size: 50px;
+  text-align: left;
+}
+.slider {
+  text-align: center;
+}
+.slider img {
+  margin: 0 auto;
+  opacity: 0.5;
+  width: 80%;
+  max-height: 800%;
+}
+.slider .slick-track {
+  padding: 15px 0;
+}
+.slider .slick-center img {
+  opacity: 1;
+}
+.deactivated {
+  opacity: 0.5;
+}
