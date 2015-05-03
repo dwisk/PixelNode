@@ -47,17 +47,20 @@
 		},
 		{
 			"name": "touchrgb",
-			"module": "./PixelNode_Input_TouchRGB"
+			"module": "./PixelNode_Input_TouchRGB",
+			"effect_select": "ColorRing",
+			"effect_ring1": "ColorPlayer1",
+			"effect_ring2": "ColorPlayer2"
 		}
 	],
 
 	"queue": [
 		{ "effect": "Off", "duration": 150 },
-		{ "effect": "Ray", "duration": 10000 },
+		{ "effect": "Ray", "duration": 10000000 },
+		{ "effect": "RainBowRings", "duration": 10000 },
 		{ "effect": "Glitter", "duration": 10000 },
 		{ "effect": "Color", "duration": 1000 },
 		{ "effect": "RainBow", "duration": 10000 },
-		{ "effect": "RainBowRings", "duration": 10000 },
 		{ "effect": "RedBlue", "duration": 10000 }
 	],
 	"effects": [
@@ -68,7 +71,13 @@
 			},
 			"outputs": [
 				{
-					"name": "color",
+					"name": "color1",
+					"targets": [
+						"domePixels.rings",
+						"player1.rings",
+						"player2.rings"
+					],
+					"name": "color2",
 					"targets": [
 						"domePixels.rings",
 						"player1.rings",
@@ -111,9 +120,11 @@
 			},
 			"outputs": [
 				{
-					"name": "glow",
+					"name": "ray",
 					"targets": [
-						"domePixels.strips"
+						"domePixels.strips",
+						"player1.strips",
+						"player2.strips"
 					]
 				}
 			]
