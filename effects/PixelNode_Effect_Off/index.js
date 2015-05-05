@@ -1,7 +1,7 @@
 /**
- * PixelNode_Effect_Rainbow 
+ * PixelNode_Effect_Off 
  * 
- * Ported fadecandy example
+ * Rainbow Effect (TOOD: Performance)
  * 
  * --------------------------------------------------------------------------------------------------------------------
  * 
@@ -19,48 +19,43 @@ var util = require("util");
  * ==================================================================================================================== */
 
 // extending Effect
-PixelNode_Effect = require('./PixelNode_Effect.js');
+PixelNode_Effect = require('../../lib/PixelNode_Effect.js');
 
 // define the Student class
-function PixelNode_Effect_Rainbow(options,pixelData) {
+function PixelNode_Effect_Off(options,pixelData) {
   var self = this;
-  PixelNode_Effect_Rainbow.super_.call(self, options, pixelData);
-  self.className = "PixelNode_Effect_Rainbow";
+  PixelNode_Effect_Off.super_.call(self, options, pixelData);
+  self.className = "PixelNode_Effect_Off";
+  self.public_dir = __dirname;
 }
 
 // class inheritance 
-util.inherits(PixelNode_Effect_Rainbow, PixelNode_Effect);
+util.inherits(PixelNode_Effect_Off, PixelNode_Effect);
 
 // module export
-module.exports = PixelNode_Effect_Rainbow;
+module.exports = PixelNode_Effect_Off;
 
 
 /* Variables
  * ==================================================================================================================== */
 
- PixelNode_Effect_Rainbow.prototype.n = 1;
+ PixelNode_Effect_Off.prototype.n = 1;
 
 
 /* Overridden Methods
  * ==================================================================================================================== */
 
 // init effect – override
-PixelNode_Effect_Rainbow.prototype.init = function() {
+PixelNode_Effect_Off.prototype.init = function() {
 	console.log("Init Effect Rainbow".grey);
 }
 
 // draw effect on target
-PixelNode_Effect_Rainbow.prototype.drawTarget = function(target, output) {
+PixelNode_Effect_Off.prototype.drawTarget = function(target, output) {
 	var self = this;
-
+	
 	for (var ring = 0; ring < target.length;ring++) {
-		var offset = 0;
-		//offset += 20;
-		if (output == "rainbow") {
-			self.fillRainbow(target[ring], self.counter+offset);		    
-		} else {
-			self.fillColor(target[ring], [250,0,0]);		    
-		}
+		self.fillColor(target[ring], [0,0,0]);		    
 	}
 
 }

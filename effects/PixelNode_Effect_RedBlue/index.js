@@ -20,13 +20,14 @@ var util = require("util");
  * ==================================================================================================================== */
 
 // extending Effect
-PixelNode_Effect = require('./PixelNode_Effect.js');
+PixelNode_Effect = require('../../lib/PixelNode_Effect.js');
 
 // define the Student class
 function PixelNode_Effect_RedBlue(options,pixelData) {
   var self = this;
   PixelNode_Effect_RedBlue.super_.call(self, options, pixelData);
   this.className = "PixelNode_Effect_RedBlue";
+  self.public_dir = __dirname;
 }
 
 // class inheritance 
