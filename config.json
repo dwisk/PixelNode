@@ -55,12 +55,11 @@
 	],
 
 	"queue": [
-		{ "effect": "Off", "duration": 150 },
-		{ "effect": "Ray", "duration": 10000000 },
-		{ "effect": "RainBowRings", "duration": 10000 },
+		{ "effect": "Ray", "duration": 10000 },
 		{ "effect": "Glitter", "duration": 10000 },
-		{ "effect": "Color", "duration": 1000 },
+		{ "effect": "Color", "duration": 100000 },
 		{ "effect": "RainBow", "duration": 10000 },
+		{ "effect": "RainBowRings", "duration": 10000 },
 		{ "effect": "RedBlue", "duration": 10000 }
 	],
 	"effects": [
@@ -178,6 +177,25 @@
 		{
 			"name": "ColorRing",
 			"module": "../effects/PixelNode_Effect_Rainbow",
+			"scale": 1,
+			"speed": 0,
+			"inputs": {
+				"color1": "rgb1.color",
+				"color2": "rgb2.color",
+				"stopper": "touch.values"
+			},
+			"outputs": [
+				{
+					"name": "rainbow",
+					"targets": [
+						"touch.rings"
+					]
+				}
+			]
+		},		
+		{
+			"name": "IntensityRing",
+			"module": "../effects/PixelNode_Effect_Intensity",
 			"scale": 1,
 			"speed": 0,
 			"inputs": {
