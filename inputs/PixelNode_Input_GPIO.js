@@ -77,7 +77,8 @@ PixelNode_Input_GPIO.prototype.init = function() {
 PixelNode_Input_GPIO.prototype.initPins = function() {
 	var self = this;
 	
-	var inputs = {};
+	// inputs
+	var init_inputs = {};
 
 	// init
 	self.options.pins.forEach(function(pin) {
@@ -85,11 +86,11 @@ PixelNode_Input_GPIO.prototype.initPins = function() {
 		b.pinMode(pin.number, b.INPUT);
 		
 		// set inputs
-		inputs[pin.input] = pin.default;
+		init_inputs[pin.input] = pin.default;
 	});
 
-	// set default data
-	global.pixelNode_data.inputs = _.extend(global.pixelNode_data.inputs, inputs);
+	// init pixelNode data
+	global.pixelNode_data.inputs[self.options.name] = _.extend(global.pixelNode_data.inputs[self.options.name], init_inputs);
 
 }
 
@@ -98,7 +99,7 @@ PixelNode_Input_GPIO.prototype.getPinStatus = function() {
 
 	self.options.pins.forEach(function(pin) {
 		b.digitalRead(pin.number, function(x) {
-			global.pixelNode_data.inputs[pin.input] = x.value == 1;
+			global.pixelNode_data.inputs[self.options.name][pin.input] = x.value == 1;
 		} );
 	});
 
