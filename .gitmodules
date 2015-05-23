@@ -1,0 +1,3 @@
+[submodule "inputs/PixelNode_Input_MPR121/Adafruit_Python_MPR121"]
+	path = inputs/PixelNode_Input_MPR121/Adafruit_Python_MPR121
+url=https://github.com/dwisk/Adafruit_Python_MPR121.git

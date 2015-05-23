@@ -43,10 +43,13 @@ module.exports = PixelNode_Input_MPR121;
  * ==================================================================================================================== */
 
 PixelNode_Input_MPR121.prototype.default_options = {
+	//"name": "touch",
+	//"module": "../inputs/PixelNode_Input_MPR121",
 	"data_target": "touches",
 	"crash_waittime": 1,
 	"crash_cautious_lifetime": 20,
-	"crash_cautious_waittime": 2
+	"crash_cautious_waittime": 2,
+	"i2c_bus": 2
 };
 
 var firstInit = 0;
@@ -104,7 +107,7 @@ PixelNode_Input_MPR121.prototype.start = function(callback) {
 	var self = this;
 
  	// spawn pythong process
-	var ls = spawn('python', ['-u', __dirname + '/touch.py']);
+	var ls = spawn('python', ['-u', __dirname + '/touch.py', self.options.i2c_bus]);
 	this.callback = callback;
 
 	// data listener

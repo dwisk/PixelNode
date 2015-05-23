@@ -29,10 +29,16 @@ import Adafruit_MPR121.MPR121 as MPR121
 # Create MPR121 instance.
 cap = MPR121.MPR121()
 
+# get bus from cli arguments
+if len(sys.argv) > 1:
+    bus = int(sys.argv[1])
+else :
+    bus = None
+
 
 # Initialize communication with MPR121 using default I2C bus of device, and 
 # default I2C address (0x5A).  On BeagleBone Black will default to I2C bus 0.
-if not cap.begin():
+if not cap.begin(bus):
     print 'Error initializing MPR121.  Check your wiring!'
     sys.exit(1)
 
