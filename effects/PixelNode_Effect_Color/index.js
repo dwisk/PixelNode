@@ -64,7 +64,8 @@ PixelNode_Effect_Color.prototype.drawTarget = function(target, output) {
 
 	var c; 
 	if (output == "color1") {
-		if (!global.pixelNode_data.inputs.rgb1) {
+		c = global.pixelNode_data.inputs.rgb1;
+		if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
 				c = new HSVColour(self.options.hue, self.options.saturation, self.options.value).getRGB();
 		} else {
 			c = {
@@ -74,7 +75,8 @@ PixelNode_Effect_Color.prototype.drawTarget = function(target, output) {
 			}
 		}
 	} else { // color2
-		if (!global.pixelNode_data.inputs.rgb2) {
+		c = global.pixelNode_data.inputs.rgb2;
+		if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
 				c = new HSVColour(self.options.hue+90, self.options.saturation, self.options.value).getRGB();
 		} else {
 			c = {
