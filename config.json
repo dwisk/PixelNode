@@ -56,18 +56,31 @@
 			"name": "buttons",
 			"module": "../inputs/PixelNode_Input_GPIO",
 			"pins": [
-				{ "number": "P8_8", "input": "button3", "default": false },
-				{ "number": "P8_10", "input": "button1", "default": false },
-				{ "number": "P8_12", "input": "button2", "default": false }
+				{ "number": "P8_10", "input": "button_left", "default": false },
+				{ "number": "P8_12", "input": "button_right", "default": false },
+				{ "number": "P8_8", "input": "button_back", "default": false }
 			]
 		},
 		{
-			"name": "touch",
-			"module": "../inputs/PixelNode_Input_MPR121",
-			"data_target": "touches",
-			"crash_waittime": 0.5,
-			"crash_cautious_lifetime": 15,
-			"crash_cautious_waittime": 2
+			"name": "rgb",
+			"module": "../inputs/PixelNode_Input_TCS34725",
+			"data_target": "rgbsensors",
+			"sensors": [
+				{
+					"name"	  : "color_left",
+				    "bus"     : "/dev/i2c-2", 
+				    "led_pin" : "P9_23", 
+				    "irq_pin" : "P9_15",
+				    "enable"  : "inputs.buttons.button_left"
+				},
+				{
+					"name"	  : "color_right",
+					"bus"     : "/dev/i2c-1", 
+					"led_pin" : "P9_25", 
+					"irq_pin" : "P9_27",
+					"enable"  : "inputs.buttons.button_right"
+			    }
+			]
 		}
 	],
 

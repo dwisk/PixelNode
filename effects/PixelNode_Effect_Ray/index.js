@@ -58,8 +58,10 @@ PixelNode_Effect_Ray.prototype.drawTarget = function(target) {
 	var ran;
 	var c, c1, c2;
 
+	//console.log(global.pixelNode_data.inputs);
+
 	// get color 1
-	c = global.pixelNode_data.inputs.rgb1;
+	c = global.pixelNode_data.inputs.rgb.color_left;
 	if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
 		c1 = new RGBColour(c[0],c[1],c[2]).getRGB();
 	} else {
@@ -67,7 +69,7 @@ PixelNode_Effect_Ray.prototype.drawTarget = function(target) {
 	}
 
 	// get color 2
-	c = global.pixelNode_data.inputs.rgb2;
+	c = global.pixelNode_data.inputs.rgb.color_right;
 	if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
 		c2 = new RGBColour(c[0]*0.5,c[1]*0.5,c[2]*0.5).getRGB();
 	} else {
