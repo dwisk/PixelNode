@@ -51,16 +51,32 @@
 			"effect_select": "ColorRing",
 			"effect_ring1": "ColorPlayer1",
 			"effect_ring2": "ColorPlayer2"
+		},
+		{
+			"name": "buttons",
+			"module": "../inputs/PixelNode_Input_GPIO",
+			"pins": [
+				{ "number": "P8_8", "input": "button3", "default": false },
+				{ "number": "P8_10", "input": "button1", "default": false },
+				{ "number": "P8_12", "input": "button2", "default": false }
+			]
+		},
+		{
+			"name": "touch",
+			"module": "../inputs/PixelNode_Input_MPR121",
+			"data_target": "touches",
+			"crash_waittime": 0.5,
+			"crash_cautious_lifetime": 15,
+			"crash_cautious_waittime": 2
 		}
 	],
 
 	"queue": [
-		{ "effect": "Ray", "duration": 10000 },
-		{ "effect": "Glitter", "duration": 10000 },
-		{ "effect": "Color", "duration": 100000 },
-		{ "effect": "RainBow", "duration": 10000 },
-		{ "effect": "RainBowRings", "duration": 10000 },
-		{ "effect": "RedBlue", "duration": 10000 }
+		{ "effect": "Ray", "duration": 30000 },
+		{ "effect": "Glitter", "duration": 30000 },
+		{ "effect": "RainBow", "duration": 30000 },
+		{ "effect": "RainBowRings", "duration": 30000 },
+		{ "effect": "RedBlue", "duration": 30000 }
 	],
 	"effects": [
 		{
@@ -72,7 +88,7 @@
 				{
 					"name": "color1",
 					"targets": [
-						"domePixels.rings",
+						"domePixels.strips",
 						"player1.rings",
 						"player2.rings"
 					],
@@ -93,7 +109,7 @@
 		},
 		{
 			"name": "Off",
-			"module": "../effects/PixelNode_Effect_off",
+			"module": "../effects/PixelNode_Effect_Off",
 			"inputs": {
 			},
 			"outputs": [
@@ -129,6 +145,25 @@
 			]
 		},
 		{
+			"name": "Wall",
+			"module": "../effects/PixelNode_Effect_Wall",
+			"inputs": {
+				"color1": "rgb1.color",
+				"color2": "rgb2.color",
+				"stopper": "touch.values"
+			},
+			"outputs": [
+				{
+					"name": "ray",
+					"targets": [
+						"domePixels.rings",
+						"player1.strips",
+						"player2.strips"
+					]
+				}
+			]
+		},
+		{
 			"name": "Glitter",
 			"module": "../effects/PixelNode_Effect_Glitter",
 			"inputs": {
@@ -151,7 +186,7 @@
 			"name": "RainBow",
 			"module": "../effects/PixelNode_Effect_Rainbow",
 			"scale": 10,
-			"speed": 1,
+			"speed": 5,
 			"inputs": {
 				"color1": "rgb1.color",
 				"color2": "rgb2.color",
@@ -178,7 +213,7 @@
 			"name": "ColorRing",
 			"module": "../effects/PixelNode_Effect_Rainbow",
 			"scale": 1,
-			"speed": 0,
+			"speed": 5,
 			"inputs": {
 				"color1": "rgb1.color",
 				"color2": "rgb2.color",

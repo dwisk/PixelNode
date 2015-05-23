@@ -75,11 +75,12 @@ PixelNode_Effect_Glitter.prototype.drawTarget = function(target) {
 
 	var intensity;
 	if (global.pixelNode_data.inputs.intensity != null) {
-		intensity = global.pixelNode_data.inputs.intensity/2 + 0.5;
+		intensity = global.pixelNode_data.inputs.intensity/2.5 + 0.6;
 	} else {
 		intensity = 0.6;
 	}
 
+//	console.log(intensity);
 
 	// draw effect
 	if (self.counter % 30 == 0) {
