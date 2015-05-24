@@ -50,8 +50,20 @@
 			]
 		},
 		{
+			"name": "touch",
+			"module": "../inputs/PixelNode_Input_MPR121",
+			"data_target": "touches",
+			"crash_waittime": 1,
+			"crash_cautious_lifetime": 20,
+			"crash_cautious_waittime": 2,
+			"i2c_bus": 2,
+			"offset": 1,
+			"verbose": false
+		},
+		{
 			"name": "rgb",
-			"module": "pixelnode-input-bbbtcs34725",
+			"module": "pixelnode-input",
+			"modulex": "pixelnode-input-bbbtcs34725",
 			"data_target": "rgbsensors",
 			"sensors": [
 				{
@@ -90,15 +102,19 @@
 				{
 					"name": "color1",
 					"targets": [
-						"domePixels.strips",
 						"player1.rings"
 					]
 				},
 				{
 					"name": "color2",
 					"targets": [
-						"domePixels.rings",
 						"player2.rings"
+					]
+				},
+				{
+					"name": "both",
+					"targets": [
+						"domePixels.strips"
 					]
 				}
 			]

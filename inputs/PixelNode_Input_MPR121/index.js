@@ -15,7 +15,6 @@
 
 var util = require("util");
 var _ = require('underscore');
-var MPR121 = require("./MPR121");
 var spawn = require('child_process').spawn;
 
 
@@ -49,12 +48,16 @@ PixelNode_Input_MPR121.prototype.default_options = {
 	"crash_waittime": 1,
 	"crash_cautious_lifetime": 20,
 	"crash_cautious_waittime": 2,
-	"i2c_bus": 2
+	"i2c_bus": 2,
+	"offset": 0,
+	"verbose": false
 };
 
 var firstInit = 0;
 var lastInit = 0;
 var crashCount = 0;
+
+var lastPins = [];
 
 /* Overridden Methods
  * ==================================================================================================================== */
@@ -91,10 +94,22 @@ PixelNode_Input_MPR121.prototype.init = function() {
 
 	// start effect
 	self.start(function(result) {
-		self.setInputData(result, self.options.data_target)
-	})
+		if (self.options.offset != 0) {
+			var segment1 = result.slice(self.options.offset);
+			var segment2 = result.slice(0,self.options.offset);
+			pins = segment1.concat(segment2);
+		} else {
+			pins = result;
+		}
 
 
+		for (var i = pins.length - 1; i >= 0; i--) {
+			if (pins[i] != lastPins[i]) {
+				lastPins[i] = pins[i];
+				global.pixelNode.data.set(["inputs", self.options.name, "touches", i], pins[i], !self.options.verbose);
+			} 
+		}
+	});
 }
 
 
