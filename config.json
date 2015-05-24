@@ -42,7 +42,7 @@
 		},
 		{
 			"name": "buttons",
-			"module": "../inputs/PixelNode_Input_GPIO",
+			"module": "pixelnode-input-bbbgpio",
 			"pins": [
 				{ "number": "P8_10", "input": "button_left", "default": false },
 				{ "number": "P8_12", "input": "button_right", "default": false },
@@ -51,7 +51,7 @@
 		},
 		{
 			"name": "rgb",
-			"module": "../inputs/PixelNode_Input_TCS34725",
+			"module": "pixelnode-input-bbbtcs34725",
 			"data_target": "rgbsensors",
 			"sensors": [
 				{

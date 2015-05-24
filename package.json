@@ -17,10 +17,8 @@
   },
   "homepage": "https://github.com/dwisk/PixelNode#readme",
   "dependencies": {
-    "bbb-tcs34725": "0.0.3",
     "colors": "~1.0.3",
     "express": "^4.12.3",
-    "i2c": "^0.2.1",
     "jade": "^1.9.2",
     "pixelnode-driver-fadecandy": "0.0.x",
     "pixelnode-driver-websimulator": "0.0.x",
@@ -34,6 +32,8 @@
     "grunt-contrib-less": "~1.0.1",
     "grunt-contrib-concat": "~0.5.1",
     "main-bower-files": "~2.6.2",
-    "grunt-contrib-clean": "~0.6.0"
+    "grunt-contrib-clean": "~0.6.0",
+    "pixelnode-input-bbbgpio": "~0.0.1",
+    "pixelnode-input-bbbtcs34725": "~0.0.2"
   }
 }
