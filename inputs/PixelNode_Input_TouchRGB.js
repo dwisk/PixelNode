@@ -114,9 +114,9 @@ PixelNode_Input_TouchRGB.prototype.init = function() {
 
 	});
 
-	var effectManager = global.pixelNode.effectManager;
-	effectManager.on('drawEffect_after', function() {
-		self.overrideEffect(effectManager);
+	var gameManager = global.pixelNode.gameManager;
+	gameManager.on('drawEffect_after', function() {
+		self.overrideEffect(gameManager);
 	});
 
 
@@ -212,25 +212,25 @@ PixelNode_Input_TouchRGB.prototype.reader = function() {
 
 }
 
-PixelNode_Input_TouchRGB.prototype.overrideEffect = function(effectManager) {
+PixelNode_Input_TouchRGB.prototype.overrideEffect = function(gameManager) {
 	var self = this;
 	if (global.pixelNode_data.inputs.button3 == true) {
-		effectManager.getEffectByName("IntensityRing").draw();
+		gameManager.getEffectByName("IntensityRing").draw();
 		didOverrideIntensity = true;
 	}
 	else if (didOverrideIntensity) { 
-		effectManager.pixelDataOff();
+		gameManager.pixelDataOff();
 		didOverrideIntensity = false;
 	}
 
 	if (global.pixelNode_data.inputs.button1 == true || global.pixelNode_data.inputs.button2 == true) {
-		effectManager.getEffectByName("ColorRing").draw();
+		gameManager.getEffectByName("ColorRing").draw();
 		if (self.colorSelect1) effectColorRing1.draw();
 		if (self.colorSelect2) effectColorRing2.draw();
 		didOverrideColor = true;
 	}
 	else if (didOverrideColor) { 
-		effectManager.pixelDataOff();
+		gameManager.pixelDataOff();
 		didOverrideColor = false;
 	}
 }

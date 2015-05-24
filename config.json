@@ -35,7 +35,8 @@
 		},
 		{
 			"name": "touchrgb",
-			"module": "../inputs/PixelNode_Input_TouchRGB",
+			"module": "pixelnode-input",
+			"modulex": "../inputs/PixelNode_Input_TouchRGB",
 			"effect_select": "ColorRing",
 			"effect_ring1": "ColorPlayer1",
 			"effect_ring2": "ColorPlayer2"
@@ -83,220 +84,259 @@
 		}
 	],
 
-	"queue": [
-		{ "effect": "Color", "duration": 30000 },
-		{ "effect": "Ray", "duration": 30000 },
-		{ "effect": "Glitter", "duration": 30000 },
-		{ "effect": "RainBow", "duration": 30000 },
-		{ "effect": "RainBowRings", "duration": 30000 },
-		{ "effect": "RedBlue", "duration": 30000 }
+	"future_games": [
+		{
+			"name": "FourRows",
+			"module": "../games/PixelNode_Game_FourRows",
+			"mappings": {
+				"color1": "player1.rings",
+				"color2": "player2.rings",
+				"canvas": "domePixels.strips"
+			},
+			"inputs": {
+				"color_left": "inputs.rgb.color_left",
+				"color_right": "inputs.rgb.color_right",
+				"touches": "touch.touches"
+			}
+		}
 	],
-	"effects": [
+	"games": [
+
 		{
-			"name": "Color",
-			"module": "../effects/PixelNode_Effect_Color",
-			"inputs": {
+			"name": "2colored",
+			"title": "Two colored",
+			"module": "../games/PixelNode_Game_Animation",
+			"mappings": {
+				"color1": "player1.rings",
+				"color2": "player2.rings",
+				"canvas": "domePixels.strips"
 			},
-			"outputs": [
+			"inputs": {
+				"color_left": "inputs.rgb.color_left",
+				"color_right": "inputs.rgb.color_right",
+				"touches": "touch.touches"
+			},
+			"queue": [
+				{ "effect": "Color", "duration": 10000 },
+				{ "effect": "Ray", "duration": 30000 },
+				{ "effect": "Glitter", "duration": 30000 }
+			],
+			"effects": [
 				{
-					"name": "color1",
-					"targets": [
-						"player1.rings"
+					"name": "Color",
+					"module": "../../effects/PixelNode_Effect_Color",
+					"inputs": {
+					},
+					"outputs": [
+						{
+							"name": "color1",
+							"targets": [
+								"player1.rings"
+							]
+						},
+						{
+							"name": "color2",
+							"targets": [
+								"player2.rings"
+							]
+						},
+						{
+							"name": "both",
+							"targets": [
+								"domePixels.strips"
+							]
+						}
 					]
 				},
 				{
-					"name": "color2",
-					"targets": [
-						"player2.rings"
+					"name": "Ray",
+					"module": "../../effects/PixelNode_Effect_Ray",
+					"inputs": {
+						"color1": "rgb1.color",
+						"color2": "rgb2.color",
+						"stopper": "touch.values"
+					},
+					"outputs": [
+						{
+							"name": "ray",
+							"targets": [
+								"domePixels.strips",
+								"player1.strips",
+								"player2.strips"
+							]
+						}
 					]
 				},
 				{
-					"name": "both",
-					"targets": [
-						"domePixels.strips"
-					]
-				}
-			]
-		},
-		{
-			"name": "Off",
-			"module": "../effects/PixelNode_Effect_Off",
-			"inputs": {
-			},
-			"outputs": [
-				{
-					"name": "black",
-					"targets": [
-						"domePixels.rings",
-						"touch.rings",
-						"inside.rings",
-						"player1.rings",
-						"player2.rings"
-					]
-				}
-			]
-		},
-		{
-			"name": "Ray",
-			"module": "../effects/PixelNode_Effect_Ray",
-			"inputs": {
-				"color1": "rgb1.color",
-				"color2": "rgb2.color",
-				"stopper": "touch.values"
-			},
-			"outputs": [
-				{
-					"name": "ray",
-					"targets": [
-						"domePixels.strips",
-						"player1.strips",
-						"player2.strips"
-					]
-				}
-			]
-		},
-		{
-			"name": "Wall",
-			"module": "../effects/PixelNode_Effect_Wall",
-			"inputs": {
-				"color1": "rgb1.color",
-				"color2": "rgb2.color",
-				"stopper": "touch.values"
-			},
-			"outputs": [
-				{
-					"name": "ray",
-					"targets": [
-						"domePixels.rings",
-						"player1.strips",
-						"player2.strips"
-					]
-				}
-			]
-		},
-		{
-			"name": "Glitter",
-			"module": "../effects/PixelNode_Effect_Glitter",
-			"inputs": {
-				"color1": "rgb1.color",
-				"color2": "rgb2.color",
-				"stopper": "touch.values"
-			},
-			"outputs": [
-				{
-					"name": "glow",
-					"targets": [
-						"domePixels.rings",
-						"player1.strips",
-						"player2.strips"
-					]
-				}
-			]
-		},
-		{
-			"name": "RainBow",
-			"module": "../effects/PixelNode_Effect_Rainbow",
-			"scale": 10,
-			"speed": 5,
-			"inputs": {
-				"color1": "rgb1.color",
-				"color2": "rgb2.color",
-				"stopper": "touch.values"
-			},
-			"outputs": [
-				{
-					"name": "rainbow",
-					"targets": [
-						"domePixels.strips",
-						"touch.strips"
+					"name": "Wall",
+					"module": "../../effects/PixelNode_Effect_Wall",
+					"inputs": {
+						"color1": "rgb1.color",
+						"color2": "rgb2.color",
+						"stopper": "touch.values"
+					},
+					"outputs": [
+						{
+							"name": "ray",
+							"targets": [
+								"domePixels.rings",
+								"player1.strips",
+								"player2.strips"
+							]
+						}
 					]
 				},
 				{
-					"name": "black",
-					"targets": [
-						"player1.rings",
-						"player2.rings"
+					"name": "Glitter",
+					"module": "../../effects/PixelNode_Effect_Glitter",
+					"inputs": {
+						"color1": "rgb1.color",
+						"color2": "rgb2.color",
+						"stopper": "touch.values"
+					},
+					"outputs": [
+						{
+							"name": "glow",
+							"targets": [
+								"domePixels.rings",
+								"player1.strips",
+								"player2.strips"
+							]
+						}
 					]
 				}
 			]
-		},		
+		},
 		{
-			"name": "ColorRing",
-			"module": "../effects/PixelNode_Effect_Rainbow",
-			"scale": 1,
-			"speed": 5,
-			"inputs": {
-				"color1": "rgb1.color",
-				"color2": "rgb2.color",
-				"stopper": "touch.values"
+			"name": "rainbows",
+			"title": "Rainbows and more",
+			"module": "../games/PixelNode_Game_Animation",
+			"mappings": {
+				"color1": "player1.rings",
+				"color2": "player2.rings",
+				"canvas": "domePixels.strips"
 			},
-			"outputs": [
+			"inputs": {
+				"color_left": "inputs.rgb.color_left",
+				"color_right": "inputs.rgb.color_right",
+				"touches": "touch.touches"
+			},
+			"queue": [
+				{ "effect": "RainBow", "duration": 30000 },
+				{ "effect": "RainBowRings", "duration": 30000 },
+				{ "effect": "RedBlue", "duration": 30000 }
+			],
+			"effects": [
 				{
-					"name": "rainbow",
-					"targets": [
-						"touch.rings"
+					"name": "RainBow",
+					"module": "../../effects/PixelNode_Effect_Rainbow",
+					"scale": 10,
+					"speed": 5,
+					"inputs": {
+						"color1": "rgb1.color",
+						"color2": "rgb2.color",
+						"stopper": "touch.values"
+					},
+					"outputs": [
+						{
+							"name": "rainbow",
+							"targets": [
+								"domePixels.strips",
+								"touch.strips"
+							]
+						},
+						{
+							"name": "black",
+							"targets": [
+								"player1.rings",
+								"player2.rings"
+							]
+						}
+					]
+				},	
+				{
+					"name": "RainBowRings",
+					"module": "../../effects/PixelNode_Effect_Rainbow",
+					"scale": 1,
+					"speed": 100,
+					"inputs": {
+						"color1": "rgb1.color",
+						"color2": "rgb2.color",
+						"stopper": "touch.values"
+					},
+					"outputs": [
+						{
+							"name": "rainbow",
+							"targets": [
+								"domePixels.rings",
+								"player1.rings",
+								"player2.rings"
+							]
+						}
+					]
+				},		
+				{
+					"name": "RedBlue",
+					"module": "../../effects/PixelNode_Effect_RedBlue",
+					"inputs": {
+						"color1": "rgb1.color",
+						"color2": "rgb2.color",
+						"stopper": "touch.values"
+					},
+					"outputs": [
+						{
+							"name": "glow",
+							"targets": [
+								"domePixels.strips",
+								"player1.strips",
+								"player2.strips"
+							]
+						}
 					]
 				}
 			]
-		},		
+		},
 		{
-			"name": "IntensityRing",
-			"module": "../effects/PixelNode_Effect_Intensity",
-			"scale": 1,
-			"speed": 0,
-			"inputs": {
-				"color1": "rgb1.color",
-				"color2": "rgb2.color",
-				"stopper": "touch.values"
+			"name": "working",
+			"title": "Work in Progress",
+			"module": "../games/PixelNode_Game_Animation",
+			"mappings": {
+				"color1": "player1.rings",
+				"color2": "player2.rings",
+				"canvas": "domePixels.strips"
 			},
-			"outputs": [
-				{
-					"name": "rainbow",
-					"targets": [
-						"touch.rings"
-					]
-				}
-			]
-		},		
-		{
-			"name": "RainBowRings",
-			"module": "../effects/PixelNode_Effect_Rainbow",
-			"scale": 1,
-			"speed": 100,
 			"inputs": {
-				"color1": "rgb1.color",
-				"color2": "rgb2.color",
-				"stopper": "touch.values"
+				"color_left": "inputs.rgb.color_left",
+				"color_right": "inputs.rgb.color_right",
+				"touches": "touch.touches"
 			},
-			"outputs": [
+			"queue": [
+				{ "effect": "Wall", "duration": 100000 }
+			],
+			"effects": [
+				
 				{
-					"name": "rainbow",
-					"targets": [
-						"domePixels.rings",
-						"player1.rings",
-						"player2.rings"
-					]
-				}
-			]
-		},		
-		{
-			"name": "RedBlue",
-			"module": "../effects/PixelNode_Effect_RedBlue",
-			"inputs": {
-				"color1": "rgb1.color",
-				"color2": "rgb2.color",
-				"stopper": "touch.values"
-			},
-			"outputs": [
-				{
-					"name": "glow",
-					"targets": [
-						"domePixels.strips",
-						"player1.strips",
-						"player2.strips"
+					"name": "Wall",
+					"module": "../../effects/PixelNode_Effect_Wall",
+					"inputs": {
+						"color1": "rgb1.color",
+						"color2": "rgb2.color",
+						"stopper": "touch.values"
+					},
+					"outputs": [
+						{
+							"name": "ray",
+							"targets": [
+								"domePixels.rings",
+								"player1.strips",
+								"player2.strips"
+							]
+						}
 					]
 				}
 			]
 		}
+
 	]
+
 }

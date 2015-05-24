@@ -9,21 +9,22 @@ block foot
 
 block body
 	div(ng-controller="SimulatorCtrl" class="container")
-		h2 {{effect.name}}
 		div(class='slider col-xs-12 responsive')
 			slick(infinite="true", 
-				slides-to-show="3",
-				slides-to-scroll="3",
+				slides-to-show="2",
+				slides-to-scroll="2",
 				arrows="false",
 				center-mode="true",
-				current-index="queueId",
+				current-index="listId",
 				focus-on-select="true",
 				center-padding="60px")
 
-				each effect in config.queue
+				each game in config.games
 					div
-						img(src='/effects/#{effect.effect}/icon.png')
+						img(src='/games/#{game.name}/icon.png')
 
+		h2 {{game.title}}
+		h3 {{game.subtitle}}
 		
 		div 
 			p(ng-class="{deactivated: !autoplay}", ng-click="autoplay = !autoplay") Autoplay 
