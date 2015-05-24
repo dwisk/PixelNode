@@ -58,7 +58,7 @@ PixelNode_Effect_Glitter.prototype.drawTarget = function(target) {
 	var c, c1, c2;
 
 	// get color 1
-	c = global.pixelNode_data.inputs.rgb.color_left;
+	c = global.pixelNode.data.get("inputs.rgb.color_left");
 	if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
 		c1 = new RGBColour(c[0],c[1],c[2]).getRGB();
 	} else {
@@ -66,7 +66,7 @@ PixelNode_Effect_Glitter.prototype.drawTarget = function(target) {
 	}
 
 	// get color 2
-	c = global.pixelNode_data.inputs.rgb.color_right;
+	c = global.pixelNode.data.get("inputs.rgb.color_right");
 	if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
 		c2 = new RGBColour(c[0]*0.5,c[1]*0.5,c[2]*0.5).getRGB();
 	} else {
@@ -74,8 +74,8 @@ PixelNode_Effect_Glitter.prototype.drawTarget = function(target) {
 	}
 
 	var intensity;
-	if (global.pixelNode_data.inputs.intensity != null) {
-		intensity = global.pixelNode_data.inputs.intensity/2.5 + 0.6;
+	if (global.pixelNode.data.get("inputs.intensity") != null) {
+		intensity = global.pixelNode.data.get("inputs.intensity")/2.5 + 0.6;
 	} else {
 		intensity = 0.6;
 	}

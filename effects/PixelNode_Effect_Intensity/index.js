@@ -57,24 +57,15 @@ PixelNode_Effect_Intensity.prototype.init = function() {
 // draw effect on target
 PixelNode_Effect_Intensity.prototype.drawTarget = function(target, output) {
 	var self = this;
-	var c, c1, c2;
+	var c, c1;
 
 	// get color 1
-	c = global.pixelNode_data.inputs.rgb1;
+	c = global.pixelNode.data.get("inputs.rgb.color_left");
 	if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
 		c1 = new RGBColour(c[0],c[1],c[2]).getRGB();
 	} else {
 		c1 = new HSVColour(self.counter/10, 100, 100).getRGB();
 	}
-
-	// get color 2
-	c = global.pixelNode_data.inputs.rgb2;
-	if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
-		c2 = new RGBColour(c[0]*0.5,c[1]*0.5,c[2]*0.5).getRGB();
-	} else {
-		c2 = new HSVColour(self.counter/10+90, 100, 50).getRGB();
-	}
-
 
 
 	// draw effect

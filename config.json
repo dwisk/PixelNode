@@ -85,6 +85,7 @@
 	],
 
 	"queue": [
+		{ "effect": "Color", "duration": 30000 },
 		{ "effect": "Ray", "duration": 30000 },
 		{ "effect": "Glitter", "duration": 30000 },
 		{ "effect": "RainBow", "duration": 30000 },
@@ -102,20 +103,14 @@
 					"name": "color1",
 					"targets": [
 						"domePixels.strips",
-						"player1.rings",
-						"player2.rings"
-					],
-					"name": "color2",
-					"targets": [
-						"domePixels.rings",
-						"player1.rings",
-						"player2.rings"
+						"player1.rings"
 					]
 				},
 				{
-					"name": "colorselect",
+					"name": "color2",
 					"targets": [
-						"touch.rings"
+						"domePixels.rings",
+						"player2.rings"
 					]
 				}
 			]

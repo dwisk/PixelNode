@@ -62,35 +62,26 @@ var lastTouches = [];
 PixelNode_Effect_Color.prototype.drawTarget = function(target, output) {
 	var self = this;
 
-	var c; 
+	var c, temp; 
 	if (output == "color1") {
-		c = global.pixelNode_data.inputs.rgb1;
-		if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
-				c = new HSVColour(self.options.hue, self.options.saturation, self.options.value).getRGB();
-		} else {
-			c = {
-				r: global.pixelNode_data.inputs.rgb1[0],
-				g: global.pixelNode_data.inputs.rgb1[1],
-				b: global.pixelNode_data.inputs.rgb1[2]
-			}
-		}
-	} else { // color2
-		c = global.pixelNode_data.inputs.rgb2;
-		if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
-				c = new HSVColour(self.options.hue+90, self.options.saturation, self.options.value).getRGB();
-		} else {
-			c = {
-				r: global.pixelNode_data.inputs.rgb2[0],
-				g: global.pixelNode_data.inputs.rgb2[1],
-				b: global.pixelNode_data.inputs.rgb2[2]
-			}
-		}
+		c = global.pixelNode.data.get("inputs.rgb.color_left");
+	} else if (output == "color2") { // color2
+		c = global.pixelNode.data.get("inputs.rgb.color_right");
 	}
+
+
+	if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
+		c1 = new RGBColour(c[0],c[1],c[2]).getRGB();
+	} else {
+		c1 = new HSVColour(self.counter/2, 100, 100).getRGB();
+	}
+
 
 	for (var ring = 0; ring < target.length;ring++) {
-		self.fillColor(target[ring], [c.r,c.g,c.b]);		    
+		for (var pixel = 0; pixel < target[ring].length; pixel++) {
+			target[ring][pixel] = [c1.r, c1.g, c1.b];
+		}			    
 	}
-
 }
 
 

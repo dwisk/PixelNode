@@ -63,27 +63,29 @@ PixelNode_Input_WebSocket.prototype.init = function() {
 	this.initSockets();
 	this.initStatusSender();
 
-	global.pixelNode_data.changeTrigger = null;
-
-	global.pixelNode_data.inputs = _.extend(global.pixelNode_data.inputs, {
-	    button1: false,
-	    button2: false,
-	    button3: false,
-
-	    touches: [
-	      false,
-	      false,
-	      false,
-	      false,
-	      false,
-	      false,
-	      false,
-	      false,
-	      false,
-	      false,
-	      false,
-	      false
-	    ]
+	global.pixelNode.data.set("changeTrigger", null);
+	global.pixelNode.data.extend("inputs",{
+	    buttons: {
+	    	button1: false,
+	    	button2: false,
+	    	button3: false
+	    },
+	    touch: {
+		    touches: [
+		      false,
+		      false,
+		      false,
+		      false,
+		      false,
+		      false,
+		      false,
+		      false,
+		      false,
+		      false,
+		      false,
+		      false
+		    ]
+	    }
   	});
 
 }
@@ -94,10 +96,10 @@ PixelNode_Input_WebSocket.prototype.init = function() {
 
 PixelNode_Input_WebSocket.prototype.initStatusSender = function() {
 	var self = this;
-	Object.observe(global.pixelNode_data, function(changes) {
-		if (!global.pixelNode_data) {
-			global.pixelNode_data.changeTrigger = "234u2342343";
-		}
+	global.pixelNode.data.on("changed", function(paths, value) {
+		//if (global.pixelNode.data.get("changeTrigger") != null) {
+		//	global.pixelNode.data.set("changeTrigger", "234u2342343", true);
+		//}
 		self.sendStatus.call(self);
 	});
 }
@@ -111,7 +113,7 @@ PixelNode_Input_WebSocket.prototype.initSockets = function() {
 		socket.emit('input_init', {
 		  	options: self.options,
 		  	config: global.config,
-		  	data: _.extend({},global.pixelNode_data)
+		  	data: global.pixelNode.data.copy()
 	  	});
 
 		// remember socket if input is inited
@@ -124,20 +126,8 @@ PixelNode_Input_WebSocket.prototype.initSockets = function() {
 
 		// remember socket if simulator is inited
 	  	socket.on('input_change', function (data) {
-	  		var path = data.target.split(".");
-	  		if (path.length == 2) {
-		  		if (global.pixelNode_data[path[0]][path[1]] != data.value) {
-			  		global.pixelNode_data[path[0]][path[1]] = data.value;
-			  		global.pixelNode_data.changeTrigger = socket.id;
-			  		console.log("Input Change: ".grey+(data.target+" = "+data.value).white);
-		  		}
-		  	} else {
-		  		if (global.pixelNode_data[path[0]] != data.value) {
-		  			global.pixelNode_data[path[0]] = data.value;
-			  		global.pixelNode_data.changeTrigger = socket.id;
-			  		console.log("Input Change: ".grey+(data.target+" = "+data.value).white);
-				}
-		  	}
+	  		global.pixelNode.data.set(data.target, data.value)
+	  		global.pixelNode.data.set("changeTrigger", socket.id, true);
 	  	});
 
 	});
@@ -149,8 +139,8 @@ PixelNode_Input_WebSocket.prototype.sendStatus = function() {
 	this.sockets.forEach(function(socket) {
 		// just send pixels if socket is still connected
 		if(socket.connected) {
-			if (global.pixelNode_data.changeTrigger != socket.id) {
-				socket.emit('input_status', _.extend({},global.pixelNode_data));
+			if (global.pixelNode.data.get("changeTrigger") != socket.id) {
+				socket.emit('input_status', global.pixelNode.data.copy());
 			}
 		// otherwise remove socket from array
 		} else {
@@ -159,7 +149,7 @@ PixelNode_Input_WebSocket.prototype.sendStatus = function() {
 		}
 	});
 
-	global.pixelNode_data.changeTrigger = null;
+	global.pixelNode.data.set("changeTrigger", null, true);
 }
 
 

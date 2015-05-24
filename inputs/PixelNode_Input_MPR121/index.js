@@ -87,12 +87,11 @@ PixelNode_Input_MPR121.prototype.init = function() {
 	];
 
 	// init pixelNode data
-	global.pixelNode_data.inputs[self.options.name] = _.extend(global.pixelNode_data.inputs[self.options.name], init_inputs);
+	global.pixelNode.data.extend(["inputs",self.options.name], init_inputs);
 
 	// start effect
 	self.start(function(result) {
 		self.setInputData(result, self.options.data_target)
-		//global.pixelNode_data.inputs[self.options.name][self.options.data_target] = result;
 	})
 
 

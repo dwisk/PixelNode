@@ -17,7 +17,6 @@ var util = require("util");
 var _ = require('underscore');
 var b = require('bonescript');
 var rgbLib = require('bbb-tcs34725');
-var objectPath = require("object-path");
 
 
 /* Class Constructor
@@ -107,7 +106,7 @@ PixelNode_Input_TCS34725.prototype.initSensors = function() {
 	});
 
 	// init pixelNode data
-	global.pixelNode_data.inputs[self.options.name] = _.extend(global.pixelNode_data.inputs[self.options.name], init_inputs);
+	global.pixelNode.data.extend(["inputs",self.options.name], init_inputs);
 
 }
 
@@ -121,7 +120,7 @@ PixelNode_Input_TCS34725.prototype.initGammaTable = function() {
 	  x = Math.pow(x, 2.5);
 	  x = x * 255;
 	    
-	  this.gammatable[i] = x;      
+	  this.gammatable[i] = Math.round(x);      
 	  //Serial.println(gammatable[i]);
 	}
 
@@ -176,7 +175,7 @@ PixelNode_Input_TCS34725.prototype.getRGBcolor = function(sensor, cb) {
       red = blue = green = 0;
     }
 
-    cb([red, green, blue]);
+    cb([red,green,blue]);
 
 
   });
@@ -201,11 +200,12 @@ PixelNode_Input_TCS34725.prototype.startReading = function() {
 	setInterval(function() {
 
 		// check if color should be checked? 
-		if (objectPath.get(global.pixelNode_data, self.options.sensors[side].enable)) {
+		if (global.pixelNode.data.get(self.options.sensors[side].enable)) {
+			var path = ["inputs", self.options.name, self.options.sensors[side].name];
 
 			// on first enabled run, reset color to black
 			if (!sensor_enabled[self.options.sensors[side].name]) {
-				objectPath.set(global.pixelNode_data.inputs, self.options.name+"."+self.options.sensors[side].name, [0,0,0]);
+				global.pixelNode.data.set(path, [0,0,0]);
 				sensor_enabled[self.options.sensors[side].name] = true;
 			
 			// if color/sensor is enabled get color
@@ -221,8 +221,8 @@ PixelNode_Input_TCS34725.prototype.startReading = function() {
 				setTimeout(function() {
 					// read the color
 					self.getRGBcolor(sensor, function(color) { 
-						// set read color value into pixelNode_data
-						objectPath.set(global.pixelNode_data.inputs, self.options.name+"."+self.options.sensors[side].name, color);						
+						// set read color value into pixelNode data
+						global.pixelNode.data.set(path, color);						
 						// switch LED off
 						
 						sensor.setLED(false);
