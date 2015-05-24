@@ -34,6 +34,7 @@
     "main-bower-files": "~2.6.2",
     "grunt-contrib-clean": "~0.6.0",
     "pixelnode-input-bbbgpio": "~0.0.1",
+    "pixelnode-input-mpr121": "~0.0.3",
     "pixelnode-input-bbbtcs34725": "~0.0.2"
   }
 }
