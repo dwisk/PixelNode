@@ -1,7 +1,7 @@
 /**
  * PixelNode_Input_MPR121 
  * 
- * Ported fadecandy example
+ * Inputs from Adafruits MPR121 touch sensor via a python subprocess.
  * 
  * --------------------------------------------------------------------------------------------------------------------
  * 
@@ -23,7 +23,7 @@ var spawn = require('child_process').spawn;
  * ==================================================================================================================== */
 
 // extending Effect
-PixelNode_Input = require('../../lib/PixelNode_Input.js');
+PixelNode_Input = require('pixelnode-input');
 
 // define the Student class
 function PixelNode_Input_MPR121(options,pixelData) {

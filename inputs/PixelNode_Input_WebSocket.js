@@ -21,7 +21,7 @@ var _ = require('underscore');
  * ==================================================================================================================== */
 
 // extending Effect
-PixelNode_Input = require('../lib/PixelNode_Input.js');
+PixelNode_Input = require('pixelnode-input');
 
 // define the Student class
 function PixelNode_Input_WebSocket(options,pixelData) {

@@ -1,7 +1,7 @@
 /**
  * PixelNode_Input_GPIO 
  * 
- * Ported fadecandy example
+ * Binary input from GPIOS (beaglebone only)
  * 
  * --------------------------------------------------------------------------------------------------------------------
  * 
@@ -23,7 +23,7 @@ var b = require('bonescript');
  * ==================================================================================================================== */
 
 // extending Effect
-PixelNode_Input = require('../lib/PixelNode_Input.js');
+PixelNode_Input = require('pixelnode-input');
 
 // define the Student class
 function PixelNode_Input_GPIO(options,pixelData) {

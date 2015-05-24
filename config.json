@@ -22,24 +22,12 @@
 
 	"inputs": [
 		{
-			"name": "touch",
-			"module": "./PixelNode_Input"
-		},
-		{
-			"name": "rgb1",
-			"module": "./PixelNode_Input"
-		},
-		{
-			"name": "rgb2",
-			"module": "./PixelNode_Input"
-		},
-		{
 			"name": "nunchuk1",
-			"module": "./PixelNode_Input"
+			"module": "pixelnode-input"
 		},
 		{
 			"name": "nunchuk2",
-			"module": "./PixelNode_Input"
+			"module": "pixelnode-input"
 		},
 		{
 			"name": "switch",

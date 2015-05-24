@@ -1,7 +1,7 @@
 /**
  * PixelNode_Input_TCS34725 
  * 
- * Ported fadecandy example
+ * Input from TCS34725 color sensors. Supporting multiple sensors via different i2c-buses. Beaglebone Only.
  * 
  * --------------------------------------------------------------------------------------------------------------------
  * 
@@ -23,7 +23,7 @@ var rgbLib = require('bbb-tcs34725');
  * ==================================================================================================================== */
 
 // extending Effect
-PixelNode_Input = require('../../lib/PixelNode_Input.js');
+PixelNode_Input = require('pixelnode-input');
 
 // define the Student class
 function PixelNode_Input_TCS34725(options,pixelData) {
