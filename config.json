@@ -22,24 +22,8 @@
 
 	"inputs": [
 		{
-			"name": "nunchuk1",
-			"module": "pixelnode-input"
-		},
-		{
-			"name": "nunchuk2",
-			"module": "pixelnode-input"
-		},
-		{
 			"name": "switch",
 			"module": "../inputs/PixelNode_Input_WebSocket"
-		},
-		{
-			"name": "touchrgb",
-			"module": "pixelnode-input",
-			"modulex": "../inputs/PixelNode_Input_TouchRGB",
-			"effect_select": "ColorRing",
-			"effect_ring1": "ColorPlayer1",
-			"effect_ring2": "ColorPlayer2"
 		},
 		{
 			"name": "buttons",
@@ -52,6 +36,7 @@
 		},
 		{
 			"name": "touch",
+			"modulex": "pixelnode-input",
 			"module": "pixelnode-input-mpr121", 
 			"crash_waittime": 1,
 			"crash_cautious_lifetime": 20,
@@ -62,8 +47,8 @@
 		},
 		{
 			"name": "rgb",
-			"module": "pixelnode-input",
-			"modulex": "pixelnode-input-bbbtcs34725",
+			"moduleX": "pixelnode-input",
+			"module": "pixelnode-input-bbbtcs34725",
 			"data_target": "rgbsensors",
 			"sensors": [
 				{
@@ -117,9 +102,9 @@
 				"touches": "touch.touches"
 			},
 			"queue": [
-				{ "effect": "Color", "duration": 10000 },
+				{ "effect": "Glitter", "duration": 30000 },
 				{ "effect": "Ray", "duration": 30000 },
-				{ "effect": "Glitter", "duration": 30000 }
+				{ "effect": "Color", "duration": 30000 }
 			],
 			"effects": [
 				{

@@ -69,7 +69,7 @@ PixelNode_Effect_Color.prototype.drawTarget = function(target, output) {
 	if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
 		c1 = new RGBColour(c[0],c[1],c[2]).getRGB();
 	} else {
-		c1 = new HSVColour(self.counter/10, 100, 100).getRGB();
+		c1 = new HSVColour(self.counter/50, 100, 100).getRGB();
 	}
 
 	// get color 2
@@ -77,7 +77,7 @@ PixelNode_Effect_Color.prototype.drawTarget = function(target, output) {
 	if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
 		c2 = new RGBColour(c[0]*0.5,c[1]*0.5,c[2]*0.5).getRGB();
 	} else {
-		c2 = new HSVColour(self.counter/10+90, 100, 50).getRGB();
+		c2 = new HSVColour(self.counter/50+90, 100, 50).getRGB();
 	}
 
 

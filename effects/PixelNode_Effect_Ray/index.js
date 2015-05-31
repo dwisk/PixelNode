@@ -63,7 +63,7 @@ PixelNode_Effect_Ray.prototype.drawTarget = function(target) {
 	if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
 		c1 = new RGBColour(c[0],c[1],c[2]).getRGB();
 	} else {
-		c1 = new HSVColour(self.counter/10, 100, 100).getRGB();
+		c1 = new HSVColour(self.counter/50, 100, 100).getRGB();
 	}
 
 	// get color 2
@@ -71,13 +71,13 @@ PixelNode_Effect_Ray.prototype.drawTarget = function(target) {
 	if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
 		c2 = new RGBColour(c[0]*0.5,c[1]*0.5,c[2]*0.5).getRGB();
 	} else {
-		c2 = new HSVColour(self.counter/10+90, 100, 50).getRGB();
+		c2 = new HSVColour(self.counter/50+90, 100, 50).getRGB();
 	}
 
 	// draw effect
 	for (var ring = 0; ring < target.length;ring++) {
 		// console.log(ring,Math.round(self.counter/10/target.length) % 12);
-		if(ring,Math.round(self.counter/2/target.length) % 12 == ring) {
+		if(ring,Math.round(self.counter/10/target.length) % 12 == ring) {
 			c = c1;
 		} else {
 			c = c2;

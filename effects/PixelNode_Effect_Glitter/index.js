@@ -42,7 +42,6 @@ module.exports = PixelNode_Effect_Glitter;
 
 
 
-
 /* Overridden Methods
  * ==================================================================================================================== */
 
@@ -62,7 +61,7 @@ PixelNode_Effect_Glitter.prototype.drawTarget = function(target) {
 	if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
 		c1 = new RGBColour(c[0],c[1],c[2]).getRGB();
 	} else {
-		c1 = new HSVColour(self.counter/10, 100, 100).getRGB();
+		c1 = new HSVColour(self.counter/50, 100, 100).getRGB();
 	}
 
 	// get color 2
@@ -70,7 +69,7 @@ PixelNode_Effect_Glitter.prototype.drawTarget = function(target) {
 	if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {		
 		c2 = new RGBColour(c[0]*0.5,c[1]*0.5,c[2]*0.5).getRGB();
 	} else {
-		c2 = new HSVColour(self.counter/10+90, 100, 50).getRGB();
+		c2 = new HSVColour(self.counter/50+90, 100, 50).getRGB();
 	}
 
 	var intensity;
@@ -82,21 +81,17 @@ PixelNode_Effect_Glitter.prototype.drawTarget = function(target) {
 
 //	console.log(intensity);
 
-	// draw effect
-	if (self.counter % 30 == 0) {
-
-		for (var ring = 0; ring < target.length;ring++) {
+	for (var ring = 0; ring < target.length;ring++) {
+		
+		for (var pixel = 0; pixel < target[ring].length; pixel++) {
+			ran = Math.round(Math.random()*intensity/1);
 			
-			for (var pixel = 0; pixel < target[ring].length; pixel++) {
-				ran = Math.round(Math.random()*intensity/1);
-				
-				if (ran == 1) {
-					target[ring][pixel] = [c1.r, c1.g, c1.b];
-				} else {
-					target[ring][pixel] = [c2.r, c2.g, c2.b];
-				}
-			}			    
-		}
+			if (ran == 1) {
+				target[ring][pixel] = [c1.r, c1.g, c1.b];
+			} else {
+				target[ring][pixel] = [c2.r, c2.g, c2.b];
+			}
+		}			    
 	}
 
 }

@@ -82,7 +82,7 @@ PixelNode_Game_Animation.prototype.draw = function() {
 	var self = this;
 	self.effect.draw();
 
-	var counter = global.pixelNode.data.get("counter");
+	var counter = global.pixelNode.clock.get();
 	
 	if (counter >=(self.queueEffect.duration || 10000)) {
 		console.log("Game Animation: autoplay".grey)
@@ -126,7 +126,7 @@ PixelNode_Game_Animation.prototype.setEffectByName = function(name) {
 
 	self.effect = self.getEffectByName(name);
 
-	global.pixelNode.data.set("counter",0);
+	global.pixelNode.clock.reset();
 
 	console.log(("Changed Effect to " + this.effect.options.name.white + (" (" + this.effect.options.module + ")").grey).grey);
 	global.pixelNode.data.set("gameAnimation.effect", this.effect.options);
