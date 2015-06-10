@@ -88,44 +88,13 @@
 			"queue": [
 				{ "effect": "Color", "duration": 30000 },
 				{ "effect": "Glitter", "duration": 30000 },
-				{ "effect": "Ray", "duration": 30000 }
+				{ "effect": "Ray", "duration": 30000 },
+				{ "effect": "Wall", "duration": 30000 }
 			],
 			"effects": [
-			
-				{
-					"name": "Color",
-					"module": "../../effects/PixelNode_Effect_Color",
-					"inputs": {
-					},
-					"outputs": [
-						{
-							"name": "both",
-							"targets": [
-								"domePixels.strips"
-							]
-						}
-					]
-				},
-				{
-					"name": "Ray",
-					"module": "../../effects/PixelNode_Effect_Ray",
-					"inputs": {
-						"color1": "rgb1.color",
-						"color2": "rgb2.color",
-						"stopper": "touch.values"
-					},
-					"outputs": [
-						{
-							"name": "ray",
-							"targets": [
-								"domePixels.strips"
-							]
-						}
-					]
-				},
 				{
 					"name": "Wall",
-					"module": "../../effects/PixelNode_Effect_Wall",
+					"module": "../../effects/PixelNode_Effect_TwoWall",
 					"inputs": {
 						"color1": "rgb1.color",
 						"color2": "rgb2.color",
@@ -141,8 +110,39 @@
 					]
 				},
 				{
+					"name": "Color",
+					"module": "../../effects/PixelNode_Effect_TwoColor",
+					"inputs": {
+					},
+					"outputs": [
+						{
+							"name": "both",
+							"targets": [
+								"domePixels.strips"
+							]
+						}
+					]
+				},
+				{
+					"name": "Ray",
+					"module": "../../effects/PixelNode_Effect_TwoRay",
+					"inputs": {
+						"color1": "rgb1.color",
+						"color2": "rgb2.color",
+						"stopper": "touch.values"
+					},
+					"outputs": [
+						{
+							"name": "ray",
+							"targets": [
+								"domePixels.strips"
+							]
+						}
+					]
+				},
+				{
 					"name": "Glitter",
-					"module": "../../effects/PixelNode_Effect_Glitter",
+					"module": "../../effects/PixelNode_Effect_TwoGlitter",
 					"inputs": {
 						"color1": "rgb1.color",
 						"color2": "rgb2.color",
@@ -252,24 +252,6 @@
 				{ "effect": "Wall", "duration": 100000 }
 			],
 			"effects": [
-				
-				{
-					"name": "Wall",
-					"module": "../../effects/PixelNode_Effect_Wall",
-					"inputs": {
-						"color1": "rgb1.color",
-						"color2": "rgb2.color",
-						"stopper": "touch.values"
-					},
-					"outputs": [
-						{
-							"name": "ray",
-							"targets": [
-								"domePixels.rings"
-							]
-						}
-					]
-				}
 			]
 		}
 

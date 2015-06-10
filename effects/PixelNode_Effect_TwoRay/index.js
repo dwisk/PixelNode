@@ -1,5 +1,5 @@
 /**
- * PixelNode_Effect_Ray 
+ * PixelNode_Effect_TwoRay 
  * 
  * Ported fadecandy example
  * 
@@ -23,18 +23,18 @@ var util = require("util");
 PixelNode_Effect = require('../../lib/PixelNode_Effect.js');
 
 // define the Student class
-function PixelNode_Effect_Ray(options,pixelData) {
+function PixelNode_Effect_TwoRay(options,pixelData) {
   var self = this;
-  PixelNode_Effect_Ray.super_.call(self, options, pixelData);
-  this.className = "PixelNode_Effect_Ray";
+  PixelNode_Effect_TwoRay.super_.call(self, options, pixelData);
+  this.className = "PixelNode_Effect_TwoRay";
   self.public_dir = __dirname;
 }
 
 // class inheritance 
-util.inherits(PixelNode_Effect_Ray, PixelNode_Effect);
+util.inherits(PixelNode_Effect_TwoRay, PixelNode_Effect);
 
 // module export
-module.exports = PixelNode_Effect_Ray;
+module.exports = PixelNode_Effect_TwoRay;
 
 
 /* Variables
@@ -47,12 +47,12 @@ module.exports = PixelNode_Effect_Ray;
  * ==================================================================================================================== */
 
 // init effect – override
-PixelNode_Effect_Ray.prototype.init = function() {
+PixelNode_Effect_TwoRay.prototype.init = function() {
 	console.log("Init Effect Glitter".grey);
 }
 
 // draw effect on target
-PixelNode_Effect_Ray.prototype.drawTarget = function(target, output_name) {
+PixelNode_Effect_TwoRay.prototype.drawTarget = function(target, output_name) {
 	var self = this;
 
 	// get color 1
@@ -68,6 +68,8 @@ PixelNode_Effect_Ray.prototype.drawTarget = function(target, output_name) {
 	for (var ring = 0; ring < target.length;ring++) {
 		// console.log(ring,Math.round(self.counter/10/target.length) % 12);
 		if(ring,Math.round(self.counter/10/target.length) % target.length == ring) {
+			c = c1;
+		} else if (global.pixelNode.data.get(["inputs","touch","touches",ring])) {
 			c = c1;
 		} else {
 			c = c2;

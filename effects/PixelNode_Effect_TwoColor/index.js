@@ -1,5 +1,5 @@
 /**
- * PixelNode_Effect_Color 
+ * PixelNode_Effect_TwoColor 
  * 
  * Rainbow Effect (TOOD: Performance)
  * 
@@ -21,37 +21,37 @@ var util = require("util");
 PixelNode_Effect = require('../../lib/PixelNode_Effect.js');
 
 // define the Student class
-function PixelNode_Effect_Color(options,pixelData) {
+function PixelNode_Effect_TwoColor(options,pixelData) {
   var self = this;
-  PixelNode_Effect_Color.super_.call(self, options, pixelData);
-  self.className = "PixelNode_Effect_Color";
+  PixelNode_Effect_TwoColor.super_.call(self, options, pixelData);
+  self.className = "PixelNode_Effect_TwoColor";
   self.public_dir = __dirname;
 }
 
 // class inheritance 
-util.inherits(PixelNode_Effect_Color, PixelNode_Effect);
+util.inherits(PixelNode_Effect_TwoColor, PixelNode_Effect);
 
 // module export
-module.exports = PixelNode_Effect_Color;
+module.exports = PixelNode_Effect_TwoColor;
 
 
 /* Variables
  * ==================================================================================================================== */
 
-PixelNode_Effect_Color.prototype.default_options = {
+PixelNode_Effect_TwoColor.prototype.default_options = {
  	hue: 0,
  	saturation: 100,
  	value: 100
 }
-PixelNode_Effect_Color.prototype.colorSelect = false;
-PixelNode_Effect_Color.prototype.hueSelect = 0;
+PixelNode_Effect_TwoColor.prototype.colorSelect = false;
+PixelNode_Effect_TwoColor.prototype.hueSelect = 0;
 
 
 /* Overridden Methods
  * ==================================================================================================================== */
 
 // init effect – override
-PixelNode_Effect_Color.prototype.init = function() {
+PixelNode_Effect_TwoColor.prototype.init = function() {
 	console.log("Init Effect Rainbow".grey);
 }
 
@@ -59,7 +59,7 @@ PixelNode_Effect_Color.prototype.init = function() {
 var lastTouches = [];
 
 // draw effect on target
-PixelNode_Effect_Color.prototype.drawTarget = function(target, output) {
+PixelNode_Effect_TwoColor.prototype.drawTarget = function(target, output) {
 	var self = this;
 
 	var c, c1, c2; 

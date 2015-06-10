@@ -142,6 +142,10 @@ PixelNode_Game_Animation.prototype.setEffectByName = function(name) {
 
 	global.pixelNode.clock.reset();
 
+	if (self.effect.reset != undefined)  {
+		self.effect.reset();
+	}
+
 	console.log(("Changed Effect to " + this.effect.options.name.white + (" (" + this.effect.options.module + ")").grey).grey);
 	global.pixelNode.data.set("gameAnimation.effect", this.effect.options);
 };
