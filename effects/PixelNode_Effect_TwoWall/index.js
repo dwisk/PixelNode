@@ -42,6 +42,9 @@ module.exports = PixelNode_Effect_TwoWall;
 
 PixelNode_Effect_TwoWall.prototype.counterOffset = 0;
 PixelNode_Effect_TwoWall.prototype.cfirst = false;
+PixelNode_Effect.prototype.default_options = {
+	scale: 1
+}
 
 
 /* Overridden Methods
@@ -81,7 +84,7 @@ PixelNode_Effect_TwoWall.prototype.drawTarget = function(target) {
 
 	var speed = 100;
 	position = Math.floor(((self.counter - self.counterOffset) / speed) % 12);
-	height = Math.floor(((self.counter - self.counterOffset) / speed) / 12);
+	height = Math.floor(((self.counter - self.counterOffset) / speed) / 12) * self.options.scale;
 	if (height >= target.length) {
 		self.counterOffset = self.counter;
 		height = 0;

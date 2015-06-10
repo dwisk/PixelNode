@@ -86,12 +86,31 @@
 				"touches": "touch.touches"
 			},
 			"queue": [
+				{ "effect": "Clock", "duration": 30000 },
 				{ "effect": "Color", "duration": 30000 },
 				{ "effect": "Glitter", "duration": 30000 },
 				{ "effect": "Ray", "duration": 30000 },
 				{ "effect": "Wall", "duration": 30000 }
 			],
 			"effects": [
+				{
+					"name": "Clock",
+					"module": "../../effects/PixelNode_Effect_TwoClock",
+					"inputs": {
+						"color1": "rgb1.color",
+						"color2": "rgb2.color",
+						"stopper": "touch.values"
+					},
+					"scale": 20,
+					"outputs": [
+						{
+							"name": "clock",
+							"targets": [
+								"domePixels.strips"
+							]
+						}
+					]
+				},
 				{
 					"name": "Wall",
 					"module": "../../effects/PixelNode_Effect_TwoWall",
@@ -100,6 +119,7 @@
 						"color2": "rgb2.color",
 						"stopper": "touch.values"
 					},
+					"scale": 20,
 					"outputs": [
 						{
 							"name": "ray",
