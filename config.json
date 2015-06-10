@@ -13,13 +13,9 @@
 			"address": "127.0.0.1",
 			"port": 7890,
 			"delay": 50
-		},
-		{
-			"module": "pixelnode-driver-websimulator",
-			"delay": 50
 		}
 	],
-
+	"inputsX": [],
 	"inputs": [
 		{
 			"name": "switch",
@@ -83,10 +79,45 @@
 				"color_right": "inputs.rgb.color_right",
 				"touches": "touch.touches"
 			}
-		}
+		},
+		{
+			"name": "off",
+			"title": "OFF",
+			"module": "../games/PixelNode_Game_Animation",
+			"mappings": {
+				"color1": "player1.rings",
+				"color2": "player2.rings",
+				"canvas": "domePixels.strips"
+			},
+			"inputs": {
+				"color_left": "inputs.rgb.color_left",
+				"color_right": "inputs.rgb.color_right",
+				"touches": "touch.touches"
+			},
+			"queue": [
+				{ "effect": "Off", "duration": 100000 }
+			],
+			"effects": [
+				
+				{
+					"name": "Off",
+					"module": "../../effects/PixelNode_Effect_Off",
+					"outputs": [
+						{
+							"name": "ray",
+							"targets": [
+								"domePixels.rings",
+								"inside.rings",
+								"player1.strips",
+								"player2.strips"
+							]
+						}
+					]
+				}
+			]
+		}	
 	],
 	"games": [
-
 		{
 			"name": "2colored",
 			"title": "Two colored",
@@ -102,12 +133,12 @@
 				"touches": "touch.touches"
 			},
 			"queue": [
+				{ "effect": "Color", "duration": 30000000 },
 				{ "effect": "Glitter", "duration": 30000 },
-				{ "effect": "Ray", "duration": 30000 },
-				{ "effect": "Color", "duration": 30000 }
+				{ "effect": "Ray", "duration": 30000 }
 			],
 			"effects": [
-				{
+							{
 					"name": "Color",
 					"module": "../../effects/PixelNode_Effect_Color",
 					"inputs": {

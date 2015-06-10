@@ -61,9 +61,21 @@ PixelNode_Game_Animation.prototype.init = function() {
 
 	self.setEffectByQueueId(0);
 
-	global.pixelNode.data.on("changed_inputs_buttons_button_back", function(paths, value) {
-		if (value) {
-			self.nextEffect();
+	if (global.config.inputMode == "server") {
+		global.pixelNode.data.on("changed_inputs_buttons_button_back", function(paths, value) {
+			if(self.options.name == global.pixelNode.data.get("game.name") && value) {
+				self.nextEffect();
+			}
+		});
+	}
+	global.pixelNode.data.on("changed_gameAnimation_queueId", function() {
+		if(self.options.name == global.pixelNode.data.get("game.name")) {
+			self.setEffectByQueueId.call(self,global.pixelNode.data.get("gameAnimation.queueId"));
+		}
+	});
+	global.pixelNode.data.on("replaced", function() {
+		if(self.options.name == global.pixelNode.data.get("game.name")) {
+			self.setEffectByQueueId.call(self,global.pixelNode.data.get("gameAnimation.queueId"));
 		}
 	});
 }
@@ -84,7 +96,7 @@ PixelNode_Game_Animation.prototype.draw = function() {
 
 	var counter = global.pixelNode.clock.get();
 	
-	if (counter >=(self.queueEffect.duration || 10000)) {
+	if (global.config.inputMode == "server" && counter >=(self.queueEffect.duration || 10000)) {
 		console.log("Game Animation: autoplay".grey)
 		self.nextEffect();
 	}
@@ -102,12 +114,14 @@ PixelNode_Game_Animation.prototype.nextEffect = function() {
 
 PixelNode_Game_Animation.prototype.setEffectByQueueId = function(id) {
 	this.pixelDataOff();
-	this.setEffectByName(this.options.queue[id].effect);
-	this.queueEffect = this.options.queue[id];
-	this.queueId = id;
+	if (this.options.queue[id]) {
+		this.setEffectByName(this.options.queue[id].effect);
+		this.queueEffect = this.options.queue[id];
+		this.queueId = id;
 
-	global.pixelNode.data.set("gameAnimation.queueId", id);
-	global.pixelNode.data.set("game.subtitle", this.effect.name);
+		global.pixelNode.data.set("gameAnimation.queueId", id);
+		global.pixelNode.data.set("game.subtitle", this.effect.name);
+	}
 };
 
 PixelNode_Game_Animation.prototype.getEffectByName = function(name) {

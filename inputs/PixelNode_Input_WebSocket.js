@@ -97,10 +97,7 @@ PixelNode_Input_WebSocket.prototype.init = function() {
 PixelNode_Input_WebSocket.prototype.initStatusSender = function() {
 	var self = this;
 	global.pixelNode.data.on("changed", function(paths, value) {
-		//if (global.pixelNode.data.get("changeTrigger") != null) {
-		//	global.pixelNode.data.set("changeTrigger", "234u2342343", true);
-		//}
-		self.sendStatus.call(self);
+		self.sendStatus.call(self, paths, value);
 	});
 }
 
@@ -110,21 +107,22 @@ PixelNode_Input_WebSocket.prototype.initSockets = function() {
 	// wait for webSocket connections
 	global.webSockets.on('connection', function (socket) {
 		// emit input init and send options & config
-		socket.emit('input_init', {
+		socket.emit('data_init', {
 		  	options: self.options,
 		  	config: global.config,
-		  	data: global.pixelNode.data.copy()
+		  	data: global.pixelNode.data.copy(),
+		  	timestamp: new Date()
 	  	});
 
 		// remember socket if input is inited
-	  	socket.on('input_inited', function (data) {
+	  	socket.on('data_client_inited', function (data) {
 	  		if (data.success) {
 	  			console.log(("Input WebSocket connected ("+socket.conn.id+")").green);
 	  			self.sockets.push(socket);
 	  		}
 	  	});
 
-		// remember socket if simulator is inited
+		// receiving data
 	  	socket.on('input_change', function (data) {
 	  		global.pixelNode.data.set(data.target, data.value)
 	  		global.pixelNode.data.set("changeTrigger", socket.id, true);
@@ -134,13 +132,16 @@ PixelNode_Input_WebSocket.prototype.initSockets = function() {
 	
 }
 
-PixelNode_Input_WebSocket.prototype.sendStatus = function() {
+PixelNode_Input_WebSocket.prototype.sendStatus = function(paths, value) {
 	var self = this;
 	this.sockets.forEach(function(socket) {
 		// just send pixels if socket is still connected
 		if(socket.connected) {
 			if (global.pixelNode.data.get("changeTrigger") != socket.id) {
-				socket.emit('input_status', global.pixelNode.data.copy());
+				socket.emit('data_changed', {
+					path: paths,
+					data: global.pixelNode.data.get(paths)
+				});
 			}
 		// otherwise remove socket from array
 		} else {
