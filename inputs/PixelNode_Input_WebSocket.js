@@ -21,7 +21,7 @@ var _ = require('underscore');
  * ==================================================================================================================== */
 
 // extending Effect
-PixelNode_Input = require('../lib/PixelNode_Input.js');
+PixelNode_Input = require('pixelnode-input');
 
 // define the Student class
 function PixelNode_Input_WebSocket(options,pixelData) {
@@ -63,27 +63,29 @@ PixelNode_Input_WebSocket.prototype.init = function() {
 	this.initSockets();
 	this.initStatusSender();
 
-	global.pixelNode_data.changeTrigger = null;
-
-	global.pixelNode_data.inputs = _.extend(global.pixelNode_data.inputs, {
-	    button1: false,
-	    button2: false,
-	    button3: false,
-
-	    touches: [
-	      false,
-	      false,
-	      false,
-	      false,
-	      false,
-	      false,
-	      false,
-	      false,
-	      false,
-	      false,
-	      false,
-	      false
-	    ]
+	global.pixelNode.data.set("changeTrigger", null);
+	global.pixelNode.data.extend("inputs",{
+	    buttons: {
+	    	button1: false,
+	    	button2: false,
+	    	button3: false
+	    },
+	    touch: {
+		    touches: [
+		      false,
+		      false,
+		      false,
+		      false,
+		      false,
+		      false,
+		      false,
+		      false,
+		      false,
+		      false,
+		      false,
+		      false
+		    ]
+	    }
   	});
 
 }
@@ -94,11 +96,8 @@ PixelNode_Input_WebSocket.prototype.init = function() {
 
 PixelNode_Input_WebSocket.prototype.initStatusSender = function() {
 	var self = this;
-	Object.observe(global.pixelNode_data, function(changes) {
-		if (!global.pixelNode_data) {
-			global.pixelNode_data.changeTrigger = "234u2342343";
-		}
-		self.sendStatus.call(self);
+	global.pixelNode.data.on("changed", function(paths, value) {
+		self.sendStatus.call(self, paths, value);
 	});
 }
 
@@ -108,49 +107,41 @@ PixelNode_Input_WebSocket.prototype.initSockets = function() {
 	// wait for webSocket connections
 	global.webSockets.on('connection', function (socket) {
 		// emit input init and send options & config
-		socket.emit('input_init', {
+		socket.emit('data_init', {
 		  	options: self.options,
 		  	config: global.config,
-		  	data: _.extend({},global.pixelNode_data)
+		  	data: global.pixelNode.data.copy(),
+		  	timestamp: new Date()
 	  	});
 
 		// remember socket if input is inited
-	  	socket.on('input_inited', function (data) {
+	  	socket.on('data_client_inited', function (data) {
 	  		if (data.success) {
 	  			console.log(("Input WebSocket connected ("+socket.conn.id+")").green);
 	  			self.sockets.push(socket);
 	  		}
 	  	});
 
-		// remember socket if simulator is inited
+		// receiving data
 	  	socket.on('input_change', function (data) {
-	  		var path = data.target.split(".");
-	  		if (path.length == 2) {
-		  		if (global.pixelNode_data[path[0]][path[1]] != data.value) {
-			  		global.pixelNode_data[path[0]][path[1]] = data.value;
-			  		global.pixelNode_data.changeTrigger = socket.id;
-			  		console.log("Input Change: ".grey+(data.target+" = "+data.value).white);
-		  		}
-		  	} else {
-		  		if (global.pixelNode_data[path[0]] != data.value) {
-		  			global.pixelNode_data[path[0]] = data.value;
-			  		global.pixelNode_data.changeTrigger = socket.id;
-			  		console.log("Input Change: ".grey+(data.target+" = "+data.value).white);
-				}
-		  	}
+	  		global.pixelNode.data.set(data.target, data.value)
+	  		global.pixelNode.data.set("changeTrigger", socket.id, true);
 	  	});
 
 	});
 	
 }
 
-PixelNode_Input_WebSocket.prototype.sendStatus = function() {
+PixelNode_Input_WebSocket.prototype.sendStatus = function(paths, value) {
 	var self = this;
 	this.sockets.forEach(function(socket) {
 		// just send pixels if socket is still connected
 		if(socket.connected) {
-			if (global.pixelNode_data.changeTrigger != socket.id) {
-				socket.emit('input_status', _.extend({},global.pixelNode_data));
+			if (global.pixelNode.data.get("changeTrigger") != socket.id) {
+				socket.emit('data_changed', {
+					path: paths,
+					data: global.pixelNode.data.get(paths)
+				});
 			}
 		// otherwise remove socket from array
 		} else {
@@ -159,7 +150,7 @@ PixelNode_Input_WebSocket.prototype.sendStatus = function() {
 		}
 	});
 
-	global.pixelNode_data.changeTrigger = null;
+	global.pixelNode.data.set("changeTrigger", null, true);
 }
 
 
