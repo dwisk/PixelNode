@@ -1,7 +1,7 @@
 /**
- * PixelNode_Effect_Rainbow 
+ * PixelNode_Effect_White 
  * 
- * Ported fadecandy example
+ * Rainbow Effect (TOOD: Performance)
  * 
  * --------------------------------------------------------------------------------------------------------------------
  * 
@@ -19,54 +19,43 @@ var util = require("util");
  * ==================================================================================================================== */
 
 // extending Effect
-PixelNode_Effect = require('../../lib/PixelNode_Effect.js');
+PixelNode_Effect = require('../lib/PixelNode_Effect.js');
 
 // define the Student class
-function PixelNode_Effect_Rainbow(options,pixelData) {
+function PixelNode_Effect_White(options,pixelData) {
   var self = this;
-  PixelNode_Effect_Rainbow.super_.call(self, options, pixelData);
-  self.className = "PixelNode_Effect_Rainbow";
+  PixelNode_Effect_White.super_.call(self, options, pixelData);
+  self.className = "PixelNode_Effect_White";
   self.public_dir = __dirname;
 }
 
 // class inheritance 
-util.inherits(PixelNode_Effect_Rainbow, PixelNode_Effect);
+util.inherits(PixelNode_Effect_White, PixelNode_Effect);
 
 // module export
-module.exports = PixelNode_Effect_Rainbow;
+module.exports = PixelNode_Effect_White;
 
 
 /* Variables
  * ==================================================================================================================== */
 
-PixelNode_Effect_Rainbow.prototype.n = 1;
-PixelNode_Effect.prototype.default_options = {
-	scale: 1,
-	speed: 100
-}
+ PixelNode_Effect_White.prototype.n = 1;
 
 
 /* Overridden Methods
  * ==================================================================================================================== */
 
 // init effect – override
-PixelNode_Effect_Rainbow.prototype.init = function() {
+PixelNode_Effect_White.prototype.init = function() {
 	console.log("Init Effect Rainbow".grey);
 }
 
 // draw effect on target
-PixelNode_Effect_Rainbow.prototype.drawTarget = function(target, output) {
+PixelNode_Effect_White.prototype.drawTarget = function(target, output) {
 	var self = this;
-	var colors = [];
-
-	colors = self.getRainbow(target[0].length, self.counter*self.options.speed/1000, self.options.scale);
 	
 	for (var ring = 0; ring < target.length;ring++) {
-		if (output == "rainbow") {
-			self.fillArray(target[ring], colors);		    
-		} else {
-			self.fillColor(target[ring], [0,0,0]);		    
-		}
+		self.fillColor(target[ring], [255,255,255]);		    
 	}
 
 }

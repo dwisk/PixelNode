@@ -1,5 +1,5 @@
 /**
- * PixelNode_Effect_TwoGlitter 
+ * PixelNode_Effect_TwoRay 
  * 
  * Ported fadecandy example
  * 
@@ -20,21 +20,21 @@ var util = require("util");
  * ==================================================================================================================== */
 
 // extending Effect
-PixelNode_Effect = require('../../lib/PixelNode_Effect.js');
+PixelNode_Effect = require('../lib/PixelNode_Effect.js');
 
 // define the Student class
-function PixelNode_Effect_TwoGlitter(options,pixelData) {
+function PixelNode_Effect_TwoRay(options,pixelData) {
   var self = this;
-  PixelNode_Effect_TwoGlitter.super_.call(self, options, pixelData);
-  this.className = "PixelNode_Effect_TwoGlitter";
+  PixelNode_Effect_TwoRay.super_.call(self, options, pixelData);
+  this.className = "PixelNode_Effect_TwoRay";
   self.public_dir = __dirname;
 }
 
 // class inheritance 
-util.inherits(PixelNode_Effect_TwoGlitter, PixelNode_Effect);
+util.inherits(PixelNode_Effect_TwoRay, PixelNode_Effect);
 
 // module export
-module.exports = PixelNode_Effect_TwoGlitter;
+module.exports = PixelNode_Effect_TwoRay;
 
 
 /* Variables
@@ -42,51 +42,46 @@ module.exports = PixelNode_Effect_TwoGlitter;
 
 
 
+
 /* Overridden Methods
  * ==================================================================================================================== */
 
 // init effect – override
-PixelNode_Effect_TwoGlitter.prototype.init = function() {
+PixelNode_Effect_TwoRay.prototype.init = function() {
 	console.log("Init Effect Glitter".grey);
 }
 
 // draw effect on target
-PixelNode_Effect_TwoGlitter.prototype.drawTarget = function(target) {
+PixelNode_Effect_TwoRay.prototype.drawTarget = function(target, output_name) {
 	var self = this;
-	var ran;
-	var c, c1, c2; 
 
 	// get color 1
-	c1 = self.getColor("inputs.rgb.color_left");
+	var c1 = self.getColor("inputs.rgb.color_left");
 
 	// get color 2
-	c2 = self.getColor("inputs.rgb.color_right", {
+	var c2 = self.getColor("inputs.rgb.color_right", {
 		dimmer: 0.5,
 		offset: 90
 	});
 
-
-	var intensity;
-	if (global.pixelNode.data.get("inputs.intensity") != null) {
-		intensity = global.pixelNode.data.get("inputs.intensity")/2.5 + 0.6;
-	} else {
-		intensity = 0.6;
-	}
-
-//	console.log(intensity);
-
+	// draw effect
 	for (var ring = 0; ring < target.length;ring++) {
+		// console.log(ring,Math.round(self.counter/10/target.length) % 12);
+		if(ring,Math.round(self.counter/10/target.length) % target.length == ring) {
+			c = c1;
+		} else if (global.pixelNode.data.get(["inputs","touch","touches",ring])) {
+			c = c1;
+		} else {
+			c = c2;
+		}
 		
 		for (var pixel = 0; pixel < target[ring].length; pixel++) {
-			ran = Math.round(Math.random()*intensity/1);
-			
-			if (ran == 1 || global.pixelNode.data.get(["inputs","touch","touches",pixel])) {
-				target[ring][pixel] = c1
-			} else {
-				target[ring][pixel] = c2
-			}
+			target[ring][pixel] = c;
 		}			    
 	}
 
 }
+
+
+
 
