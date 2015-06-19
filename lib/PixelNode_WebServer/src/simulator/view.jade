@@ -9,12 +9,12 @@ block foot
 
 block body
 	h1 Simulator
-	div(ng-controller="SimulatorCtrl")
+	div(ng-controller="SimulatorCtrl" class="pixels")
 		div(ng-repeat="map in mapping")
 			h2 {{map.name}} 
 			table(class="pixelPreview")
-				tr(ng-repeat="ring in map.rings")
-					td(ng-repeat="pixel in ring.px" style="background-color: {{getColor(pixel)}};")
+				tr(ng-repeat="strip in map.rings")
+					td(ng-repeat="pixel in strip.px" style="background-color: {{getColor(pixel)}};")
 
 	div(ng-controller="SimulatorCtrl2" class="container")
 		h2 {{effect.name}}
