@@ -11,13 +11,13 @@
 /* Includes
  * -------------------------------------------------------------------------------------------------------------------- */
 
-var PixelNode = require('./index.js');
+var PixelNode = require('../index.js');
 
 
 /* Code
  * -------------------------------------------------------------------------------------------------------------------- */
 
 var testPixelNode = new PixelNode({
-	config: "config_client.json",
-	mapping: "mapping_dome2.json"
+	config: "LightcaveTable_config.json",
+	mapping: "LightcaveTable_mapping.json"
 });

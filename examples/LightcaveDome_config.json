@@ -1,6 +1,6 @@
 {
 	"title": "PixelNode",
-	"inputMode": "client",
+	"inputMode": "server",
 
 	"webServer": {
 		"start": true,
@@ -12,13 +12,23 @@
 			"module": "pixelnode-driver-pixelpusher",
 			"delay": 50,
 			"dimmer": 1
+		},
+		{
+			"module": "pixelnode-driver-websimulator",
+			"delay": 50,
+			"dimmer": 1
 		}
 	],
 	"inputs": [
 		{
 			"name": "socketclient",
 			"module": "../inputs/PixelNode_Input_WebSocket_Client.js"
+		},
+		{
+			"name": "switch",
+			"module": "../inputs/PixelNode_Input_WebSocket"
 		}
+
 	],
 
 	"future_games": [
@@ -71,6 +81,44 @@
 		}
 	],
 	"games": [
+		{
+			"name": "working",
+			"title": "Work in Progress",
+			"module": "../games/PixelNode_Game_Animation",
+			"mappings": {
+				"color1": "player1.rings",
+				"color2": "player2.rings",
+				"canvas": "domePixels.strips"
+			},
+			"inputs": {
+				"color_left": "inputs.rgb.color_left",
+				"color_right": "inputs.rgb.color_right",
+				"touches": "touch.touches"
+			},
+			"queue": [
+				{ "effect": "Wall", "duration": 100000 }
+			],
+			"effects": [
+			{
+				"name": "Wall",
+				"module": "../../effects/PixelNode_Effect_RedBlue",
+				"inputs": {
+					"color1": "rgb1.color",
+					"color2": "rgb2.color",
+					"stopper": "touch.values"
+				},
+				"scale": 20,
+				"outputs": [
+					{
+						"name": "ray",
+						"targets": [
+							"domePixels.strips"
+						]
+					}
+				]
+			}
+			]
+		},
 		{
 			"name": "2colored",
 			"title": "Two colored",
@@ -238,6 +286,7 @@
 				{
 					"name": "RedBlue",
 					"module": "../../effects/PixelNode_Effect_RedBlue",
+					"scale": 20,
 					"inputs": {
 						"color1": "rgb1.color",
 						"color2": "rgb2.color",
@@ -253,27 +302,8 @@
 					]
 				}
 			]
-		},
-		{
-			"name": "working",
-			"title": "Work in Progress",
-			"module": "../games/PixelNode_Game_Animation",
-			"mappings": {
-				"color1": "player1.rings",
-				"color2": "player2.rings",
-				"canvas": "domePixels.strips"
-			},
-			"inputs": {
-				"color_left": "inputs.rgb.color_left",
-				"color_right": "inputs.rgb.color_right",
-				"touches": "touch.touches"
-			},
-			"queue": [
-				{ "effect": "Wall", "duration": 100000 }
-			],
-			"effects": [
-			]
 		}
+
 
 	]
 
