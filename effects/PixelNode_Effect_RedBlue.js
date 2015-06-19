@@ -40,7 +40,10 @@ module.exports = PixelNode_Effect_RedBlue;
 /* Variables
  * ==================================================================================================================== */
 
-
+ PixelNode_Effect_RedBlue.prototype.default_options = {
+ 	scale: 1,
+ 	speed: 1
+ }
 
 
 /* Overridden Methods
@@ -59,7 +62,7 @@ PixelNode_Effect_RedBlue.prototype.drawTarget = function(target) {
 	for (var ring = 0; ring < target.length;ring++) {
 		
 		for (var pixel = 0; pixel < target[ring].length; pixel++) {
-			var t = pixel * 0.5 + millis * 0.002;
+			var t = pixel / self.options.scale * 0.5 + millis * 0.002 * self.options.speed;
 			var red = 128 + 96 * Math.sin(t);
 			var green = 0; //128 + 0 * Math.sin(t + 0.1);
 			var blue = 128 + 0 * Math.sin(t + 0.3);
