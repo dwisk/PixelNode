@@ -104,9 +104,9 @@ PixelNode_Effect_TwoWall.prototype.drawTarget = function(target) {
 		for (var pixel = 0; pixel < target[ring].length; pixel++) {
 			if (global.pixelNode.data.get(["inputs","touch","touches",pixel])) {
 				c = [0,0,0];
-			} else if (ring < height || (ring == height && pixel <= position)) {
+			} else if (ring < height || (ring < height+self.options.scale && pixel <= position)) {
 				c = self.cfirst ? c1 : c2;
-			} else if ((ring == height && pixel <= position+1)) {
+			} else if ((ring < height+self.options.scale && pixel <= position+1)) {
 				c = c2b;
 			} else {
 				c = self.cfirst ? c2 : c1;

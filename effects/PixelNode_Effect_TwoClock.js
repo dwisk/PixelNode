@@ -80,7 +80,7 @@ PixelNode_Effect_TwoClock.prototype.drawTarget = function(target, output) {
 
 	//console.log(c1, c2);
 	var time = new Date();
-	var internal_scale = 60 / target[0].length;
+	var internal_scale = 60 / target.length;
 	var hour = time.getHours() + self.options.offset;
 	var minute = time.getMinutes() + self.options.offset * internal_scale;
 	var second = time.getSeconds() + self.options.offset * internal_scale;
