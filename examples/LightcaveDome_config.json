@@ -50,16 +50,7 @@
 			"name": "off",
 			"title": "Work in Progress",
 			"module": "../games/PixelNode_Game_Animation",
-			"mappings": {
-				"color1": "player1.rings",
-				"color2": "player2.rings",
-				"canvas": "domePixels.strips"
-			},
-			"inputs": {
-				"color_left": "inputs.rgb.color_left",
-				"color_right": "inputs.rgb.color_right",
-				"touches": "touch.touches"
-			},
+			
 			"queue": [
 				{ "effect": "Off", "duration": 100000 }
 			],
@@ -85,16 +76,7 @@
 			"name": "working",
 			"title": "Work in Progress",
 			"module": "../games/PixelNode_Game_Animation",
-			"mappings": {
-				"color1": "player1.rings",
-				"color2": "player2.rings",
-				"canvas": "domePixels.strips"
-			},
-			"inputs": {
-				"color_left": "inputs.rgb.color_left",
-				"color_right": "inputs.rgb.color_right",
-				"touches": "touch.touches"
-			},
+
 			"queue": [
 				{ "effect": "Wall", "duration": 100000 }
 			],
@@ -102,11 +84,6 @@
 			{
 				"name": "Wall",
 				"module": "../../effects/PixelNode_Effect_RedBlue",
-				"inputs": {
-					"color1": "rgb1.color",
-					"color2": "rgb2.color",
-					"stopper": "touch.values"
-				},
 				"scale": 20,
 				"outputs": [
 					{
@@ -123,16 +100,7 @@
 			"name": "2colored",
 			"title": "Two colored",
 			"module": "../games/PixelNode_Game_Animation",
-			"mappings": {
-				"color1": "player1.rings",
-				"color2": "player2.rings",
-				"canvas": "domePixels.strips"
-			},
-			"inputs": {
-				"color_left": "inputs.rgb.color_left",
-				"color_right": "inputs.rgb.color_right",
-				"touches": "touch.touches"
-			},
+
 			"queue": [
 				{ "effect": "Clock", "duration": 30000 },
 				{ "effect": "Color", "duration": 30000 },
@@ -231,14 +199,6 @@
 			"name": "rainbows",
 			"title": "Rainbows and more",
 			"module": "../games/PixelNode_Game_Animation",
-			"mappings": {
-				"canvas": "domePixels.strips"
-			},
-			"inputs": {
-				"color_left": "inputs.rgb.color_left",
-				"color_right": "inputs.rgb.color_right",
-				"touches": "touch.touches"
-			},
 			"queue": [
 				{ "effect": "RainBow", "duration": 30000 },
 				{ "effect": "RainBowRings", "duration": 30000 },

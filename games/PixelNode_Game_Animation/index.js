@@ -21,9 +21,9 @@ var util = require("util");
 PixelNode_Game = require('../../lib/PixelNode_Game.js');
 
 // define the Student class
-function PixelNode_Game_Animation(options,pixelData) {
+function PixelNode_Game_Animation(options, effects) {
   var self = this;
-  PixelNode_Game_Animation.super_.call(self, options, pixelData);
+  PixelNode_Game_Animation.super_.call(self, options, effects);
   self.className = "PixelNode_Game_Animation";
   self.public_dir = __dirname;
 }
@@ -54,10 +54,10 @@ PixelNode_Game_Animation.prototype.init = function() {
 	console.log("Init Game Animation".grey);
 	var self = this;
 
-	self.options.effects.forEach(function(effect) {		
-		var Effect = require(effect.module);
-		self.effects.push(new Effect(effect));
-	})
+	//self.options.effects.forEach(function(effect) {		
+	//	var Effect = require(effect.module);
+	//	self.effects.push(new Effect(effect));
+	//})
 
 	self.setEffectByQueueId(0);
 
