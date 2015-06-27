@@ -1,5 +1,5 @@
 /**
- * PixelNode_Game_Fire 
+ * PixelNode_Game_Intensity 
  * 
  * Animation Game 
  * 
@@ -21,31 +21,32 @@ var util = require("util");
 PixelNode_Game = require('../../lib/PixelNode_Game.js');
 
 // define the Student class
-function PixelNode_Game_Fire(options, effects) {
+function PixelNode_Game_Intensity(options, effects) {
   var self = this;
-  PixelNode_Game_Fire.super_.call(self, options, effects);
-  self.className = "PixelNode_Game_Fire";
+  PixelNode_Game_Intensity.super_.call(self, options, effects);
+  self.className = "PixelNode_Game_Intensity";
   self.public_dir = __dirname;
 }
 
 // class inheritance 
-util.inherits(PixelNode_Game_Fire, PixelNode_Game);
+util.inherits(PixelNode_Game_Intensity, PixelNode_Game);
 
 // module export
-module.exports = PixelNode_Game_Fire;
+module.exports = PixelNode_Game_Intensity;
 
 
 /* Variables
  * ==================================================================================================================== */
 
- PixelNode_Game_Fire.prototype.default_options = {
+ PixelNode_Game_Intensity.prototype.default_options = {
  	"targets": [
  		"domePixels.strips"
  	],
- 	"addAmount": 0.125
+ 	"addAmount": 0.125,
+ 	"addSpread": 2
  }
 
-PixelNode_Game_Fire.prototype.effect = null;
+PixelNode_Game_Intensity.prototype.effect = null;
 
 var last_touches = [];
 
@@ -53,21 +54,11 @@ var last_touches = [];
  * ==================================================================================================================== */
 
 // init effect – override
-PixelNode_Game_Fire.prototype.init = function() {
+PixelNode_Game_Intensity.prototype.init = function() {
 	console.log("Init Game Fire".grey);
 	var self = this;
-
-	var Effect_Fire = require("../../effects/PixelNode_Effect_Fire");
-	self.effect = new Effect_Fire({
-		"name": "Fire",
-		"module": "../effects/PixelNode_Effect_Fire",
-		"outputs": [
-			{
-				"name": "glow",
-				"targets": self.options.targets
-			}
-		]
-	});
+	
+	self.effect = global.pixelNode.gameManager.getEffectByName(self.options.effect);
 
 
 	if (global.config.inputMode == "server") {
@@ -77,8 +68,12 @@ PixelNode_Game_Fire.prototype.init = function() {
 
 }
 
+PixelNode_Game_Intensity.prototype.reset = function() {
+	this.effect.reset();
+}
+
 // draw effect – override this
-PixelNode_Game_Fire.prototype.draw = function() {
+PixelNode_Game_Intensity.prototype.draw = function() {
 	var self = this;
 	self.effect.draw();
 
@@ -86,22 +81,23 @@ PixelNode_Game_Fire.prototype.draw = function() {
 }
 
 
-PixelNode_Game_Fire.prototype.initListener = function() {
+PixelNode_Game_Intensity.prototype.initListener = function() {
 	var self = this;
 	global.pixelNode.data.on("changed_inputs_touch_touches", function(paths, value) {
 		if (value) {
 			index = paths[0];
-			if (self.effect.heights[index] <= 1- self.options.addAmount) {
+			if (self.effect.intensity[index] <= 1- self.options.addAmount) {
 				self.addFire(index, self.options.addAmount);
-
-				for (var i = 1; i <= 12/2; i++) {
-					amount = self.options.addAmount * 0.8 * (6-i+1)/6;
+				spread = self.options.addSpread;
+				halfspread = self.options.addSpread/2;
+				for (var i = 1; i <= halfspread; i++) {
+					amount = self.options.addAmount * 0.8 * (halfspread-i+1)/halfspread;
 
 					prev = index - i;
-					if (prev < 0) prev += 12;
+					if (prev < 0) prev += spread;
 
 					next = index + i;
-					if (next >= 12) next -= 12;
+					if (next >= spread) next -= spread;
 
 					self.addFire(prev, amount);
 					self.addFire(next, amount);
@@ -112,11 +108,11 @@ PixelNode_Game_Fire.prototype.initListener = function() {
 	});
 }
 
-PixelNode_Game_Fire.prototype.addFire = function(index, amount) {
+PixelNode_Game_Intensity.prototype.addFire = function(index, amount) {
 	var self = this;
 	//console.log("addFire",index,amount);
 	
-	self.effect.heights[index] += amount;
-	if (self.effect.heights[index] > 1) self.effect.heights[index] = 1; 
+	self.effect.intensity[index] += amount;
+	if (self.effect.intensity[index] > 1) self.effect.intensity[index] = 1; 
 }
 

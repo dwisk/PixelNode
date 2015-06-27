@@ -160,6 +160,19 @@
 		]
 	},
 	{
+		"name": "Rain",
+		"module": "../effects/PixelNode_Effect_Rain",
+		"scale": 0,
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{
 		"name": "OffTouch",
 		"module": "../effects/PixelNode_Effect_Off",
 		"outputs": [

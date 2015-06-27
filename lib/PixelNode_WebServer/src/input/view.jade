@@ -11,13 +11,13 @@ block body
 	div(ng-controller="SimulatorCtrl" class="container")
 		div(class='slider col-xs-12 responsive')
 			slick(infinite="true", 
-				slides-to-show="2",
-				slides-to-scroll="2",
+				slides-to-show="3",
+				slides-to-scroll="1",
 				arrows="false",
 				center-mode="true",
 				current-index="listId",
 				focus-on-select="true",
-				center-padding="60px")
+				center-padding="0px")
 
 				each game in config.games
 					div

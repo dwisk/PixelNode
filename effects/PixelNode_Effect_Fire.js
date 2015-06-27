@@ -45,7 +45,7 @@ module.exports = PixelNode_Effect_Fire;
  	speed: 0.5
  }
  PixelNode_Effect_Fire.prototype.height = 1
- PixelNode_Effect_Fire.prototype.heights = []
+ PixelNode_Effect_Fire.prototype.intensity = []
 
 /* Overridden Methods
  * ==================================================================================================================== */
@@ -55,6 +55,23 @@ PixelNode_Effect_Fire.prototype.init = function() {
 	console.log("Init Effect RedBlue".grey);
 }
 
+// reset effect – override
+PixelNode_Effect_Fire.prototype.reset = function() {
+	// manually init targets (otherwise just happening after initial init)
+	this.initTargets();
+}
+
+// init target – override
+PixelNode_Effect_Fire.prototype.initTarget = function(target, output, target_name) {
+	var self = this;
+	target_name = target_name.replace(".", "_");
+
+	for (var ring = 0; ring < target.length;ring++) {
+		self.intensity[ring] = Math.random(1)*0.1+0.9;
+	}
+
+}
+
 // draw effect on target
 PixelNode_Effect_Fire.prototype.drawTarget = function(target) {
 	var self = this;
@@ -62,9 +79,9 @@ PixelNode_Effect_Fire.prototype.drawTarget = function(target) {
 
 	for (var ring = 0; ring < target.length;ring++) {
 		flicker = Math.random(1)*0.5 + 0.5;
-		tmp_height = self.heights[ring] * flicker;
+		tmp_height = self.intensity[ring] * flicker;
 
-		if (self.heights[ring] == undefined) { self.heights[ring] = Math.random(1)*0.1+0.9}
+		if (self.intensity[ring] == undefined) { self.intensity[ring] = Math.random(1)*0.1+0.9}
 
 		for (var pixel = 0; pixel < target[ring].length; pixel++) {
 			if (target[ring].length * tmp_height > pixel) {
@@ -78,7 +95,7 @@ PixelNode_Effect_Fire.prototype.drawTarget = function(target) {
 				green = 128* (pixel  / target[ring].length) *tmp_height;
 			} else if (target[ring].length * tmp_height > pixel-(2*self.options.scale)) {
 				red = 64 *tmp_height;
-				green = 32 * (pixel  / target[ring].length) *tmp_height;
+				green = 64 * (pixel  / target[ring].length) *tmp_height;
 			} else {
 				red = 32;
 				green = 0;
@@ -95,7 +112,7 @@ PixelNode_Effect_Fire.prototype.drawTarget = function(target) {
 		}			    
 	
 		if (tmp_height >= 0.1) {
-			self.heights[ring] -= 0.001 * self.options.speed * (Math.random(1)*0.2 + 0.8);
+			self.intensity[ring] -= 0.001 * self.options.speed * (Math.random(1)*0.2 + 0.8);
 		}
 	}
 

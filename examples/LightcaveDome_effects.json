@@ -113,6 +113,20 @@
 				]
 			}
 		]
+	},
+	{
+		"name": "Rain",
+		"module": "../effects/PixelNode_Effect_Rain",
+		"scale": 0,
+		"gravity": 2,
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
 	}
 
 ]	

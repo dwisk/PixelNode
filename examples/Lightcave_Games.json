@@ -1,14 +1,29 @@
 [
 	{
-		"name": "Fire",
-		"title": "Fire",
-		"module": "../games/PixelNode_Game_Fire",
+		"name": "Rain",
+		"title": "Rain",
+		"module": "../games/PixelNode_Game_Intensity",
+		"effect": "Rain",
 		"inputs": {
 			"color_left": "inputs.rgb.color_left",
 			"color_right": "inputs.rgb.color_right",
 			"touches": "touch.touches"
 		},
-		"speed": 0.5,
+		"speed": 0.1,
+		"touch_input": true,
+		"color_input": false
+	},	
+	{
+		"name": "Fire",
+		"title": "Fire",
+		"module": "../games/PixelNode_Game_Intensity",
+		"effect": "Fire",
+		"inputs": {
+			"color_left": "inputs.rgb.color_left",
+			"color_right": "inputs.rgb.color_right",
+			"touches": "touch.touches"
+		},
+		"speed": 0.01,
 		"touch_input": true,
 		"color_input": false
 	},	
