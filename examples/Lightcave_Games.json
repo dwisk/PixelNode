@@ -1,5 +1,20 @@
 [
 	{
+		"name": "working",
+		"title": "Work in Progress",
+		"module": "../games/PixelNode_Game_EffectQueue",
+		"inputs": {
+			"color_left": "inputs.rgb.color_left",
+			"color_right": "inputs.rgb.color_right",
+			"touches": "touch.touches"
+		},
+		"touch_input": true,
+		"color_input": false,
+		"queue": [
+			{ "effect": "Wave", "duration": 100000 }
+		]
+	},
+	{
 		"name": "Rain",
 		"title": "Rain",
 		"module": "../games/PixelNode_Game_Intensity",
@@ -27,21 +42,7 @@
 		"touch_input": true,
 		"color_input": false
 	},	
-	{
-		"name": "working",
-		"title": "Work in Progress",
-		"module": "../games/PixelNode_Game_EffectQueue",
-		"inputs": {
-			"color_left": "inputs.rgb.color_left",
-			"color_right": "inputs.rgb.color_right",
-			"touches": "touch.touches"
-		},
-		"touch_input": true,
-		"color_input": false,
-		"queue": [
-			{ "effect": "Fire", "duration": 100000 }
-		]
-	},
+
 
 	{
 		"name": "2colored",
@@ -59,7 +60,8 @@
 			{ "effect": "Color", "duration": 30000000 },
 			{ "effect": "Glitter", "duration": 30000 },
 			{ "effect": "Ray", "duration": 30000 },
-			{ "effect": "Wall", "duration": 30000 }
+			{ "effect": "Wall", "duration": 30000 },
+			{ "effect": "Wave", "duration": 30000 }
 		]
 	},
 

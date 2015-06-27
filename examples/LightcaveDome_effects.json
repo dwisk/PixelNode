@@ -50,6 +50,18 @@
 		]
 	},
 	{
+		"name": "Wave",
+		"module": "../effects/PixelNode_Effect_TwoWave",
+		"outputs": [
+			{
+				"name": "ray",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{
 		"name": "Glitter",
 		"module": "../effects/PixelNode_Effect_TwoGlitter",
 		"outputs": [
