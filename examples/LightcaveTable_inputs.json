@@ -16,12 +16,12 @@
 		"name": "touch",
 		"modulex": "pixelnode-input",
 		"module": "pixelnode-input-mpr121", 
-		"crash_waittime": 1,
-		"crash_cautious_lifetime": 20,
-		"crash_cautious_waittime": 2,
 		"i2c_bus": 2,
 		"offset": 1,
-		"verbose": false
+		"verbose": false,
+		"timer": 50,
+		"treshold_touch": 1200,
+		"treshold_release": 20
 	},
 	{
 		"name": "rgb",

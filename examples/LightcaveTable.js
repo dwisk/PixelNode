@@ -27,6 +27,8 @@ var testPixelNode = new PixelNode({
 			"port": 3001
 		},
 
+		// DRIVERS ----------------------------------------------------------------------------------------------------
+
 		"pixelDrivers": [
 			{
 				"module": "pixelnode-driver-fadecandy",
@@ -36,11 +38,21 @@ var testPixelNode = new PixelNode({
 			}
 		],
 
+
+		// EFFECTS ----------------------------------------------------------------------------------------------------
+
 		"effects": PixelNode.requireFile("LightcaveTable_effects.json"),
 		"after_effects": [
 			"PlayerColor"
 		],
+
+
+		// INPUTS ----------------------------------------------------------------------------------------------------
+
 		"inputs": PixelNode.requireFile("LightcaveTable_inputs.json"),
+
+
+		// GAMES  ----------------------------------------------------------------------------------------------------
 		"games": PixelNode.requireFile("Lightcave_Games.json"),
 
 		"future_games": [
@@ -100,9 +112,9 @@ var testPixelNode = new PixelNode({
 });
 
 
+
 /* Events
  * -------------------------------------------------------------------------------------------------------------------- */
-
 
 // override effects
 testPixelNode.gameManager.on("drawGame_after", function() {
@@ -115,5 +127,12 @@ testPixelNode.gameManager.on("drawGame_after", function() {
 	// show rainbow for player 2 if button is pressed
 	if (testPixelNode.data.get("inputs.buttons.button_right")) {
 		testPixelNode.gameManager.getEffectByName("RainBowPlayer2").draw();
+	}
+
+	if (!testPixelNode.gameManager.game.options.touch_input) {
+		testPixelNode.gameManager.getEffectByName("OffTouch").draw();
+	}
+	if (!testPixelNode.gameManager.game.options.color_input) {
+		testPixelNode.gameManager.getEffectByName("OffColor").draw();
 	}
 });

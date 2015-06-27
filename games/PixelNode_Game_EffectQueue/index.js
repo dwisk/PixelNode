@@ -1,5 +1,5 @@
 /**
- * PixelNode_Game_Animation 
+ * PixelNode_Game_EffectQueue 
  * 
  * Animation Game 
  * 
@@ -21,36 +21,36 @@ var util = require("util");
 PixelNode_Game = require('../../lib/PixelNode_Game.js');
 
 // define the Student class
-function PixelNode_Game_Animation(options, effects) {
+function PixelNode_Game_EffectQueue(options, effects) {
   var self = this;
-  PixelNode_Game_Animation.super_.call(self, options, effects);
-  self.className = "PixelNode_Game_Animation";
+  PixelNode_Game_EffectQueue.super_.call(self, options, effects);
+  self.className = "PixelNode_Game_EffectQueue";
   self.public_dir = __dirname;
 }
 
 // class inheritance 
-util.inherits(PixelNode_Game_Animation, PixelNode_Game);
+util.inherits(PixelNode_Game_EffectQueue, PixelNode_Game);
 
 // module export
-module.exports = PixelNode_Game_Animation;
+module.exports = PixelNode_Game_EffectQueue;
 
 
 /* Variables
  * ==================================================================================================================== */
 
-PixelNode_Game_Animation.prototype.default_options = {}
+ PixelNode_Game_EffectQueue.prototype.default_options = {}
 
-PixelNode_Game_Animation.prototype.effects = [];
-PixelNode_Game_Animation.prototype.effect = null;
-PixelNode_Game_Animation.prototype.queueEffect = null;
-PixelNode_Game_Animation.prototype.queueId = 0;
+PixelNode_Game_EffectQueue.prototype.effects = [];
+PixelNode_Game_EffectQueue.prototype.effect = null;
+PixelNode_Game_EffectQueue.prototype.queueEffect = null;
+PixelNode_Game_EffectQueue.prototype.queueId = 0;
 
 
 /* Overridden Methods
  * ==================================================================================================================== */
 
 // init effect – override
-PixelNode_Game_Animation.prototype.init = function() {
+PixelNode_Game_EffectQueue.prototype.init = function() {
 	console.log("Init Game Animation".grey);
 	var self = this;
 
@@ -80,7 +80,7 @@ PixelNode_Game_Animation.prototype.init = function() {
 	});
 }
 
-PixelNode_Game_Animation.prototype.pixelDataOff = function() {
+PixelNode_Game_EffectQueue.prototype.pixelDataOff = function() {
 	var self = this;
 	if (global.pixelNode.gameManager) {
 		global.mapping.forEach(function(map) {
@@ -90,7 +90,7 @@ PixelNode_Game_Animation.prototype.pixelDataOff = function() {
 }
 
 // draw effect – override this
-PixelNode_Game_Animation.prototype.draw = function() {
+PixelNode_Game_EffectQueue.prototype.draw = function() {
 	var self = this;
 	self.effect.draw();
 
@@ -104,7 +104,7 @@ PixelNode_Game_Animation.prototype.draw = function() {
 }
 
 
-PixelNode_Game_Animation.prototype.nextEffect = function() {
+PixelNode_Game_EffectQueue.prototype.nextEffect = function() {
 	var next = this.queueId + 1;
 	if (next >= this.options.queue.length) {
 		next = 0;
@@ -112,7 +112,7 @@ PixelNode_Game_Animation.prototype.nextEffect = function() {
 	this.setEffectByQueueId(next);
 };
 
-PixelNode_Game_Animation.prototype.setEffectByQueueId = function(id) {
+PixelNode_Game_EffectQueue.prototype.setEffectByQueueId = function(id) {
 	this.pixelDataOff();
 	if (this.options.queue[id]) {
 		this.setEffectByName(this.options.queue[id].effect);
@@ -124,7 +124,7 @@ PixelNode_Game_Animation.prototype.setEffectByQueueId = function(id) {
 	}
 };
 
-PixelNode_Game_Animation.prototype.getEffectByName = function(name) {
+PixelNode_Game_EffectQueue.prototype.getEffectByName = function(name) {
 	var self = this;
 	var effect = null;
 	self.effects.forEach(function(fx) {
@@ -134,7 +134,7 @@ PixelNode_Game_Animation.prototype.getEffectByName = function(name) {
 	});
 	return effect;
 }
-PixelNode_Game_Animation.prototype.setEffectByName = function(name) {
+PixelNode_Game_EffectQueue.prototype.setEffectByName = function(name) {
 	var self = this;
 	self.pixelDataOff();
 
