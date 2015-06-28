@@ -1,5 +1,19 @@
 [
 	{
+		"name": "Rain",
+		"title": "Rain",
+		"module": "../games/PixelNode_Game_Intensity",
+		"effect": "Rain",
+		"inputs": {
+			"color_left": "inputs.rgb.color_left",
+			"color_right": "inputs.rgb.color_right",
+			"touches": "touch.touches"
+		},
+		"speed": 0.1,
+		"touch_input": true,
+		"color_input": false
+	},	
+	{
 		"name": "working",
 		"title": "Work in Progress",
 		"module": "../games/PixelNode_Game_EffectQueue",
@@ -14,20 +28,6 @@
 			{ "effect": "Color", "duration": 100000 }
 		]
 	},
-	{
-		"name": "Rain",
-		"title": "Rain",
-		"module": "../games/PixelNode_Game_Intensity",
-		"effect": "Rain",
-		"inputs": {
-			"color_left": "inputs.rgb.color_left",
-			"color_right": "inputs.rgb.color_right",
-			"touches": "touch.touches"
-		},
-		"speed": 0.1,
-		"touch_input": true,
-		"color_input": false
-	},	
 	{
 		"name": "Fire",
 		"title": "Fire",
@@ -46,6 +46,7 @@
 
 	{
 		"name": "2colored",
+		"default": true,
 		"title": "Two colored",
 		"module": "../games/PixelNode_Game_EffectQueue",
 		"inputs": {
@@ -77,8 +78,8 @@
 		"touch_input": false,
 		"color_input": false,
 		"queue": [
-			{ "effect": "RainBow", "duration": 30000 },
 			{ "effect": "RainBowRings", "duration": 30000 },
+			{ "effect": "RainBow", "duration": 30000 },
 			{ "effect": "RedBlue", "duration": 30000 }
 		]
 	}

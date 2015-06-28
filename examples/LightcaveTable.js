@@ -27,6 +27,10 @@ var testPixelNode = new PixelNode({
 			"port": 3001
 		},
 
+		"gameManager": {
+			"idletime": 2 * 60
+		},
+
 		// DRIVERS ----------------------------------------------------------------------------------------------------
 
 		"pixelDrivers": [
