@@ -50,6 +50,18 @@
 		]
 	},
 	{
+		"name": "Off",
+		"module": "../effects/PixelNode_Effect_Off",
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{
 		"name": "Wave",
 		"module": "../effects/PixelNode_Effect_TwoWave",
 		"outputs": [

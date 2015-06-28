@@ -197,6 +197,20 @@
 		]
 	},
 	{
+		"name": "Off",
+		"module": "../effects/PixelNode_Effect_Off",
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.strips",
+					"player1.strips",
+					"player2.strips"					
+				]
+			}
+		]
+	},
+	{
 		"name": "OffColor",
 		"module": "../effects/PixelNode_Effect_Off",
 		"outputs": [

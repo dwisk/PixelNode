@@ -136,3 +136,20 @@ testPixelNode.gameManager.on("drawGame_after", function() {
 		testPixelNode.gameManager.getEffectByName("OffColor").draw();
 	}
 });
+
+
+
+/* Check for autooff
+ * -------------------------------------------------------------------------------------------------------------------- */
+
+setInterval(function() {
+	time = new Date();
+	hour = time.getHours();
+
+	if (((hour >= 20) || (hour < 7))) {
+		global.pixelNode.data.set("games.force_off", false);
+	} else {
+		global.pixelNode.data.set("games.force_off", true);
+	}
+	
+},1000*1);

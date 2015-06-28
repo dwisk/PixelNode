@@ -11,7 +11,7 @@
 		"touch_input": true,
 		"color_input": false,
 		"queue": [
-			{ "effect": "Wave", "duration": 100000 }
+			{ "effect": "Color", "duration": 100000 }
 		]
 	},
 	{
