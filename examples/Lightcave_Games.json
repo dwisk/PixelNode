@@ -2,6 +2,7 @@
 	{
 		"name": "Rain",
 		"title": "Rain",
+		"icon": "entypo/water",
 		"module": "../games/PixelNode_Game_Intensity",
 		"effect": "Rain",
 		"inputs": {
@@ -16,6 +17,7 @@
 	{
 		"name": "working",
 		"title": "Work in Progress",
+		"icon": "entypo/tools",
 		"module": "../games/PixelNode_Game_EffectQueue",
 		"inputs": {
 			"color_left": "inputs.rgb.color_left",
@@ -31,6 +33,7 @@
 	{
 		"name": "Fire",
 		"title": "Fire",
+		"icon": "openiconic/fire",
 		"module": "../games/PixelNode_Game_Intensity",
 		"effect": "Fire",
 		"inputs": {
@@ -48,6 +51,7 @@
 		"name": "2colored",
 		"default": true,
 		"title": "Two colored",
+		"icon": "entypo/adjust",
 		"module": "../games/PixelNode_Game_EffectQueue",
 		"inputs": {
 			"color_left": "inputs.rgb.color_left",
@@ -57,9 +61,7 @@
 		"touch_input": true,
 		"color_input": true,
 		"queue": [
-			{ "effect": "Clock", "duration": 30000000 },
-			{ "effect": "Color", "duration": 30000000 },
-			{ "effect": "Glitter", "duration": 30000 },
+			{ "effect": "Color", "duration": 30000 },
 			{ "effect": "Ray", "duration": 30000 },
 			{ "effect": "Wall", "duration": 30000 },
 			{ "effect": "Wave", "duration": 30000 }
@@ -67,8 +69,61 @@
 	},
 
 	{
+		"name": "wave",
+		"default": true,
+		"title": "Wave",
+		"icon": "entypo/air",
+		"module": "../games/PixelNode_Game_EffectQueue",
+		"inputs": {
+			"color_left": "inputs.rgb.color_left",
+			"color_right": "inputs.rgb.color_right",
+			"touches": "touch.touches"
+		},
+		"touch_input": true,
+		"color_input": true,
+		"queue": [
+			{ "effect": "Wave", "duration": 30000000 }
+		]
+	},
+	{
+		"name": "clock",
+		"default": true,
+		"title": "Clock",
+		"icon": "openiconic/clock",
+		"module": "../games/PixelNode_Game_EffectQueue",
+		"inputs": {
+			"color_left": "inputs.rgb.color_left",
+			"color_right": "inputs.rgb.color_right",
+			"touches": "touch.touches"
+		},
+		"touch_input": true,
+		"color_input": true,
+		"queue": [
+			{ "effect": "Clock", "duration": 30000000 }
+		]
+	},
+	{
+		"name": "glitter",
+		"default": true,
+		"title": "Glitter",
+		"icon": "entypo/star-outlined",
+		"module": "../games/PixelNode_Game_EffectQueue",
+		"inputs": {
+			"color_left": "inputs.rgb.color_left",
+			"color_right": "inputs.rgb.color_right",
+			"touches": "touch.touches"
+		},
+		"touch_input": true,
+		"color_input": true,
+		"queue": [
+			{ "effect": "Glitter", "duration": 30000000 }
+		]
+	},
+
+	{
 		"name": "rainbows",
 		"title": "Rainbows and more",
+		"icon": "custom/rainbow",
 		"module": "../games/PixelNode_Game_EffectQueue",
 		"inputs": {
 			"color_left": "inputs.rgb.color_left",

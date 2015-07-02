@@ -14,19 +14,19 @@ block body
 				slides-to-show="3",
 				slides-to-scroll="1",
 				arrows="false",
+				swipe="false",
 				center-mode="true",
 				current-index="listId",
 				focus-on-select="true",
-				center-padding="0px")
+				center-padding="0px",
+				padding="10px")
 
 				each game in config.games
 					div
-						img(src='/games/#{game.name}/icon.png')
+						div.icon
+							!= templateRender('../lib/PixelNode_WebServer/public/icons/'+game.icon+'.svg', local)
+							//!= templateRender('/Users/atrox/Documents/_remote_projects/PixelNode/lib/PixelNode_WebServer/src/simulator/view.jade', local)
 
 		h2 {{game.title}}
-		h3 {{game.subtitle}}
+		//h3 {{game.subtitle}}
 		
-		div 
-			p(ng-class="{deactivated: !autoplay}", ng-click="autoplay = !autoplay") Autoplay 
-				span(ng-show="autoplay") ON 
-				span(ng-hide="autoplay") OFF 

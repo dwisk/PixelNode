@@ -153,7 +153,7 @@ setInterval(function() {
 	if (((hour >= 20) || (hour < 7))) {
 		global.pixelNode.data.set("games.force_off", false);
 	} else {
-		global.pixelNode.data.set("games.force_off", true);
+		//global.pixelNode.data.set("games.force_off", true);
 	}
 	
 },1000*1);
