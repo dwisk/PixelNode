@@ -79,7 +79,7 @@ PixelNode_Effect_Wave.prototype.drawTarget = function(target) {
 		for (var pixel = 0; pixel < target[ring].length; pixel++) {
 			var wave = base + height * Math.sin(t);
 
-			if (global.pixelNode.data.get(["inputs","touch","touches",ring])) {
+			if (global.pixelNode.data.get(["inputs","buttons","btn_"+ring])) {
 				c = c1;
 			} else if (pixel <= wave) {
 				c = self.options.waveTop ? c2: c1;

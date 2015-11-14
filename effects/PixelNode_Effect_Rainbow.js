@@ -64,6 +64,7 @@ PixelNode_Effect_Rainbow.prototype.drawTarget = function(target, output) {
 	for (var ring = 0; ring < target.length;ring++) {
 		if (output == "rainbow") {
 			self.fillArray(target[ring], colors);		    
+			
 		} else {
 			self.fillColor(target[ring], [0,0,0]);		    
 		}

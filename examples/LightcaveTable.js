@@ -12,6 +12,7 @@
  * -------------------------------------------------------------------------------------------------------------------- */
 
 var PixelNode = require('../index.js');
+var b = require('bonescript');
 
 
 /* Config
@@ -28,24 +29,25 @@ var testPixelNode = new PixelNode({
 		},
 
 		"gameManager": {
-			"idletime": 2 * 60
+			"idletime": 20 * 60
 		},
 
 		// DRIVERS ----------------------------------------------------------------------------------------------------
 
 		"pixelDrivers": [
-			{
-				"module": "pixelnode-driver-fadecandy",
-				"address": "127.0.0.1",
-				"port": 7890,
-				"delay": 50
+		{
+			"module": "pixelnode-driver-fadecandy",
+			"address": "127.0.0.1",
+			"port": 7890,
+			"delay": 50,
+			"dimmer": 1
 			}
 		],
 
 
 		// EFFECTS ----------------------------------------------------------------------------------------------------
 
-		"effects": PixelNode.requireFile("LightcaveTable_effects.json"),
+		"effects": PixelNode.requireFile("LightcaveDome_effects.json"),
 		"after_effects": [
 			"PlayerColor"
 		],
@@ -54,6 +56,7 @@ var testPixelNode = new PixelNode({
 		// INPUTS ----------------------------------------------------------------------------------------------------
 
 		"inputs": PixelNode.requireFile("LightcaveTable_inputs.json"),
+		//inputs: [],
 
 
 		// GAMES  ----------------------------------------------------------------------------------------------------
@@ -120,6 +123,11 @@ var testPixelNode = new PixelNode({
 /* Events
  * -------------------------------------------------------------------------------------------------------------------- */
 
+var color_input_was_on = false;
+
+b.pinMode("P8_14", b.OUTPUT);
+b.pinMode("P8_15", b.OUTPUT);
+
 // override effects
 testPixelNode.gameManager.on("drawGame_after", function() {
 
@@ -138,6 +146,17 @@ testPixelNode.gameManager.on("drawGame_after", function() {
 	}
 	if (!testPixelNode.gameManager.game.options.color_input) {
 		testPixelNode.gameManager.getEffectByName("OffColor").draw();
+		if (color_input_was_on) {
+			b.digitalWrite("P8_14", 0);
+			b.digitalWrite("P8_15", 0);
+			color_input_was_on = false;
+		} 
+	} else {
+		if (!color_input_was_on) {
+			b.digitalWrite("P8_14", 1);
+			b.digitalWrite("P8_15", 1);
+			color_input_was_on = true;
+		} 
 	}
 });
 
@@ -146,14 +165,15 @@ testPixelNode.gameManager.on("drawGame_after", function() {
 /* Check for autooff
  * -------------------------------------------------------------------------------------------------------------------- */
 
-setInterval(function() {
-	time = new Date();
-	hour = time.getHours();
-
-	if (((hour >= 20) || (hour < 7))) {
-		global.pixelNode.data.set("games.force_off", false);
-	} else {
-		//global.pixelNode.data.set("games.force_off", true);
-	}
-	
-},1000*1);
+// setInterval(function() {
+// 	time = new Date();
+// 	hour = time.getHours();
+// 
+// 	if (((hour >= 20) || (hour < 7))) {
+// 		global.pixelNode.data.set("games.force_off", false);
+// 	} else {
+// 		global.pixelNode.data.set("games.force_off", true);
+// 	}
+// 	
+// },1000*1);
+// 

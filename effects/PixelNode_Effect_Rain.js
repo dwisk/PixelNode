@@ -78,12 +78,15 @@ PixelNode_Effect_Rain.prototype.initTarget = function(target, output, target_nam
 	self.target_cnt[target_name] = 0;
 }
 
+var lastDraw = new Date();
 
 // draw effect on target
 PixelNode_Effect_Rain.prototype.drawTarget = function(target, output, target_name) {
 	var self = this;
 	target_name = target_name.replace(".", "_");
 	self.target_cnt[target_name]++;
+	var dropamounts = 0;
+	var before = new Date();
 
 
 	for (var ring = 0; ring < target.length;ring++) {
@@ -120,6 +123,8 @@ PixelNode_Effect_Rain.prototype.drawTarget = function(target, output, target_nam
 			} 
 			self.drops[target_name][ring][drop] = self.drops[target_name][ring][drop] - self.options.gravity;
 		}
+
+		dropamounts += self.drops[target_name][ring].length;
 	    
 
 		if (self.intensity[ring] >= 0.03) {
@@ -128,6 +133,10 @@ PixelNode_Effect_Rain.prototype.drawTarget = function(target, output, target_nam
 	
 	}
 
+	var after = new Date();
+	//console.log(Math.ceil(dropamounts / target.length), after-before, before - lastDraw);
+
+	lastDraw = before;
 
 
 }

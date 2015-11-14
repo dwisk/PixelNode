@@ -1,19 +1,92 @@
 [
+{
+	"name": "glitter",
+	"default": true,
+	"title": "Glitter",
+	"icon": "entypo/star-outlined",
+	"module": "../games/PixelNode_Game_EffectQueue",
+	"inputs": {
+		"color_left": "inputs.rgb.color_left",
+		"color_right": "inputs.rgb.color_right",
+		"touches": "touch.touches"
+	},
+	"touch_input": true,
+	"color_input": true,
+	"queue": [
+		{ "effect": "Glitter", "duration": 30000000 }
+	]
+},
+{
+	"name": "2colored",
+	"default": true,
+	"title": "Two colored",
+	"icon": "entypo/adjust",
+	"module": "../games/PixelNode_Game_EffectQueue",
+	"inputs": {
+		"color_left": "inputs.rgb.color_left",
+		"color_right": "inputs.rgb.color_right",
+		"touches": "touch.touches"
+	},
+	"touch_input": true,
+	"color_input": true,
+	"queue": [
+		{ "effect": "Color", "duration": 30000 },
+		{ "effect": "Ray", "duration": 30000 },
+		{ "effect": "Wall", "duration": 30000 },
+		{ "effect": "Wave", "duration": 30000 }
+	]
+},
+{
+	"name": "Fire",
+	"title": "Fire",
+	"icon": "openiconic/fire",
+	"module": "../games/PixelNode_Game_Intensity",
+	"effect": "Fire",
+	"inputs": {
+		"color_left": "inputs.rgb.color_left",
+		"color_right": "inputs.rgb.color_right",
+		"touches": "touch.touches"
+	},
+	"speed": 0.01,
+	"touch_input": true,
+	"color_input": false
+},	
+{
+	"name": "Rain",
+	"title": "Rain",
+	"icon": "entypo/water",
+	"module": "../games/PixelNode_Game_Intensity",
+	"effect": "Rain",
+	"inputs": {
+		"color_left": "inputs.rgb.color_left",
+		"color_right": "inputs.rgb.color_right",
+		"touches": "touch.touches"
+	},
+	"speed": 0.1,
+	"touch_input": true,
+	"color_input": false
+},	
+
 	{
-		"name": "Rain",
-		"title": "Rain",
-		"icon": "entypo/water",
-		"module": "../games/PixelNode_Game_Intensity",
-		"effect": "Rain",
+		"name": "rainbows",
+		"title": "Rainbows and more",
+		"icon": "custom/rainbow",
+		"module": "../games/PixelNode_Game_EffectQueue",
 		"inputs": {
 			"color_left": "inputs.rgb.color_left",
 			"color_right": "inputs.rgb.color_right",
 			"touches": "touch.touches"
 		},
-		"speed": 0.1,
-		"touch_input": true,
-		"color_input": false
-	},	
+		"touch_input": false,
+		"color_input": false,
+		"queue": [
+			{ "effect": "RainBowRings", "duration": 30000 },
+			{ "effect": "RainBow", "duration": 30000 },
+			{ "effect": "RedBlue", "duration": 30000 }
+		]
+	},
+
+
 	{
 		"name": "working",
 		"title": "Work in Progress",
@@ -30,43 +103,10 @@
 			{ "effect": "Color", "duration": 100000 }
 		]
 	},
-	{
-		"name": "Fire",
-		"title": "Fire",
-		"icon": "openiconic/fire",
-		"module": "../games/PixelNode_Game_Intensity",
-		"effect": "Fire",
-		"inputs": {
-			"color_left": "inputs.rgb.color_left",
-			"color_right": "inputs.rgb.color_right",
-			"touches": "touch.touches"
-		},
-		"speed": 0.01,
-		"touch_input": true,
-		"color_input": false
-	},	
 
 
-	{
-		"name": "2colored",
-		"default": true,
-		"title": "Two colored",
-		"icon": "entypo/adjust",
-		"module": "../games/PixelNode_Game_EffectQueue",
-		"inputs": {
-			"color_left": "inputs.rgb.color_left",
-			"color_right": "inputs.rgb.color_right",
-			"touches": "touch.touches"
-		},
-		"touch_input": true,
-		"color_input": true,
-		"queue": [
-			{ "effect": "Color", "duration": 30000 },
-			{ "effect": "Ray", "duration": 30000 },
-			{ "effect": "Wall", "duration": 30000 },
-			{ "effect": "Wave", "duration": 30000 }
-		]
-	},
+
+
 
 	{
 		"name": "wave",
@@ -101,42 +141,7 @@
 		"queue": [
 			{ "effect": "Clock", "duration": 30000000 }
 		]
-	},
-	{
-		"name": "glitter",
-		"default": true,
-		"title": "Glitter",
-		"icon": "entypo/star-outlined",
-		"module": "../games/PixelNode_Game_EffectQueue",
-		"inputs": {
-			"color_left": "inputs.rgb.color_left",
-			"color_right": "inputs.rgb.color_right",
-			"touches": "touch.touches"
-		},
-		"touch_input": true,
-		"color_input": true,
-		"queue": [
-			{ "effect": "Glitter", "duration": 30000000 }
-		]
-	},
-
-	{
-		"name": "rainbows",
-		"title": "Rainbows and more",
-		"icon": "custom/rainbow",
-		"module": "../games/PixelNode_Game_EffectQueue",
-		"inputs": {
-			"color_left": "inputs.rgb.color_left",
-			"color_right": "inputs.rgb.color_right",
-			"touches": "touch.touches"
-		},
-		"touch_input": false,
-		"color_input": false,
-		"queue": [
-			{ "effect": "RainBowRings", "duration": 30000 },
-			{ "effect": "RainBow", "duration": 30000 },
-			{ "effect": "RedBlue", "duration": 30000 }
-		]
 	}
+
 
 ]

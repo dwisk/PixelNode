@@ -60,7 +60,6 @@ PixelNode_Game_Intensity.prototype.init = function() {
 	
 	self.effect = global.pixelNode.gameManager.getEffectByName(self.options.effect);
 
-
 	if (global.config.inputMode == "server") {
 	}
 		self.initListener();
@@ -83,9 +82,21 @@ PixelNode_Game_Intensity.prototype.draw = function() {
 
 PixelNode_Game_Intensity.prototype.initListener = function() {
 	var self = this;
-	global.pixelNode.data.on("changed_inputs_touch_touches", function(paths, value) {
-		if (value) {
-			index = paths[0];
+
+	global.pixelNode.data.on("changed_inputs_buttons_button_back", function(paths, value) {
+		if(self.options.name == global.pixelNode.data.get("game.name") && value) {
+			self.reset();
+		}
+	});
+
+	global.pixelNode.data.on("changed_inputs_buttons", function(paths, value) {
+		var found = paths[0].match(/btn_(\d*)/);
+
+		if (value && found != null) {
+
+			index = parseInt(paths[0].split("_")[1]);
+			console.log(index);
+
 			if (self.effect.intensity[index] <= 1- self.options.addAmount) {
 				self.addFire(index, self.options.addAmount);
 				spread = self.options.addSpread;
@@ -106,6 +117,9 @@ PixelNode_Game_Intensity.prototype.initListener = function() {
 			}
 		}
 	});
+}
+PixelNode_Game_Intensity.prototype.addFire = function(value) {
+
 }
 
 PixelNode_Game_Intensity.prototype.addFire = function(index, amount) {

@@ -161,6 +161,7 @@
 		]
 	},	{
 		"name": "Fire",
+		"speed": 10,
 		"module": "../effects/PixelNode_Effect_Fire",
 		"outputs": [
 			{

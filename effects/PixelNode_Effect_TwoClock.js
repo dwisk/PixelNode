@@ -99,7 +99,7 @@ PixelNode_Effect_TwoClock.prototype.drawTarget = function(target, output) {
 		     || (ring == hour && pixel > 3*self.options.scale) 
 				) {
 				target[ring][pixel] = c2;
-			} else if ( global.pixelNode.data.get(["inputs","touch","touches",ring])
+			} else if (global.pixelNode.data.get(["inputs","buttons","btn_"+ring])
 			 ||	(second >= ring*internal_scale && second < (ring+1)*internal_scale ) 
 				) {
 				target[ring][pixel] = c1;

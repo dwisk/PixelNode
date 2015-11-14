@@ -14,7 +14,7 @@
 var PixelNode = require('../index.js');
 
 
-/* Code
+/* Config
  * -------------------------------------------------------------------------------------------------------------------- */
 
 var testPixelNode = new PixelNode({
@@ -27,19 +27,17 @@ var testPixelNode = new PixelNode({
 			"port": 3001
 		},
 
+		"gameManager": {
+			"idletime": 2 * 60
+		},
 
 		// DRIVERS ----------------------------------------------------------------------------------------------------
 
 		"pixelDrivers": [
-			//{
-			//	"module": "pixelnode-driver-pixelpusher",
-			//	"delay": 50,
-			//	"dimmer": 1
-			//},
-			{
-				"module": "pixelnode-driver-websimulator",
-				"delay": 50,
-				"dimmer": 1
+		{
+			"module": "pixelnode-driver-pixelpusher",
+			"delay": 50,
+			"dimmer": 1
 			}
 		],
 
@@ -47,7 +45,8 @@ var testPixelNode = new PixelNode({
 		// EFFECTS ----------------------------------------------------------------------------------------------------
 
 		"effects": PixelNode.requireFile("LightcaveDome_effects.json"),
-		"after_effects": [],
+		"after_effects": [
+		],
 
 
 		// INPUTS ----------------------------------------------------------------------------------------------------
@@ -55,18 +54,15 @@ var testPixelNode = new PixelNode({
 		"inputs": [
 			{
 				"name": "socketclient",
-				"module": "../inputs/PixelNode_Input_WebSocket_Client.js"
-			},
-			{
-				"name": "switch",
-				"module": "../inputs/PixelNode_Input_WebSocket"
+				"module": "../inputs/PixelNode_Input_WebSocket_Client.js",
+				"server": "http://192.168.3.43:3001"
 			}
 
 		],
 		
 
-		// GAMES ----------------------------------------------------------------------------------------------------
 
+		// GAMES  ----------------------------------------------------------------------------------------------------
 		"games": PixelNode.requireFile("Lightcave_Games.json"),
 
 		"future_games": [
@@ -122,29 +118,23 @@ var testPixelNode = new PixelNode({
 
 	},
 
-
-	// MAPPING  ----------------------------------------------------------------------------------------------------
-
 	mapping: "LightcaveDome_mapping.json"
 });
+
 
 
 
 /* Check for autooff
  * -------------------------------------------------------------------------------------------------------------------- */
 
-setInterval(function() {
-	time = new Date();
-	hour = time.getHours();
-
-	if (((hour >= 20) || (hour < 7))) {
-		global.pixelNode.data.set("games.force_off", false);
-	} else {
-		global.pixelNode.data.set("games.force_off", true);
-	}
-	
-},1000*1);
-
-
-
-
+//setInterval(function() {
+//	time = new Date();
+//	hour = time.getHours();
+//
+//	if (((hour >= 20) || (hour < 7))) {
+//		global.pixelNode.data.set("games.force_off", false);
+//	} else {
+//		global.pixelNode.data.set("games.force_off", true);
+//	}
+//	
+//},1000*1);

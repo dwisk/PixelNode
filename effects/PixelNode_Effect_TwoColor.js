@@ -83,7 +83,7 @@ PixelNode_Effect_TwoColor.prototype.drawTarget = function(target, output) {
 			} else if (output == "color2") {
 				target[ring][pixel] = c2;
 			} else if (output == "both") {
-				if (global.pixelNode.data.get(["inputs","touch","touches",ring])) {
+				if (global.pixelNode.data.get(["inputs","buttons","btn_"+ring])) {
 					target[ring][pixel] = c1;
 				} else {
 					target[ring][pixel] = c2;

@@ -60,6 +60,8 @@ PixelNode_Game_EffectQueue.prototype.init = function() {
 	//})
 
 	self.setEffectByQueueId(0);
+	self.nextEffect();
+
 
 	if (global.config.inputMode == "server") {
 		global.pixelNode.data.on("changed_inputs_buttons_button_back", function(paths, value) {
