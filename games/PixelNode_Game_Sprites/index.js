@@ -1,5 +1,5 @@
 /**
- * PixelNode_Game_Intensity 
+ * PixelNode_Game_Sprites 
  * 
  * Animation Game 
  * 
@@ -13,6 +13,7 @@
  * ==================================================================================================================== */
 
 var util = require("util");
+var _ = require("underscore");
 
 /* Class Constructor
  * ==================================================================================================================== */
@@ -21,32 +22,30 @@ var util = require("util");
 PixelNode_Game = require('../../lib/PixelNode_Game.js');
 
 // define the Student class
-function PixelNode_Game_Intensity(options, effects) {
+function PixelNode_Game_Sprites(options, effects) {
   var self = this;
-  PixelNode_Game_Intensity.super_.call(self, options, effects);
-  self.className = "PixelNode_Game_Intensity";
+  PixelNode_Game_Sprites.super_.call(self, options, effects);
+  self.className = "PixelNode_Game_Sprites";
   self.public_dir = __dirname;
 }
 
 // class inheritance 
-util.inherits(PixelNode_Game_Intensity, PixelNode_Game);
+util.inherits(PixelNode_Game_Sprites, PixelNode_Game);
 
 // module export
-module.exports = PixelNode_Game_Intensity;
+module.exports = PixelNode_Game_Sprites;
 
 
 /* Variables
  * ==================================================================================================================== */
 
- PixelNode_Game_Intensity.prototype.default_options = {
+ PixelNode_Game_Sprites.prototype.default_options = {
  	"targets": [
  		"domePixels.strips"
- 	],
- 	"addAmount": 0.125,
- 	"addSpread": 2
+ 	]
  }
 
-PixelNode_Game_Intensity.prototype.effect = null;
+PixelNode_Game_Sprites.prototype.effect = null;
 
 var last_touches = [];
 
@@ -54,25 +53,27 @@ var last_touches = [];
  * ==================================================================================================================== */
 
 // init effect – override
-PixelNode_Game_Intensity.prototype.init = function() {
+PixelNode_Game_Sprites.prototype.init = function() {
 	console.log("Init Game Fire".grey);
 	var self = this;
 	
+	console.log(self.options.effect);
 	self.effect = global.pixelNode.gameManager.getEffectByName(self.options.effect);
+	console.log(self.effect);
 
 	if (global.config.inputMode == "server") {
 	}
-		self.initListener();
+	self.initListener();
 	
 
 }
 
-PixelNode_Game_Intensity.prototype.reset = function() {
+PixelNode_Game_Sprites.prototype.reset = function() {
 	this.effect.reset();
 }
 
 // draw effect – override this
-PixelNode_Game_Intensity.prototype.draw = function() {
+PixelNode_Game_Sprites.prototype.draw = function() {
 	var self = this;
 	self.effect.draw();
 
@@ -80,7 +81,7 @@ PixelNode_Game_Intensity.prototype.draw = function() {
 }
 
 
-PixelNode_Game_Intensity.prototype.initListener = function() {
+PixelNode_Game_Sprites.prototype.initListener = function() {
 	var self = this;
 
 	global.pixelNode.data.on("changed_inputs_buttons_button_back", function(paths, value) {
@@ -95,35 +96,17 @@ PixelNode_Game_Intensity.prototype.initListener = function() {
 		if (value && found != null) {
 
 			index = parseInt(paths[0].split("_")[1]);
-			console.log(index);
 
-			if (self.effect.intensity[index] <= 1- self.options.addAmount) {
-				self.addFire(index, self.options.addAmount);
-				spread = self.options.addSpread;
-				halfspread = self.options.addSpread/2;
-				for (var i = 1; i <= halfspread; i++) {
-					amount = self.options.addAmount * 0.8 * (halfspread-i+1)/halfspread;
-
-					prev = index - i;
-					if (prev < 0) prev += spread;
-
-					next = index + i;
-					if (next >= spread) next -= spread;
-
-					self.addFire(prev, amount);
-					self.addFire(next, amount);
-
-				};
-			}
+			self.addSprite(index);
 		}
 	});
 }
 
-PixelNode_Game_Intensity.prototype.addFire = function(index, amount) {
+PixelNode_Game_Sprites.prototype.addSprite = function(index) {
 	var self = this;
-	//console.log("addFire",index,amount);
 	
-	self.effect.intensity[index] += amount;
-	if (self.effect.intensity[index] > 1) self.effect.intensity[index] = 1; 
+	var sprite = self.effect.spritePrototype != undefined ? _.clone(self.effect.spritePrototype) : {};
+	sprite.index = index;
+	self.effect.sprites.push(sprite);
 }
 

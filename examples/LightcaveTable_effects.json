@@ -172,6 +172,32 @@
 			}
 		]
 	},
+	{		
+		"name": "SpriteGrow",
+		"speed": 10,
+		"module": "../effects/PixelNode_Effect_SpriteGrow",
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{		
+		"name": "SpriteSpark",
+		"speed": 1,
+		"module": "../effects/PixelNode_Effect_SpriteSpark",
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
 	{
 		"name": "Rain",
 		"module": "../effects/PixelNode_Effect_Rain",
