@@ -1,0 +1,53 @@
+[
+	{
+		"name": "switch",
+		"module": "../inputs/PixelNode_Input_WebSocket"
+	},
+	{
+		"name": "buttons",
+		"module": "pixelnode-input-bbbgpio",
+		"pins": [
+			{ "number": "P8_13", "input": "button_left", "default": false },
+			{ "number": "P8_16", "input": "button_right", "default": false },
+
+			{ "number": "P8_12", "input": "button_front_right", "default": false },
+			{ "number": "P8_10", "input": "button_front_left", "default": false },
+			{ "number": "P8_8", "input": "button_back", "default": false },
+
+			{ "number": "P8_29", "input": "btn_1", "default": false },
+			{ "number": "P8_30", "input": "btn_2", "default": false },
+			{ "number": "P8_31", "input": "btn_3", "default": false },
+			{ "number": "P8_32", "input": "btn_4", "default": false },
+			{ "number": "P8_33", "input": "btn_5", "default": false },
+			{ "number": "P8_34", "input": "btn_6", "default": false },
+			{ "number": "P8_35", "input": "btn_7", "default": false },
+			{ "number": "P8_36", "input": "btn_8", "default": false },
+			{ "number": "P8_37", "input": "btn_9", "default": false },
+			{ "number": "P8_38", "input": "btn_10", "default": false },
+			{ "number": "P8_39", "input": "btn_11", "default": false },
+			{ "number": "P8_40", "input": "btn_0", "default": false }
+		]
+	},
+	{
+		"name": "rgb",
+		"moduleX": "pixelnode-input",
+		"module": "pixelnode-input-bbbtcs34725",
+		"data_target": "rgbsensors",
+		"sensors": [
+			{
+				"name"	  : "color_left",
+			    "bus"     : "/dev/i2c-2", 
+			    "led_pin" : "P9_23", 
+			    "irq_pin" : "P9_15",
+			    "enable"  : "inputs.buttons.button_left"
+			},
+			{
+				"name"	  : "color_right",
+				"bus"     : "/dev/i2c-1", 
+				"led_pin" : "P9_25", 
+				"irq_pin" : "P9_27",
+				"enable"  : "inputs.buttons.button_right"
+		    }
+		]
+	}
+]	
