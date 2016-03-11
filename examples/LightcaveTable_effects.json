@@ -84,7 +84,8 @@
 			{
 				"name": "glow",
 				"targets": [
-					"domePixels.rings"
+					"domePixels.rings",
+					"touch.rings"
 				]
 			}
 		]
@@ -98,8 +99,7 @@
 			{
 				"name": "rainbow",
 				"targets": [
-					"domePixels.strips",
-					"touch.strips"
+					"domePixels.strips"
 				]
 			}
 		]
@@ -161,7 +161,6 @@
 		]
 	},	{
 		"name": "Fire",
-		"speed": 10,
 		"module": "../effects/PixelNode_Effect_Fire",
 		"outputs": [
 			{
@@ -187,7 +186,7 @@
 	},
 	{		
 		"name": "SpriteSpark",
-		"speed": 1,
+		"speed": 2,
 		"module": "../effects/PixelNode_Effect_SpriteSpark",
 		"outputs": [
 			{

@@ -12,7 +12,6 @@
  * -------------------------------------------------------------------------------------------------------------------- */
 
 var PixelNode = require('../index.js');
-var b = require('bonescript');
 
 
 /* Config
@@ -35,13 +34,12 @@ var testPixelNode = new PixelNode({
 		// DRIVERS ----------------------------------------------------------------------------------------------------
 
 		"pixelDrivers": [
-		{
-			"module": "pixelnode-driver-fadecandy",
-			"address": "127.0.0.1",
-			"port": 7890,
+			{
+			"module": "pixelnode-driver-websimulator",
 			"delay": 50,
 			"dimmer": 1
 			}
+
 		],
 
 
@@ -55,8 +53,12 @@ var testPixelNode = new PixelNode({
 
 		// INPUTS ----------------------------------------------------------------------------------------------------
 
-		"inputs": PixelNode.requireFile("LightcaveTable_inputs.json"),
-		//inputs: [],
+		//"inputs": PixelNode.requireFile("LightcaveTable_inputs.json"),
+		inputs: [	{
+				"name": "switch",
+				"module": "../inputs/PixelNode_Input_WebSocket"
+			}
+		],
 
 
 		// GAMES  ----------------------------------------------------------------------------------------------------
@@ -73,7 +75,7 @@ var testPixelNode = new PixelNode({
 				},
 				"inputs": {
 					"color_left": "inputs.rgb.color_left",
-					"color_right": "inputs.rgb.color_right",
+					"color_right": "inputs.rgb.color_left",
 					"touches": "touch.touches"
 				}
 			},
@@ -88,7 +90,7 @@ var testPixelNode = new PixelNode({
 				},
 				"inputs": {
 					"color_left": "inputs.rgb.color_left",
-					"color_right": "inputs.rgb.color_right",
+					"color_right": "inputs.rgb.color_left",
 					"touches": "touch.touches"
 				},
 				"queue": [
@@ -125,8 +127,8 @@ var testPixelNode = new PixelNode({
 
 var color_input_was_on = false;
 
-b.pinMode("P8_14", b.OUTPUT);
-b.pinMode("P8_15", b.OUTPUT);
+
+
 
 // override effects
 testPixelNode.gameManager.on("drawGame_after", function() {
@@ -141,25 +143,11 @@ testPixelNode.gameManager.on("drawGame_after", function() {
 		testPixelNode.gameManager.getEffectByName("RainBowPlayer2").draw();
 	}
 
-	// disable buttons if game has no touch_input
 	if (!testPixelNode.gameManager.game.options.touch_input) {
 		testPixelNode.gameManager.getEffectByName("OffTouch").draw();
 	}
-
-	// disable color sensors if game as no color_input
 	if (!testPixelNode.gameManager.game.options.color_input) {
 		testPixelNode.gameManager.getEffectByName("OffColor").draw();
-		if (color_input_was_on) {
-			b.digitalWrite("P8_14", 0);
-			b.digitalWrite("P8_15", 0);
-			color_input_was_on = false;
-		} 
-	} else {
-		if (!color_input_was_on) {
-			b.digitalWrite("P8_14", 1);
-			b.digitalWrite("P8_15", 1);
-			color_input_was_on = true;
-		} 
 	}
 });
 

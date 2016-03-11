@@ -1,8 +1,8 @@
 [
 {
 	"name": "SpriteSpark",
-	"title": "Spark",
-	"icon": "entypo/tools",
+	"title": "Shooting Star",
+	"icon": "entypo/paper-plane",
 	"module": "../games/PixelNode_Game_Sprites",
 	"effect": "SpriteSpark",
 	"inputs": {
@@ -15,20 +15,6 @@
 	"color_input": true
 },
 {
-	"name": "SpriteGrow",
-	"title": "Grow something",
-	"icon": "entypo/tools",
-	"module": "../games/PixelNode_Game_Sprites",
-	"effect": "SpriteGrow",
-	"inputs": {
-		"color_left": "inputs.rgb.color_left",
-		"color_right": "inputs.rgb.color_right",
-		"touches": "touch.touches"
-	},
-	"speed": 0.01,
-	"touch_input": true,
-	"color_input": true
-},{
 	"name": "glitter",
 	"default": true,
 	"title": "Glitter",
@@ -46,6 +32,20 @@
 	]
 },
 {
+	"name": "SpriteGrow",
+	"title": "Little Painter",
+	"icon": "openiconic/brush",
+	"module": "../games/PixelNode_Game_Sprites",
+	"effect": "SpriteGrow",
+	"inputs": {
+		"color_left": "inputs.rgb.color_left",
+		"color_right": "inputs.rgb.color_right",
+		"touches": "touch.touches"
+	},
+	"speed": 0.01,
+	"touch_input": true,
+	"color_input": true
+},{
 	"name": "2colored",
 	"default": true,
 	"title": "Two colored",
@@ -114,29 +114,6 @@
 			{ "effect": "RedBlue", "duration": 30000 }
 		]
 	},
-
-
-	{
-		"name": "working",
-		"title": "Work in Progress",
-		"icon": "entypo/tools",
-		"module": "../games/PixelNode_Game_EffectQueue",
-		"inputs": {
-			"color_left": "inputs.rgb.color_left",
-			"color_right": "inputs.rgb.color_right",
-			"touches": "touch.touches"
-		},
-		"touch_input": true,
-		"color_input": false,
-		"queue": [
-			{ "effect": "Color", "duration": 100000 }
-		]
-	},
-
-
-
-
-
 	{
 		"name": "wave",
 		"default": true,

@@ -38,6 +38,10 @@ var testPixelNode = new PixelNode({
 			"module": "pixelnode-driver-pixelpusher",
 			"delay": 50,
 			"dimmer": 1
+			},{
+			"module": "pixelnode-driver-websimulator",
+			"delay": 50,
+			"dimmer": 1
 			}
 		],
 
@@ -55,7 +59,7 @@ var testPixelNode = new PixelNode({
 			{
 				"name": "socketclient",
 				"module": "../inputs/PixelNode_Input_WebSocket_Client.js",
-				"server": "http://192.168.3.43:3001"
+				"server": "http://beaglebone.local:3001"
 			}
 
 		],

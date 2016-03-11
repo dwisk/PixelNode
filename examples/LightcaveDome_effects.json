@@ -185,7 +185,7 @@
 	},
 	{		
 		"name": "SpriteSpark",
-		"speed": 2,
+		"speed": 1,
 		"module": "../effects/PixelNode_Effect_SpriteSpark",
 		"outputs": [
 			{
