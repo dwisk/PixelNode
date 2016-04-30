@@ -7,8 +7,8 @@
 		"name": "buttons",
 		"module": "pixelnode-input-bbbgpio",
 		"pins": [
-			{ "number": "P8_13", "input": "button_left", "default": false },
-			{ "number": "P8_16", "input": "button_right", "default": false },
+			{ "number": "P8_13", "input": "button_right", "default": false },
+			{ "number": "P8_16", "input": "button_left", "default": false },
 
 			{ "number": "P8_12", "input": "button_front_right", "default": false },
 			{ "number": "P8_10", "input": "button_front_left", "default": false },
@@ -29,25 +29,21 @@
 		]
 	},
 	{
+		"name": "touch",
+		"module": "pixelnode-input-mpr121", 
+		"crash_waittime": 1,
+		"crash_cautious_lifetime": 20,
+		"crash_cautious_waittime": 2,
+		"i2c_bus": 2,
+		"offset": 0,
+		"verbose": false,
+		"treshold_touch": 5,
+		"treshold_release": 2
+
+	},
+	{
 		"name": "rgb",
-		"moduleX": "pixelnode-input",
-		"module": "pixelnode-input-bbbtcs34725",
-		"data_target": "rgbsensors",
-		"sensors": [
-			{
-				"name"	  : "color_left",
-			    "bus"     : "/dev/i2c-2", 
-			    "led_pin" : "P9_23", 
-			    "irq_pin" : "P9_15",
-			    "enable"  : "inputs.buttons.button_left"
-			},
-			{
-				"name"	  : "color_right",
-				"bus"     : "/dev/i2c-1", 
-				"led_pin" : "P9_25", 
-				"irq_pin" : "P9_27",
-				"enable"  : "inputs.buttons.button_right"
-		    }
-		]
+		"module": "../inputs/PixelNode_Input_TouchRGB"
 	}
+
 ]	

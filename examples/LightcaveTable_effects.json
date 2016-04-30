@@ -120,28 +120,44 @@
 	},		
 	{
 		"name": "RainBowPlayer1",
-		"module": "../effects/PixelNode_Effect_Rainbow",
+		"module": "../effects/PixelNode_Effect_Colorset",
 		"scale": 1,
-		"speed": 100,
+		"speed": 0,
+		"colorset": [
+			[255,0,255],
+			[0,0,255],
+			[0,255,255],
+			[0,255,0],
+			[255,255,0],
+			[255,0,0]
+		],
 		"outputs": [
 			{
 				"name": "rainbow",
 				"targets": [
-					"player1.rings"
+					"player1_ring.rings"
 				]
 			}
 		]
 	},		
 	{
 		"name": "RainBowPlayer2",
-		"module": "../effects/PixelNode_Effect_Rainbow",
+		"module": "../effects/PixelNode_Effect_Colorset",
 		"scale": 1,
-		"speed": 100,
+		"speed": 0,
+		"colorset": [
+			[255,0,0],
+			[255,255,0],
+			[0,255,0],
+			[0,255,255],
+			[0,0,255],
+			[255,0,255]
+		],
 		"outputs": [
 			{
 				"name": "rainbow",
 				"targets": [
-					"player2.rings"
+					"player2_ring.rings"
 				]
 			}
 		]
