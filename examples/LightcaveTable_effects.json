@@ -227,6 +227,19 @@
 		]
 	},
 	{
+		"name": "ColouredRain",
+		"module": "../effects/PixelNode_Effect_ColouredRain",
+		"scale": 0,
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{
 		"name": "OffTouch",
 		"module": "../effects/PixelNode_Effect_Off",
 		"outputs": [

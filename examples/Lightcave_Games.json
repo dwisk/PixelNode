@@ -1,5 +1,20 @@
 [
 {
+	"name": "Rain",
+	"title": "Rain",
+	"icon": "entypo/water",
+	"module": "../games/PixelNode_Game_Intensity",
+	"effect": "Rain",
+	"inputs": {
+		"color_left": "inputs.rgb.color_left",
+		"color_right": "inputs.rgb.color_right",
+		"touches": "touch.touches"
+	},
+	"speed": 0.1,
+	"touch_input": true,
+	"color_input": false
+},	
+{
 	"name": "SpriteSpark",
 	"title": "Shooting Star",
 	"icon": "entypo/paper-plane",
@@ -80,21 +95,6 @@
 	"touch_input": true,
 	"color_input": false
 },	
-{
-	"name": "Rain",
-	"title": "Rain",
-	"icon": "entypo/water",
-	"module": "../games/PixelNode_Game_Intensity",
-	"effect": "Rain",
-	"inputs": {
-		"color_left": "inputs.rgb.color_left",
-		"color_right": "inputs.rgb.color_right",
-		"touches": "touch.touches"
-	},
-	"speed": 0.1,
-	"touch_input": true,
-	"color_input": false
-},	
 
 	{
 		"name": "rainbows",
@@ -114,6 +114,22 @@
 			{ "effect": "RedBlue", "duration": 30000 }
 		]
 	},
+	{
+		"name": "ColouredRain",
+		"title": "Coloured Rain",
+		"icon": "entypo/water",
+		"module": "../games/PixelNode_Game_Intensity",
+		"effect": "ColouredRain",
+		"inputs": {
+			"color_left": "inputs.rgb.color_left",
+			"color_right": "inputs.rgb.color_right",
+			"touches": "touch.touches"
+		},
+		"speed": 0.1,
+		"touch_input": true,
+		"color_input": true
+	},	
+
 	{
 		"name": "wave",
 		"default": true,
