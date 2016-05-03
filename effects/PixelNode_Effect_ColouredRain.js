@@ -48,6 +48,7 @@ module.exports = PixelNode_Effect_ColouredRain;
  PixelNode_Effect_ColouredRain.prototype.intensity = []
  PixelNode_Effect_ColouredRain.prototype.drops = {}
  PixelNode_Effect_ColouredRain.prototype.target_cnt = {}
+ PixelNode_Effect_ColouredRain.prototype.color1 = false
 
 /* Overridden Methods
  * ==================================================================================================================== */
@@ -85,8 +86,6 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 	var self = this;
 	target_name = target_name.replace(".", "_");
 	self.target_cnt[target_name]++;
-	var dropamounts = 0;
-	var before = new Date();
 	var color1 = false;
 	var c = [255,0,0];
 
@@ -98,9 +97,9 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 
 		ran = Math.round(Math.random()*(0.5 + 0.40 * self.intensity[ring]*self.options.gravity));
 		if (ran) {
-			color1 = !color1;
+			self.color1 = !self.color1;
 
-			self.drops[target_name][ring].push([target[ring].length, color1 ? c1 : c2]);
+			self.drops[target_name][ring].push([target[ring].length, self.color1 ? c1 : c2]);
 		}
 
 
@@ -132,20 +131,11 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 			}
 		}
 
-		dropamounts += self.drops[target_name][ring].length;
-	    
-
 		if (self.intensity[ring] >= 0.03) {
 			self.intensity[ring] -= 0.005 * self.options.speed * (Math.random(1)*0.2 + 0.8);
 		}
 	
 	}
-
-	var after = new Date();
-	//console.log(Math.ceil(dropamounts / target.length), after-before, before - lastDraw);
-
-	lastDraw = before;
-
 
 }
 
