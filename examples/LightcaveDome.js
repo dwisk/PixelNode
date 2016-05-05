@@ -23,26 +23,24 @@ var testPixelNode = new PixelNode({
 		"inputMode": "client",
 
 		"webServer": {
-			"start": true,
+			"start": false,
 			"port": 3001
 		},
 
-		"gameManager": {
-			"idletime": 2 * 60
-		},
 
 		// DRIVERS ----------------------------------------------------------------------------------------------------
 
 		"pixelDrivers": [
-		{
-			"module": "pixelnode-driver-pixelpusher",
-			"delay": 50,
-			"dimmer": 1
-			},{
-			"module": "pixelnode-driver-websimulator",
-			"delay": 50,
-			"dimmer": 1
+			{
+				"module": "pixelnode-driver-pixelpusher",
+				"delay": 50,
+				"dimmer": 1
 			}
+			//,{
+			//	"module": "pixelnode-driver-websimulator",
+			//	"delay": 50,
+			//	"dimmer": 1
+			//}
 		],
 
 
@@ -59,8 +57,13 @@ var testPixelNode = new PixelNode({
 			{
 				"name": "socketclient",
 				"module": "../inputs/PixelNode_Input_WebSocket_Client.js",
-				"server": "http://beaglebone.local:3001"
+				"server": "http://192.168.3.56:3001"
+			},
+			{
+				"name": "rgb",
+				"module": "../inputs/PixelNode_Input_TouchRGB"
 			}
+
 
 		],
 		

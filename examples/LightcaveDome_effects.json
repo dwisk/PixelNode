@@ -106,7 +106,7 @@
 	{
 		"name": "RainBowRings",
 		"module": "../effects/PixelNode_Effect_Rainbow",
-		"scale": 1,
+		"scale": 0.1,
 		"speed": 100,
 		"outputs": [
 			{
@@ -148,13 +148,12 @@
 	{
 		"name": "RedBlue",
 		"module": "../effects/PixelNode_Effect_RedBlue",
+		"scale": 21,
 		"outputs": [
 			{
 				"name": "glow",
 				"targets": [
-					"domePixels.strips",
-					"player1.strips",
-					"player2.strips"
+					"domePixels.strips"
 				]
 			}
 		]
@@ -199,7 +198,7 @@
 	{
 		"name": "Rain",
 		"module": "../effects/PixelNode_Effect_Rain",
-		"scale": 0,
+		"speed": 0.75,
 		"outputs": [
 			{
 				"name": "glow",
@@ -212,7 +211,7 @@
 	{
 		"name": "ColouredRain",
 		"module": "../effects/PixelNode_Effect_ColouredRain",
-		"scale": 0,
+		"speed": 0.75,
 		"outputs": [
 			{
 				"name": "glow",
