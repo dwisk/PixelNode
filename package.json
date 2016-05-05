@@ -1,6 +1,6 @@
 {
   "name": "pixelnode",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Controlling LED strips with different drivers.",
   "main": "index.js",
   "scripts": {

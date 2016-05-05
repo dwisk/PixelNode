@@ -7,6 +7,7 @@
  *
  */
 
+process.env.NODE_ENV = 'production';
 
 /* Includes
  * -------------------------------------------------------------------------------------------------------------------- */
@@ -47,7 +48,7 @@ var testPixelNode = new PixelNode({
 
 		// EFFECTS ----------------------------------------------------------------------------------------------------
 
-		"effects": PixelNode.requireFile("LightcaveDome_effects.json"),
+		"effects": PixelNode.requireFile("LightcaveTable_effects.json"),
 		"after_effects": [
 			"PlayerColor"
 		],
@@ -128,22 +129,36 @@ var color_input_was_on = false;
 b.pinMode("P8_14", b.OUTPUT);
 b.pinMode("P8_15", b.OUTPUT);
 
+var left_on = false;
+var right_on = false;
+
 // override effects
 testPixelNode.gameManager.on("drawGame_after", function() {
 
 	// show rainbow for player 1 if button is pressed
 	if (testPixelNode.data.get("inputs.buttons.button_left")) {
 		testPixelNode.gameManager.getEffectByName("RainBowPlayer1").draw();
+		left_on = true;
+	} else if (left_on) {
+		testPixelNode.gameManager.pixelDataOff();
+		left_on = false;
 	}
 
 	// show rainbow for player 2 if button is pressed
 	if (testPixelNode.data.get("inputs.buttons.button_right")) {
 		testPixelNode.gameManager.getEffectByName("RainBowPlayer2").draw();
+		right_on = true;
+	} else if (right_on) {
+		testPixelNode.gameManager.pixelDataOff();
+		right_on = false;
 	}
 
+	// disable buttons if game has no touch_input
 	if (!testPixelNode.gameManager.game.options.touch_input) {
 		testPixelNode.gameManager.getEffectByName("OffTouch").draw();
 	}
+
+	// disable color sensors if game as no color_input
 	if (!testPixelNode.gameManager.game.options.color_input) {
 		testPixelNode.gameManager.getEffectByName("OffColor").draw();
 		if (color_input_was_on) {

@@ -19,8 +19,8 @@ var PixelNode = require('../index.js');
 
 var testPixelNode = new PixelNode({
 	config: {
-		"title": "Lightcave Dome",
-		"inputMode": "client",
+		"title": "Lightcave Table",
+		"inputMode": "server",
 
 		"webServer": {
 			"start": true,
@@ -28,42 +28,37 @@ var testPixelNode = new PixelNode({
 		},
 
 		"gameManager": {
-			"idletime": 2 * 60
+			"idletime": 20 * 60
 		},
 
 		// DRIVERS ----------------------------------------------------------------------------------------------------
 
 		"pixelDrivers": [
-		{
-			"module": "pixelnode-driver-pixelpusher",
-			"delay": 50,
-			"dimmer": 1
-			},{
+			{
 			"module": "pixelnode-driver-websimulator",
 			"delay": 50,
 			"dimmer": 1
 			}
+
 		],
 
 
 		// EFFECTS ----------------------------------------------------------------------------------------------------
 
-		"effects": PixelNode.requireFile("LightcaveDome_effects.json"),
+		"effects": PixelNode.requireFile("LightcaveTable_effects.json"),
 		"after_effects": [
+			"PlayerColor"
 		],
 
 
 		// INPUTS ----------------------------------------------------------------------------------------------------
 
-		"inputs": [
-			{
-				"name": "socketclient",
-				"module": "../inputs/PixelNode_Input_WebSocket_Client.js",
-				"server": "http://beaglebone.local:3001"
+		//"inputs": PixelNode.requireFile("LightcaveTable_inputs.json"),
+		inputs: [	{
+				"name": "switch",
+				"module": "../inputs/PixelNode_Input_WebSocket"
 			}
-
 		],
-		
 
 
 		// GAMES  ----------------------------------------------------------------------------------------------------
@@ -80,7 +75,7 @@ var testPixelNode = new PixelNode({
 				},
 				"inputs": {
 					"color_left": "inputs.rgb.color_left",
-					"color_right": "inputs.rgb.color_right",
+					"color_right": "inputs.rgb.color_left",
 					"touches": "touch.touches"
 				}
 			},
@@ -95,7 +90,7 @@ var testPixelNode = new PixelNode({
 				},
 				"inputs": {
 					"color_left": "inputs.rgb.color_left",
-					"color_right": "inputs.rgb.color_right",
+					"color_right": "inputs.rgb.color_left",
 					"touches": "touch.touches"
 				},
 				"queue": [
@@ -122,23 +117,54 @@ var testPixelNode = new PixelNode({
 
 	},
 
-	mapping: "LightcaveDome_mapping.json"
+	mapping: "LightcaveTable_mapping.json"
 });
 
+
+
+/* Events
+ * -------------------------------------------------------------------------------------------------------------------- */
+
+var color_input_was_on = false;
+
+
+
+
+// override effects
+testPixelNode.gameManager.on("drawGame_after", function() {
+
+	// show rainbow for player 1 if button is pressed
+	if (testPixelNode.data.get("inputs.buttons.button_left")) {
+		testPixelNode.gameManager.getEffectByName("RainBowPlayer1").draw();
+	}
+
+	// show rainbow for player 2 if button is pressed
+	if (testPixelNode.data.get("inputs.buttons.button_right")) {
+		testPixelNode.gameManager.getEffectByName("RainBowPlayer2").draw();
+	}
+
+	if (!testPixelNode.gameManager.game.options.touch_input) {
+		testPixelNode.gameManager.getEffectByName("OffTouch").draw();
+	}
+	if (!testPixelNode.gameManager.game.options.color_input) {
+		testPixelNode.gameManager.getEffectByName("OffColor").draw();
+	}
+});
 
 
 
 /* Check for autooff
  * -------------------------------------------------------------------------------------------------------------------- */
 
-//setInterval(function() {
-//	time = new Date();
-//	hour = time.getHours();
-//
-//	if (((hour >= 20) || (hour < 7))) {
-//		global.pixelNode.data.set("games.force_off", false);
-//	} else {
-//		global.pixelNode.data.set("games.force_off", true);
-//	}
-//	
-//},1000*1);
+// setInterval(function() {
+// 	time = new Date();
+// 	hour = time.getHours();
+// 
+// 	if (((hour >= 20) || (hour < 7))) {
+// 		global.pixelNode.data.set("games.force_off", false);
+// 	} else {
+// 		global.pixelNode.data.set("games.force_off", true);
+// 	}
+// 	
+// },1000*1);
+// 
