@@ -74,6 +74,23 @@ PixelNode_Input_TouchRGB.prototype.init = function() {
 		}
   	});
 
+	if (typeof global.pixelNode_data.inputs.touch == "undefined") {
+		global.pixelNode_data.inputs = _.extend(global.pixelNode_data.inputs, {
+			touch: {
+				touches: []
+			}
+	  	});
+	}
+
+	if (typeof global.pixelNode_data.inputs.buttons == "undefined") {
+		global.pixelNode_data.inputs = _.extend(global.pixelNode_data.inputs, {
+			buttons: {
+				button_left: false,
+				button_right: false
+			}
+	  	});
+	}
+
 	lastTouches = global.pixelNode_data.inputs.touch.touches;
 
 
