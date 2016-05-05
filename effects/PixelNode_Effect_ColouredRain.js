@@ -43,7 +43,7 @@ module.exports = PixelNode_Effect_ColouredRain;
 
  PixelNode_Effect_ColouredRain.prototype.default_options = {
  	scale: 1,
- 	speed: 0.5,
+ 	speed: 2,
  	gravity: 0.8
  }
  PixelNode_Effect_ColouredRain.prototype.intensity = []
@@ -52,8 +52,8 @@ module.exports = PixelNode_Effect_ColouredRain;
  PixelNode_Effect_ColouredRain.prototype.dropPrototype = {
  	index: null,
   	position: 0,
-  	color: [0,0,0],
-  	timerPosition: 0
+  	timerPosition: 0,
+  	color: [0,0,0]
  };
 
 
@@ -81,10 +81,7 @@ PixelNode_Effect_ColouredRain.prototype.initTarget = function(target, output, ta
 		self.intensity[ring] = Math.random(1)*0.1+0.9;
 	}
 
-	self.dropPrototype.position = target[0].length+2;
-	self.dropPrototype.timerPosition = target[0].length+4;
-	console.log("Length".grey,target[0].length);
-
+	self.dropPrototype.position = target[0].length;
 }
 
 var lastDraw = new Date();
@@ -106,7 +103,9 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 
 			var drop = _.clone(self.dropPrototype);
 			drop.index = ring;
-			drop.color = self.color1 ? c1 : c2
+			drop.color = self.color1 ? c1 : c2;
+			drop.position = ring.length-1;
+
 			self.drops.push( drop);
 		}
 		self.fillColor(target[ring],  [0,0,0]);
@@ -123,16 +122,12 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 			self.drops.splice(i,1);
 			i--;
 		} else {
-			drop.timerPosition--;
-			drop.position = Math.ceil(drop.timerPosition / self.options.speed) -1;
-
-			ringoffseted = drop.index -1;
-			if ( ringoffseted < 0 ) ringoffseted = ringoffseted + target.length;
-			onetwo = ringoffseted / target.length < 0.5;
+			drop.timerPosition++;
+			drop.position = target[drop.index].length - Math.ceil(drop.timerPosition / self.options.speed);
 			
-			target[drop.index][drop.position] = drop.color;
-			if (drop.position > 1) target[drop.index][drop.position+1] = self.dimmColor(drop.color, 0.5);
-			if (drop.position > 2) target[drop.index][drop.position+2] = self.dimmColor(drop.color, 0.33);
+			if (drop.position > 0 && drop.position < target[drop.index].length) target[drop.index][drop.position] = drop.color;
+			if (drop.position > 1 && drop.position+1 < target[drop.index].length) target[drop.index][drop.position+1] = self.dimmColor(drop.color, 0.5);
+			if (drop.position > 2 && drop.position+2 < target[drop.index].length) target[drop.index][drop.position+2] = self.dimmColor(drop.color, 0.33);
 		}
 
 	}

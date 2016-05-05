@@ -52,8 +52,9 @@ module.exports = PixelNode_Effect_Rain;
  PixelNode_Effect_Rain.prototype.dropPrototype = {
  	index: null,
   	position: 0,
-  	timerPosition: 256
+  	timerPosition: 0
  };
+
 
 /* Overridden Methods
  * ==================================================================================================================== */
@@ -73,7 +74,6 @@ PixelNode_Effect_Rain.prototype.reset = function() {
 // init target – override
 PixelNode_Effect_Rain.prototype.initTarget = function(target, output, target_name) {
 	var self = this;
-	target_name = target_name.replace(".", "_");
 
 	self.drops = [];	
 	for (var ring = 0; ring < target.length;ring++) {
@@ -82,8 +82,7 @@ PixelNode_Effect_Rain.prototype.initTarget = function(target, output, target_nam
 
 	self.target_cnt[target_name] = 0;
 
-	self.dropPrototype.position = target[0].length+2;
-	self.dropPrototype.timerPosition = target[0].length*2+4;
+	self.dropPrototype.position = target[0].length;
 }
 
 var lastDraw = new Date();
@@ -91,8 +90,6 @@ var lastDraw = new Date();
 // draw effect on target
 PixelNode_Effect_Rain.prototype.drawTarget = function(target, output, target_name) {
 	var self = this;
-	target_name = target_name.replace(".", "_");
-	self.target_cnt[target_name]++;
 
 	for (var ring = 0; ring < target.length;ring++) {
 		if (self.intensity[ring] == undefined) { self.intensity[ring] = Math.random(1)*0.1+0.9}
@@ -101,6 +98,7 @@ PixelNode_Effect_Rain.prototype.drawTarget = function(target, output, target_nam
 		if (ran) {
 			var drop = _.clone(self.dropPrototype);
 			drop.index = ring;
+			drop.position = ring.length-1;
 			self.drops.push( drop);
 		}
 		self.fillColor(target[ring],  [0,0,0]);
@@ -110,23 +108,20 @@ PixelNode_Effect_Rain.prototype.drawTarget = function(target, output, target_nam
 		}
 	
 	}
+
 	for (var i = 0; i < self.drops.length; i++) {
 		var drop = self.drops[i];
+
 		if (drop.position+3 <= 0) {
 			self.drops.splice(i,1);
 			i--;
 		} else {
-			drop.timerPosition--;
-			drop.position = Math.ceil(drop.timerPosition / self.options.speed) -1;
-
-			ringoffseted = drop.index -1;
-			if ( ringoffseted < 0 ) ringoffseted = ringoffseted + target.length;
-			onetwo = ringoffseted / target.length < 0.5;
-			
+			drop.timerPosition++;
+			drop.position = target[drop.index].length - Math.ceil(drop.timerPosition / self.options.speed);
 			color = [0,0,255];
-			target[drop.index][drop.position] = color;
-			if (drop.position > 1) target[drop.index][drop.position+1] = self.dimmColor(color, 0.75);
-			if (drop.position > 2) target[drop.index][drop.position+2] = self.dimmColor(color, 0.5);
+			if (drop.position > 0 && drop.position < target[drop.index].length) target[drop.index][drop.position] = color;
+			if (drop.position > 1 && drop.position+1 < target[drop.index].length) target[drop.index][drop.position+1] = self.dimmColor(color, 0.75);
+			if (drop.position > 2 && drop.position+2 < target[drop.index].length) target[drop.index][drop.position+2] = self.dimmColor(color, 0.5);
 		}
 
 	}
