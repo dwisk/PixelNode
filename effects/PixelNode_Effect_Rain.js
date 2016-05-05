@@ -51,8 +51,6 @@ module.exports = PixelNode_Effect_Rain;
  PixelNode_Effect_Rain.prototype.target_cnt = {}
  PixelNode_Effect_Rain.prototype.dropPrototype = {
  	index: null,
- 	color1: [0, 255, 0 ],
-  	color2: [255, 0, 0 ],
   	position: 0,
   	timerPosition: 256
  };
@@ -79,7 +77,6 @@ PixelNode_Effect_Rain.prototype.initTarget = function(target, output, target_nam
 
 	self.drops = [];	
 	for (var ring = 0; ring < target.length;ring++) {
-		//self.drops[target_name][ring] = [];
 		self.intensity[ring] = Math.random(1)*0.1+0.9;
 	}
 
