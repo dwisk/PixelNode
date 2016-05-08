@@ -44,7 +44,8 @@ module.exports = PixelNode_Effect_ColouredRain;
  PixelNode_Effect_ColouredRain.prototype.default_options = {
  	scale: 1,
  	speed: 2,
- 	gravity: 0.8
+ 	gravity: 0.8,
+ 	direction: 1
  }
  PixelNode_Effect_ColouredRain.prototype.intensity = []
  PixelNode_Effect_ColouredRain.prototype.drops = []
@@ -76,12 +77,13 @@ PixelNode_Effect_ColouredRain.prototype.reset = function() {
 PixelNode_Effect_ColouredRain.prototype.initTarget = function(target, output, target_name) {
 	var self = this;
 
-	self.drops = [];	
 	for (var ring = 0; ring < target.length;ring++) {
 		self.intensity[ring] = Math.random(1)*0.1+0.9;
 	}
 
 	self.dropPrototype.position = target[0].length;
+	self.drops[target_name] = [];
+
 }
 
 var lastDraw = new Date();
@@ -94,6 +96,8 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 	var c1 = self.getColor("inputs.rgb.color_right");
 	var c2 = self.getColor("inputs.rgb.color_left");
 
+	var target_length = target[0].length;
+
 	for (var ring = 0; ring < target.length;ring++) {
 		if (self.intensity[ring] == undefined) { self.intensity[ring] = Math.random(1)*0.1+0.9}
 
@@ -104,9 +108,9 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 			var drop = _.clone(self.dropPrototype);
 			drop.index = ring;
 			drop.color = self.color1 ? c1 : c2;
-			drop.position = ring.length-1;
+			drop.position = self.options.direction<0 ? target_length-1 : 0;
 
-			self.drops.push( drop);
+			self.drops[target_name].push( drop);
 		}
 		self.fillColor(target[ring],  [0,0,0]);
 
@@ -116,21 +120,28 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 	
 	}
 
-	for (var i = 0; i < self.drops.length; i++) {
-		var drop = self.drops[i];
-		if (drop.position+3 <= 0) {
-			self.drops.splice(i,1);
+	for (var i = 0; i < self.drops[target_name].length; i++) {
+		var drop = self.drops[target_name][i];
+		if ((self.options.direction < 0 && drop.position+3 <= 0) || (self.options.direction > 0 && drop.position-3 >= target_length)) {
+			self.drops[target_name].splice(i,1);
 			i--;
 		} else {
-			drop.timerPosition++;
-			drop.position = target[drop.index].length - Math.ceil(drop.timerPosition / self.options.speed);
+			drop.timerPosition +=  self.options.direction;
+			if (self.options.direction >0) {
+				drop.position = Math.ceil(drop.timerPosition / self.options.gravity);
+			} else {
+				drop.position = target_length - Math.ceil(drop.timerPosition / self.options.gravity);
+			}
 			
-			if (drop.position > 0 && drop.position < target[drop.index].length) target[drop.index][drop.position] = drop.color;
-			if (drop.position > 1 && drop.position+1 < target[drop.index].length) target[drop.index][drop.position+1] = self.dimmColor(drop.color, 0.5);
-			if (drop.position > 2 && drop.position+2 < target[drop.index].length) target[drop.index][drop.position+2] = self.dimmColor(drop.color, 0.33);
+
+			if (drop.position >= 0 && drop.position < target_length) target[drop.index][drop.position] = drop.color;
+			if (drop.position+1*self.options.direction*-1 >= 0 && drop.position+1*self.options.direction*-1 < target_length) target[drop.index][drop.position+1*self.options.direction*-1] = self.dimmColor(drop.color, 0.5);
+			if (drop.position+2*self.options.direction*-1 >= 0 && drop.position+2*self.options.direction*-1 < target_length) target[drop.index][drop.position+2*self.options.direction*-1] = self.dimmColor(drop.color, 0.33);
 		}
 
 	}
+
+	//console.log(self.drops[target_name].length);
 
 }
 

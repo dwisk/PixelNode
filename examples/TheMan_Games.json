@@ -1,0 +1,31 @@
+[
+{
+	"name": "theman",
+	"default": true,
+	"title": "Two colored",
+	"icon": "entypo/adjust",
+	"module": "../games/PixelNode_Game_EffectQueue",
+	"inputs": {
+		"color_left": "inputs.rgb.color_left",
+		"color_right": "inputs.rgb.color_right",
+		"touches": "touch.touches"
+	},
+	"queue": [
+		{ "effect": "Wall", "duration": 30000 },
+		{ "effect": "RedBlue", "duration": 30000 },
+		{ "effect": "Wave", "duration": 30000 },
+		{ "effect": "RainBowRings", "duration": 30000 },
+		{ "effect": "Clock", "duration": 30000 },
+		{ "effect": "RainBow", "duration": 30000 },
+		{ "effect": "Ray", "duration": 30000 },
+		{ "effect": "Glitter", "duration": 30000 },
+		{ "effect": "ColouredRain", "duration": 30000 },
+		{ "effect": "Fire", "duration": 30000 },
+		{ "effect": "Rain", "duration": 30000 }
+
+
+	]
+}
+
+
+]

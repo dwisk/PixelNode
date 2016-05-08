@@ -54,14 +54,7 @@ PixelNode_Game_EffectQueue.prototype.init = function() {
 	console.log("Init Game Animation".grey);
 	var self = this;
 
-	//self.options.effects.forEach(function(effect) {		
-	//	var Effect = require(effect.module);
-	//	self.effects.push(new Effect(effect));
-	//})
-
 	self.setEffectByQueueId(0);
-	self.nextEffect();
-
 
 	if (global.config.inputMode == "server") {
 		global.pixelNode.data.on("changed_inputs_buttons_button_back", function(paths, value) {
