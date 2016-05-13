@@ -64,22 +64,22 @@ PixelNode_Effect_SpriteGrow.prototype.drawTarget = function(target, output) {
 	var c, c1, c2; 
 
 	// get color 1
-	c1 = self.getColor("inputs.rgb.color_right", {
+	c1 = self.getColor(["inputs","rgb","color_right"], {
 		offset: 90
 	});
-	c2 = self.getColor("inputs.rgb.color_left");
+	c2 = self.getColor(["inputs","rgb","color_left"]);
 	
 	self.spritePrototype.color1 = c1;
 	self.spritePrototype.color2 = c2;
 
 
 	// get color 1
-	cc1 = self.getColor("inputs.rgb.color_right", {
+	cc1 = self.getColor(["inputs","rgb","color_right"], {
 		offset: 90,
 		dimmer: 0.25
 	});
 	// get color 2
-	cc2 = self.getColor("inputs.rgb.color_left", {
+	cc2 = self.getColor(["inputs","rgb","color_left"], {
 		dimmer: 0.25
 	});
 

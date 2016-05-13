@@ -93,8 +93,8 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 	var self = this;
 	var color1 = false;
 
-	var c1 = self.getColor("inputs.rgb.color_right");
-	var c2 = self.getColor("inputs.rgb.color_left");
+	var c1 = self.getColor(["inputs","rgb","color_right"]);
+	var c2 = self.getColor(["inputs","rgb","color_left"]);
 
 	var target_length = target[0].length;
 

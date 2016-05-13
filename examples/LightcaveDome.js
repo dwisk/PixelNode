@@ -33,7 +33,7 @@ var testPixelNode = new PixelNode({
 		"pixelDrivers": [
 			{
 				"module": "pixelnode-driver-pixelpusher",
-				"delay": 50,
+				"delay": 25,
 				"dimmer": 1
 			}
 			//,{

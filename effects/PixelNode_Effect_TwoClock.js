@@ -64,16 +64,16 @@ PixelNode_Effect_TwoClock.prototype.drawTarget = function(target, output) {
 	var c, c1, c2; 
 
 	// get color 1
-	c1 = self.getColor("inputs.rgb.color_left");
+	c1 = self.getColor(["inputs","rgb","color_left"]);
 
 	// get color 2
-	c2 = self.getColor("inputs.rgb.color_right", {
+	c2 = self.getColor(["inputs","rgb","color_right"], {
 		dimmer: 0.5,
 		offset: 0
 	});
 
 	// get color 2
-	c3 = self.getColor("inputs.rgb.color_right", {
+	c3 = self.getColor(["inputs","rgb","color_right"], {
 		dimmer: 0.5,
 		offset: 90
 	});
@@ -99,7 +99,7 @@ PixelNode_Effect_TwoClock.prototype.drawTarget = function(target, output) {
 		     || (ring == hour && pixel > 3*self.options.scale) 
 				) {
 				target[ring][pixel] = c2;
-			} else if (global.pixelNode.data.get(["inputs","buttons","btn_"+ring])
+			} else if (global.pixelNode.data.fastGet(["inputs","buttons","btn_"+ring])
 			 ||	(second >= ring*internal_scale && second < (ring+1)*internal_scale ) 
 				) {
 				target[ring][pixel] = c1;

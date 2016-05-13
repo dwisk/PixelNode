@@ -68,16 +68,16 @@ PixelNode_Effect_TwoWall.prototype.drawTarget = function(target) {
 	var c, c1, c2;
 
 	// get color 1
-	c1 = self.getColor("inputs.rgb.color_left");
+	c1 = self.getColor(["inputs","rgb","color_left"]);
 
 	// get color 2
-	c2 = self.getColor("inputs.rgb.color_right", {
+	c2 = self.getColor(["inputs","rgb","color_right"], {
 		dimmer: 0.5,
 		offset: 90
 	});
 
 	// get color 2b
-	c2b = self.getColor("inputs.rgb.color_right", {
+	c2b = self.getColor(["inputs","rgb","color_right"], {
 		dimmer: 0.75,
 		offset: 45
 	});
@@ -102,7 +102,7 @@ PixelNode_Effect_TwoWall.prototype.drawTarget = function(target) {
 
 		
 		for (var pixel = 0; pixel < target[ring].length; pixel++) {
-			if (global.pixelNode.data.get(["inputs","touch","touches",pixel])) {
+			if (global.pixelNode.data.fastGet(["inputs","touch","touches",pixel])) {
 				c = [0,0,0];
 			} else if (ring < height || (ring < height+self.options.scale && pixel <= position)) {
 				c = self.cfirst ? c1 : c2;

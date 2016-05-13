@@ -113,16 +113,16 @@ PixelNode_Effect_Rain.prototype.drawTarget = function(target, output, target_nam
 	for (var i = 0; i < self.drops[target_name].length; i++) {
 		var drop = self.drops[target_name][i];
 
-		if (drop.position+3 <= 0) {
+		if (drop.position <= 0) {
 			self.drops[target_name].splice(i,1);
 			i--;
 		} else {
 			drop.timerPosition++;
 			drop.position = target[drop.index].length - Math.ceil(drop.timerPosition / self.options.gravity);
 			color = [0,0,255];
-			if (drop.position > 0 && drop.position < target[drop.index].length) target[drop.index][drop.position] = color;
-			if (drop.position > 1 && drop.position+1 < target[drop.index].length) target[drop.index][drop.position+1] = self.dimmColor(color, 0.75);
-			if (drop.position > 2 && drop.position+2 < target[drop.index].length) target[drop.index][drop.position+2] = self.dimmColor(color, 0.5);
+			if (drop.position >= 0 && drop.position < target[drop.index].length) target[drop.index][drop.position] = color;
+			if (drop.position >= 1 && drop.position+1 < target[drop.index].length) target[drop.index][drop.position+1] = self.dimmColor(color, 0.75);
+			if (drop.position >= 2 && drop.position+2 < target[drop.index].length) target[drop.index][drop.position+2] = self.dimmColor(color, 0.5);
 		}
 
 	}

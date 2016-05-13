@@ -56,10 +56,10 @@ PixelNode_Effect_TwoRay.prototype.drawTarget = function(target, output_name) {
 	var self = this;
 
 	// get color 1
-	var c1 = self.getColor("inputs.rgb.color_left");
+	var c1 = self.getColor(["inputs","rgb","color_left"]);
 
 	// get color 2
-	var c2 = self.getColor("inputs.rgb.color_right", {
+	var c2 = self.getColor(["inputs","rgb","color_right"], {
 		dimmer: 0.5,
 		offset: 90
 	});
@@ -69,7 +69,7 @@ PixelNode_Effect_TwoRay.prototype.drawTarget = function(target, output_name) {
 		// console.log(ring,Math.round(self.counter/10/target.length) % 12);
 		if(ring,Math.round(self.counter/10/target.length) % target.length == ring) {
 			c = c1;
-		} else if (global.pixelNode.data.get(["inputs","buttons","btn_"+ring])) {
+		} else if (global.pixelNode.data.fastGet(["inputs","buttons","btn_"+ring])) {
 			c = c1;
 		} else {
 			c = c2;
