@@ -96,20 +96,6 @@ PixelNode_Effect_SpriteSpark.prototype.drawTarget = function(target, output) {
 		onetwo = ringoffseted / target.length < 0.5;
 
 		self.fillColor(target[ring],  onetwo ? cc2 : cc1);
-
-
-		//for (var pixel = target[ring].length; pixel >= 0 ; pixel--) {
-		//	var dimmer = 1;
-		//	sprite = _.find(self.sprites, {index:ring, position:pixel});
-//
-		//	if (sprite != undefined) {
-		//		color = onetwo ? sprite.color2 : sprite.color1;
-		//		if (pixel > 1) target[ring][pixel-1] = self.dimmColor(color, 0.75);
-		//		if (pixel > 2) target[ring][pixel-2] = self.dimmColor(color, 0.5);
-		//	}
-		//	target[ring][pixel] = color;
-//
-		//}
 	}
 
 	for (var i = 0; i < self.sprites.length; i++) {

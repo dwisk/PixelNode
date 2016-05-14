@@ -195,9 +195,6 @@ PixelNode_Input_TouchRGB.prototype.reader = function() {
 
 	//console.log(global.pixelNode_data.inputs.rgb.color_left);
 	//console.log(global.pixelNode_data.inputs.rgb.color_right);
-
-
-
 }
 
 PixelNode_Input_TouchRGB.prototype.overrideEffect = function(gameManager) {

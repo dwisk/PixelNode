@@ -40,7 +40,7 @@
 		"color_right": "inputs.rgb.color_right",
 		"touches": "touch.touches"
 	},
-	"touch_input": true,
+	"touch_input": false,
 	"color_input": true,
 	"queue": [
 		{ "effect": "Glitter", "duration": 30000000 }

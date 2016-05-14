@@ -57,9 +57,7 @@ PixelNode_Game_Sprites.prototype.init = function() {
 	console.log("Init Game Fire".grey);
 	var self = this;
 	
-	console.log(self.options.effect);
 	self.effect = global.pixelNode.gameManager.getEffectByName(self.options.effect);
-	console.log(self.effect);
 
 	if (global.config.inputMode == "server") {
 	}
