@@ -1,0 +1,267 @@
+[
+	{
+		"name": "Clock",
+		"module": "../effects/PixelNode_Effect_TwoClock",
+		"outputs": [
+			{
+				"name": "clock",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "Wall",
+		"module": "../effects/PixelNode_Effect_TwoWall",
+		"outputs": [
+			{
+				"name": "ray",
+				"targets": [
+					"domePixels.rings"
+				]
+			}
+		]
+	},
+	{
+		"name": "PlayerColor",
+		"module": "../effects/PixelNode_Effect_TwoColor",
+		"outputs": [
+			{
+				"name": "color1",
+				"targets": [
+					"player1.rings"
+				]
+			},
+			{
+				"name": "color2",
+				"targets": [
+					"player2.rings"
+				]
+			}
+		]
+	},
+	{
+		"name": "Color",
+		"module": "../effects/PixelNode_Effect_TwoColor",
+		"outputs": [
+			{
+				"name": "both",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "Ray",
+		"module": "../effects/PixelNode_Effect_TwoRay",
+		"outputs": [
+			{
+				"name": "ray",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "Wave",
+		"module": "../effects/PixelNode_Effect_TwoWave",
+		"scale": 4,
+		"waveBase": 0.25,
+		"outputs": [
+			{
+				"name": "ray",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "Glitter",
+		"module": "../effects/PixelNode_Effect_TwoGlitter",
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.rings"
+				]
+			}
+		]
+	},
+	{
+		"name": "RainBow",
+		"module": "../effects/PixelNode_Effect_Rainbow",
+		"scale": 2,
+		"speed": 100,
+		"outputs": [
+			{
+				"name": "rainbow",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "RainBowRings",
+		"module": "../effects/PixelNode_Effect_Rainbow",
+		"scale": 0.1,
+		"speed": 100,
+		"outputs": [
+			{
+				"name": "rainbow",
+				"targets": [
+					"domePixels.rings"
+				]
+			}
+		]
+	},
+	{
+		"name": "RainBowPlayer1",
+		"module": "../effects/PixelNode_Effect_Rainbow",
+		"scale": 1,
+		"speed": 100,
+		"outputs": [
+			{
+				"name": "rainbow",
+				"targets": [
+					"player1.rings"
+				]
+			}
+		]
+	},
+	{
+		"name": "RainBowPlayer2",
+		"module": "../effects/PixelNode_Effect_Rainbow",
+		"scale": 1,
+		"speed": 100,
+		"outputs": [
+			{
+				"name": "rainbow",
+				"targets": [
+					"player2.rings"
+				]
+			}
+		]
+	},
+	{
+		"name": "RedBlue",
+		"module": "../effects/PixelNode_Effect_RedBlue",
+		"scale": 21,
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},	{
+		"name": "Fire",
+		"speed": 0,
+		"module": "../effects/PixelNode_Effect_Fire",
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "SpriteGrow",
+		"speed": 10,
+		"module": "../effects/PixelNode_Effect_SpriteGrow",
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "SpriteSpark",
+		"speed": 1,
+		"module": "../effects/PixelNode_Effect_SpriteSpark",
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "Rain",
+		"module": "../effects/PixelNode_Effect_Rain",
+		"speed": 0.75,
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "ColouredRain",
+		"module": "../effects/PixelNode_Effect_ColouredRain",
+		"speed": 0.75,
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "OffTouch",
+		"module": "../effects/PixelNode_Effect_Off",
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"touch.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "Off",
+		"module": "../effects/PixelNode_Effect_Off",
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"domePixels.strips",
+					"player1.strips",
+					"player2.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "OffColor",
+		"module": "../effects/PixelNode_Effect_Off",
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"player1.strips",
+					"player2.strips"
+				]
+			}
+		]
+	}
+
+]

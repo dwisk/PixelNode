@@ -1,0 +1,10 @@
+[
+	{
+		"name": "domePixels",
+		"pixelColorCorrection": true,
+    "matrix": true,
+    "sizeX": 32,
+    "sizeY": 64,
+    "rotate": true
+	}
+]
