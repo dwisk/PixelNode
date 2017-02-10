@@ -41,20 +41,20 @@ module.exports = PixelNode_Effect_ColouredRain;
 /* Variables
  * ==================================================================================================================== */
 
- PixelNode_Effect_ColouredRain.prototype.default_options = {
+PixelNode_Effect_ColouredRain.prototype.default_options = {
  	speed: 1.5,
  	gravity: 1,
  	direction: 1
- }
- PixelNode_Effect_ColouredRain.prototype.intensity = []
- PixelNode_Effect_ColouredRain.prototype.drops = []
- PixelNode_Effect_ColouredRain.prototype.color1 = false
- PixelNode_Effect_ColouredRain.prototype.dropPrototype = {
- 	index: null,
-  	position: 0,
-  	timerPosition: 0,
-  	color: [0,0,0]
- };
+}
+PixelNode_Effect_ColouredRain.prototype.intensity = []
+PixelNode_Effect_ColouredRain.prototype.drops = []
+PixelNode_Effect_ColouredRain.prototype.color1 = false
+PixelNode_Effect_ColouredRain.prototype.dropPrototype = {
+  index: null,
+	position: -2,
+	timerPosition: -2,
+	color: [0,0,0]
+};
 
 
 /* Overridden Methods
