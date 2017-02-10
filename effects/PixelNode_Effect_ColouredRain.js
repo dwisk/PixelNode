@@ -1,10 +1,10 @@
 /**
- * PixelNode_Effect_ColouredRain 
- * 
+ * PixelNode_Effect_ColouredRain
+ *
  * Ported fadecandy example
- * 
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -31,7 +31,7 @@ function PixelNode_Effect_ColouredRain(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_ColouredRain, PixelNode_Effect);
 
 // module export
@@ -42,9 +42,8 @@ module.exports = PixelNode_Effect_ColouredRain;
  * ==================================================================================================================== */
 
  PixelNode_Effect_ColouredRain.prototype.default_options = {
- 	scale: 1,
- 	speed: 2,
- 	gravity: 0.8,
+ 	speed: 1.5,
+ 	gravity: 1,
  	direction: 1
  }
  PixelNode_Effect_ColouredRain.prototype.intensity = []
@@ -117,7 +116,7 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 		if (self.intensity[ring] >= 0.03) {
 			self.intensity[ring] -= 0.002 * self.options.speed * (Math.random(1)*0.2 + 0.8);
 		}
-	
+
 	}
 
 	for (var i = 0; i < self.drops[target_name].length; i++) {
@@ -128,11 +127,11 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 		} else {
 			drop.timerPosition +=  self.options.direction;
 			if (self.options.direction >0) {
-				drop.position = Math.ceil(drop.timerPosition / self.options.gravity);
+				drop.position = Math.floor(drop.timerPosition / self.options.gravity);
 			} else {
-				drop.position = target_length - Math.ceil(drop.timerPosition / self.options.gravity);
+				drop.position = target_length - Math.floor(drop.timerPosition / self.options.gravity);
 			}
-			
+
 
 			if (drop.position >= 0 && drop.position < target_length) target[drop.index][drop.position] = drop.color;
 			if (drop.position+1*self.options.direction*-1 >= 0 && drop.position+1*self.options.direction*-1 < target_length) target[drop.index][drop.position+1*self.options.direction*-1] = self.dimmColor(drop.color, 0.5);
@@ -144,5 +143,3 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 	//console.log(self.drops[target_name].length);
 
 }
-
-
