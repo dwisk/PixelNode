@@ -1,10 +1,10 @@
 /**
- * PixelNode_Effect_TwoClock 
- * 
+ * PixelNode_Effect_TwoClock
+ *
  * Clock Effect
- * 
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -28,7 +28,7 @@ function PixelNode_Effect_TwoClock(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_TwoClock, PixelNode_Effect);
 
 // module export
@@ -51,7 +51,7 @@ PixelNode_Effect_TwoClock.prototype.hueSelect = 0;
 
 // init effect – override
 PixelNode_Effect_TwoClock.prototype.init = function() {
-	console.log("Init Effect Rainbow".grey);
+	console.log("Init Effect TwoClock".grey);
 }
 
 
@@ -61,7 +61,7 @@ var lastTouches = [];
 PixelNode_Effect_TwoClock.prototype.drawTarget = function(target, output) {
 	var self = this;
 
-	var c, c1, c2; 
+	var c, c1, c2;
 
 	// get color 1
 	c1 = self.getColor(["inputs","rgb","color_left"]);
@@ -95,18 +95,17 @@ PixelNode_Effect_TwoClock.prototype.drawTarget = function(target, output) {
 
 	for (var ring = 0; ring < target.length;ring++) {
 		for (var pixel = 0; pixel < target[ring].length; pixel++) {
-			if ( (minute >= ring*internal_scale && minute < (ring+1)*internal_scale && pixel >= 1*self.options.scale) 
-		     || (ring == hour && pixel > 3*self.options.scale) 
+			if ( (minute >= ring*internal_scale && minute < (ring+1)*internal_scale && pixel >= 1*self.options.scale)
+		     || (ring == hour && pixel > 3*self.options.scale)
 				) {
 				target[ring][pixel] = c2;
 			} else if (global.pixelNode.data.fastGet(["inputs","buttons","btn_"+ring])
-			 ||	(second >= ring*internal_scale && second < (ring+1)*internal_scale ) 
+			 ||	(second >= ring*internal_scale && second < (ring+1)*internal_scale )
 				) {
 				target[ring][pixel] = c1;
 			} else {
 				target[ring][pixel] = c3;
 			}
-		}			    
+		}
 	}
 }
-

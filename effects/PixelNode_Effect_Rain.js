@@ -1,10 +1,10 @@
 /**
- * PixelNode_Effect_Rain 
- * 
+ * PixelNode_Effect_Rain
+ *
  * Ported fadecandy example
- * 
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -31,7 +31,7 @@ function PixelNode_Effect_Rain(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_Rain, PixelNode_Effect);
 
 // module export
@@ -61,7 +61,7 @@ module.exports = PixelNode_Effect_Rain;
 
 // init effect – override
 PixelNode_Effect_Rain.prototype.init = function() {
-	console.log("Init Effect RedBlue".grey);
+	console.log("Init Effect Rain".grey);
 
 }
 
@@ -107,7 +107,7 @@ PixelNode_Effect_Rain.prototype.drawTarget = function(target, output, target_nam
 		if (self.intensity[ring] >= 0.03) {
 			self.intensity[ring] -= 0.002 * self.options.speed * (Math.random(1)*0.2 + 0.8);
 		}
-	
+
 	}
 
 	for (var i = 0; i < self.drops[target_name].length; i++) {
@@ -129,5 +129,3 @@ PixelNode_Effect_Rain.prototype.drawTarget = function(target, output, target_nam
 
 
 }
-
-

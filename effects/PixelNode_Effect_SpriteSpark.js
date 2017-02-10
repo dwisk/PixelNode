@@ -1,10 +1,8 @@
 /**
- * PixelNode_Effect_SpriteSpark 
- * 
- * Rainbow Effect (TOOD: Performance)
- * 
+ * PixelNode_Effect_SpriteSpark
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -30,7 +28,7 @@ function PixelNode_Effect_SpriteSpark(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_SpriteSpark, PixelNode_Effect);
 
 // module export
@@ -63,20 +61,20 @@ module.exports = PixelNode_Effect_SpriteSpark;
 
 // init effect – override
 PixelNode_Effect_SpriteSpark.prototype.init = function() {
-	console.log("Init Effect Rainbow".grey);
+	console.log("Init Effect Sprite Spark".grey);
 }
 
 // draw effect on target
 PixelNode_Effect_SpriteSpark.prototype.drawTarget = function(target, output) {
 	var self = this;
-	var c, c1, c2; 
+	var c, c1, c2;
 
 	// get color 1
 	c1 = self.getColor(["inputs","rgb","color_right"], {
 		offset: 90
 	});
 	c2 = self.getColor(["inputs","rgb","color_left"]);
-	
+
 	self.spritePrototype.color1 = c1;
 	self.spritePrototype.color2 = c2;
 
@@ -110,7 +108,7 @@ PixelNode_Effect_SpriteSpark.prototype.drawTarget = function(target, output) {
 			ringoffseted = sprite.index -1;
 			if ( ringoffseted < 0 ) ringoffseted = ringoffseted + target.length;
 			onetwo = ringoffseted / target.length < 0.5;
-			
+
 			color = onetwo ? sprite.color2 : sprite.color1;
 			target[sprite.index][sprite.position] = color;
 			if (sprite.position > 1) target[sprite.index][sprite.position-1] = self.dimmColor(color, 0.75);
@@ -123,5 +121,3 @@ PixelNode_Effect_SpriteSpark.prototype.drawTarget = function(target, output) {
 PixelNode_Effect_SpriteSpark.prototype.reset = function() {
 	this.sprites = [];
 }
-
-

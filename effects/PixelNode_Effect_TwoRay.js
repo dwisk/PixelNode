@@ -1,10 +1,10 @@
 /**
- * PixelNode_Effect_TwoRay 
- * 
+ * PixelNode_Effect_TwoRay
+ *
  * Ported fadecandy example
- * 
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -30,7 +30,7 @@ function PixelNode_Effect_TwoRay(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_TwoRay, PixelNode_Effect);
 
 // module export
@@ -48,7 +48,7 @@ module.exports = PixelNode_Effect_TwoRay;
 
 // init effect – override
 PixelNode_Effect_TwoRay.prototype.init = function() {
-	console.log("Init Effect Glitter".grey);
+	console.log("Init Effect TwoRay".grey);
 }
 
 // draw effect on target
@@ -74,14 +74,10 @@ PixelNode_Effect_TwoRay.prototype.drawTarget = function(target, output_name) {
 		} else {
 			c = c2;
 		}
-		
+
 		for (var pixel = 0; pixel < target[ring].length; pixel++) {
 			target[ring][pixel] = c;
-		}			    
+		}
 	}
 
 }
-
-
-
-

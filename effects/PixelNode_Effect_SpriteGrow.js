@@ -1,10 +1,8 @@
 /**
- * PixelNode_Effect_SpriteGrow 
- * 
- * Rainbow Effect (TOOD: Performance)
- * 
+ * PixelNode_Effect_SpriteGrow
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -30,7 +28,7 @@ function PixelNode_Effect_SpriteGrow(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_SpriteGrow, PixelNode_Effect);
 
 // module export
@@ -55,20 +53,20 @@ module.exports = PixelNode_Effect_SpriteGrow;
 
 // init effect – override
 PixelNode_Effect_SpriteGrow.prototype.init = function() {
-	console.log("Init Effect Rainbow".grey);
+	console.log("Init Effect Sprite Grow".grey);
 }
 
 // draw effect on target
 PixelNode_Effect_SpriteGrow.prototype.drawTarget = function(target, output) {
 	var self = this;
-	var c, c1, c2; 
+	var c, c1, c2;
 
 	// get color 1
 	c1 = self.getColor(["inputs","rgb","color_right"], {
 		offset: 90
 	});
 	c2 = self.getColor(["inputs","rgb","color_left"]);
-	
+
 	self.spritePrototype.color1 = c1;
 	self.spritePrototype.color2 = c2;
 
@@ -109,5 +107,3 @@ PixelNode_Effect_SpriteGrow.prototype.drawTarget = function(target, output) {
 PixelNode_Effect_SpriteGrow.prototype.reset = function() {
 	this.sprites = [];
 }
-
-

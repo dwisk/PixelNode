@@ -62,7 +62,7 @@ PixelNode_Effect_ColouredRain.prototype.dropPrototype = {
 
 // init effect – override
 PixelNode_Effect_ColouredRain.prototype.init = function() {
-	console.log("Init Effect RedBlue".grey);
+	console.log("Init Effect ColouredRain".grey);
 
 }
 

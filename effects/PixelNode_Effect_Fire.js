@@ -1,10 +1,10 @@
 /**
- * PixelNode_Effect_Fire 
- * 
+ * PixelNode_Effect_Fire
+ *
  * Ported fadecandy example
- * 
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -30,7 +30,7 @@ function PixelNode_Effect_Fire(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_Fire, PixelNode_Effect);
 
 // module export
@@ -52,7 +52,7 @@ module.exports = PixelNode_Effect_Fire;
 
 // init effect – override
 PixelNode_Effect_Fire.prototype.init = function() {
-	console.log("Init Effect RedBlue".grey);
+	console.log("Init Effect Fire".grey);
 }
 
 // reset effect – override
@@ -86,8 +86,8 @@ PixelNode_Effect_Fire.prototype.drawTarget = function(target) {
 		for (var pixel = 0; pixel < target[ring].length; pixel++) {
 			if (target[ring].length * tmp_height > pixel) {
 				red = 255 *tmp_height;
-				
-				
+
+
 
 				green = 255* (pixel  / target[ring].length) *tmp_height;
 			} else if (target[ring].length * tmp_height > pixel-(1*self.options.scale)) {
@@ -109,8 +109,8 @@ PixelNode_Effect_Fire.prototype.drawTarget = function(target) {
 
 			target[ring][pixel] = [red, green, 0];
 
-		}			    
-	
+		}
+
 		if (tmp_height >= 0.1) {
 			self.intensity[ring] -= 0.001 * self.options.speed * (Math.random(1)*0.2 + 0.8);
 		}
@@ -119,5 +119,3 @@ PixelNode_Effect_Fire.prototype.drawTarget = function(target) {
 
 
 }
-
-

@@ -1,10 +1,10 @@
 /**
- * PixelNode_Effect_Wave 
- * 
+ * PixelNode_Effect_Wave
+ *
  * Ported fadecandy example
- * 
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -30,7 +30,7 @@ function PixelNode_Effect_Wave(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_Wave, PixelNode_Effect);
 
 // module export
@@ -54,7 +54,7 @@ module.exports = PixelNode_Effect_Wave;
 
 // init effect – override
 PixelNode_Effect_Wave.prototype.init = function() {
-	console.log("Init Effect RedBlue".grey);
+	console.log("Init Effect TwoWave".grey);
 }
 
 // draw effect on target
@@ -88,9 +88,7 @@ PixelNode_Effect_Wave.prototype.drawTarget = function(target) {
 			}
 
 			target[ring][pixel] = c;
-		}			    
+		}
 	}
 
 }
-
-

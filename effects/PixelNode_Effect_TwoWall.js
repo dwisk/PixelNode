@@ -1,10 +1,10 @@
 /**
- * PixelNode_Effect_TwoWall 
- * 
+ * PixelNode_Effect_TwoWall
+ *
  * Ported fadecandy example
- * 
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -30,7 +30,7 @@ function PixelNode_Effect_TwoWall(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_TwoWall, PixelNode_Effect);
 
 // module export
@@ -52,7 +52,7 @@ PixelNode_Effect.prototype.default_options = {
 
 // init effect – override
 PixelNode_Effect_TwoWall.prototype.init = function() {
-	console.log("Init Effect Glitter".grey);
+	console.log("Init Effect TwoWall".grey);
 }
 
 PixelNode_Effect_TwoWall.prototype.reset = function() {
@@ -100,7 +100,7 @@ PixelNode_Effect_TwoWall.prototype.drawTarget = function(target) {
 		var p = 0;
 		// console.log(ring,Math.round(self.counter/10/target.length) % 12);
 
-		
+
 		for (var pixel = 0; pixel < target[ring].length; pixel++) {
 			if (global.pixelNode.data.fastGet(["inputs","touch","touches",pixel])) {
 				c = [0,0,0];
@@ -112,10 +112,7 @@ PixelNode_Effect_TwoWall.prototype.drawTarget = function(target) {
 				c = self.cfirst ? c2 : c1;
 			}
 			target[ring][pixel] = c;
-		}		
+		}
 	}
 
 }
-
-
-
