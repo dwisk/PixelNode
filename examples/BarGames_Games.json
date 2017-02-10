@@ -11,6 +11,7 @@
 			"touches": "touch.touches"
 		},
 		"queue": [
+      { "effect": "Off", "duration": 10000 },
 			{ "effect": "ColouredRain", "duration": 10000 },
 			{ "effect": "Fire", "duration": 10000 },
 			{ "effect": "Wave", "duration": 10000 },

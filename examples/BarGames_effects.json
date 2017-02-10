@@ -215,11 +215,12 @@
 		"name": "ColouredRain",
 		"module": "../effects/PixelNode_Effect_ColouredRain",
 		"speed": 0.75,
+    "direction": -1,
 		"outputs": [
 			{
 				"name": "glow",
 				"targets": [
-					"domePixels.strips"
+					"domePixels.rings"
 				]
 			}
 		]
@@ -243,9 +244,7 @@
 			{
 				"name": "glow",
 				"targets": [
-					"domePixels.strips",
-					"player1.strips",
-					"player2.strips"
+					"domePixels.strips"
 				]
 			}
 		]

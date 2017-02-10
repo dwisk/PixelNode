@@ -108,6 +108,7 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 			drop.index = ring;
 			drop.color = self.color1 ? c1 : c2;
 			drop.position = self.options.direction<0 ? target_length-1 : 0;
+      drop.timerPosition = self.options.direction<0 ? 0 : -2;
 
 			self.drops[target_name].push( drop);
 		}
@@ -129,8 +130,9 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 			if (self.options.direction >0) {
 				drop.position = Math.floor(drop.timerPosition / self.options.gravity);
 			} else {
-				drop.position = target_length - Math.floor(drop.timerPosition / self.options.gravity);
+				drop.position = target_length + Math.floor(drop.timerPosition / self.options.gravity);
 			}
+
 
 
 			if (drop.position >= 0 && drop.position < target_length) target[drop.index][drop.position] = drop.color;
