@@ -11,7 +11,7 @@
  * ==================================================================================================================== */
 
 var util = require("util");
-PixelNode_Canvas = require('../lib/PixelNode_Canvas.js');
+
 
 /* Class Constructor
  * ==================================================================================================================== */
@@ -38,7 +38,6 @@ module.exports = PixelNode_Effect_Off;
  * ==================================================================================================================== */
 
  PixelNode_Effect_Off.prototype.n = 1;
- PixelNode_Effect_Off.prototype.canvas;
 
 
 /* Overridden Methods
@@ -49,32 +48,12 @@ PixelNode_Effect_Off.prototype.init = function() {
 	console.log("Init Effect Off".grey);
 }
 
-PixelNode_Effect_Off.prototype.pos = 0;
-PixelNode_Effect_Off.prototype.dir = 1;
 // draw effect on target
 PixelNode_Effect_Off.prototype.drawTarget = function(target, output) {
 	var self = this;
-  var c1 = self.getColor(["inputs","rgb","color_right"], {
-    dimmer: 0.25,
-    offset: 90
-  });
-  canvas = new PixelNode_Canvas(target);
-  canvas.fill(c1);
 
-  canvas.rectangle(0,0,10,1,[255,0,0]);
-  canvas.rectangle(0,2,20,1,[0,255,0]);
-  canvas.line(this.pos+7,17,40,30, [0,128,0]);
-  canvas.rectangle(10,10,10,10,[0,0,255]);
-  canvas.oval(this.pos, 10, 15, 10, [255,0,0,0.5]);
-
-  this.pos += this.dir;
-  if (this.pos <= 0) {
-    this.dir = 1;
-    this.pos = 0;
-  }
-  if (this.pos >= 64-15) {
-    this.dir = -1;
-    this.pos = 64-15;
-  }
+	for (var ring = 0; ring < target.length;ring++) {
+		self.fillColor(target[ring], [0,0,0]);
+	}
 
 }
