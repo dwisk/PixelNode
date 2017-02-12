@@ -78,36 +78,72 @@ PixelNode_Effect_Fire.prototype.drawTarget = function(target) {
 	var millis = new Date().getTime();
 
 	for (var ring = 0; ring < target.length;ring++) {
-		flicker = Math.random(1)*0.5 + 0.5;
+    flicker = Math.random(1)*0.5 + 0.5;
 		tmp_height = self.intensity[ring] * flicker;
 
 		if (self.intensity[ring] == undefined) { self.intensity[ring] = Math.random(1)*0.1+0.9}
 
 		for (var pixel = 0; pixel < target[ring].length; pixel++) {
-			if (target[ring].length * tmp_height > pixel) {
-				red = 255 *tmp_height;
+      var red = 0;
+      var green = 0;
+      var blue = 0;
+      if (target[ring].length - target[ring].length * tmp_height*0.9< pixel) {
+        red = 225;
+				height = target[ring].length;
+        green = 255 * (pixel -  (height -  height * tmp_height*0.9)) / (height * tmp_height*0.9);
 
-
-
-				green = 255* (pixel  / target[ring].length) *tmp_height;
-			} else if (target[ring].length * tmp_height > pixel-(1*self.options.scale)) {
-				red = 128 *tmp_height;
-				green = 128* (pixel  / target[ring].length) *tmp_height;
-			} else if (target[ring].length * tmp_height > pixel-(2*self.options.scale)) {
-				red = 64 *tmp_height;
-				green = 64 * (pixel  / target[ring].length) *tmp_height;
-			} else {
-				red = 32;
-				green = 0;
+        if (green < 0 || green > 255) { red = green = blue = 0};
 			}
+      else
+      if (target[ring].length - target[ring].length * tmp_height*0.8< pixel) {
+        red = 196;
+				height = target[ring].length;
+        green = 196 * (pixel -  (height -  height * tmp_height*0.8)) / (height * tmp_height*0.8);
+
+        if (green < 0 || green > 196) { red = green = blue = 0};
+			}
+      else
+      if (target[ring].length - target[ring].length * tmp_height< pixel) {
+        red = 128;
+				height = target[ring].length;
+        green = 128 * (pixel -  (height -  height * tmp_height)) / (height * tmp_height);
+
+        if (green < 0 || green > 128) { red = green = blue = 0};
+			}
+      // if (target[ring].length - target[ring].length * tmp_height/4*2 < pixel) {
+      //   red = 196;
+      //   green = 255 * ((target[ring].length * tmp_height)/pixel);
+			// }
+      // else
+      // if (target[ring].length - target[ring].length * tmp_height/4*3 < pixel) {
+			// 	red = 196;
+      //   green = 196 * ((target[ring].length * tmp_height)/pixel);
+			// }
+      // else
+      // if (target[ring].length - target[ring].length * tmp_height < pixel) {
+			// 	red = 128;
+			// 	green = 128* (pixel  / target[ring].length * tmp_height);
+			// }
+
+
+
+      // else
+      // if (target[ring].length * tmp_height < pixel-(2*self.options.scale)) {
+			// 	red = 64 * tmp_height;
+			// 	green = 64 * (pixel  / target[ring].length) * tmp_height;
+			// }
+      // else {
+			// 	red = 32;
+			// 	green = 0;
+			// }
 
 			//red = red * tmp_height*1.25;
 			//green = green * tmp_height *0.75;
-			if (green > red) green = red;
+			//if (green > red) green = red;
 
 
 
-			target[ring][pixel] = [red, green, 0];
+			target[ring][pixel] = [red, green, blue];
 
 		}
 
