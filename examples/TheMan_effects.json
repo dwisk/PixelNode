@@ -98,7 +98,7 @@
 				]
 			}
 		]
-	},	
+	},
 	{
 		"name": "RainBowRings",
 		"module": "../effects/PixelNode_Effect_Rainbow",
@@ -114,7 +114,7 @@
 				]
 			}
 		]
-	},		
+	},
 	{
 		"name": "RedBlue",
 		"module": "../effects/PixelNode_Effect_RedBlue",
@@ -131,22 +131,6 @@
 	},	{
 		"name": "Fire",
 		"module": "../effects/PixelNode_Effect_Fire",
-		"speed": 0,
-		"outputs": [
-			{
-				"name": "glow",
-				"targets": [
-					"left_leg.strips",
-					"right_leg.strips",
-					"head.strips"
-				]
-			}
-		]
-	},	
-	{
-		"name": "Rain",
-		"module": "../effects/PixelNode_Effect_Rain",
-		"scale": 0,
 		"speed": 0,
 		"outputs": [
 			{
@@ -184,10 +168,10 @@
 				"targets": [
 					"left_leg.strips"				,
 					"left_leg.rightps"				,
-					"left_leg.head"				
+					"left_leg.head"
 				]
 			}
 		]
 	}
 
-]	
+]

@@ -6,7 +6,7 @@
 			{
 				"name": "clock",
 				"targets": [
-					"domePixels.strips"
+					"domePixels.rings"
 				]
 			}
 		]
@@ -24,31 +24,13 @@
 		]
 	},
 	{
-		"name": "PlayerColor",
-		"module": "../effects/PixelNode_Effect_TwoColor",
-		"outputs": [
-			{
-				"name": "color1",
-				"targets": [
-					"player1.rings"
-				]
-			},
-			{
-				"name": "color2",
-				"targets": [
-					"player2.rings"
-				]
-			}
-		]
-	},
-	{
 		"name": "Color",
 		"module": "../effects/PixelNode_Effect_TwoColor",
 		"outputs": [
 			{
 				"name": "both",
 				"targets": [
-					"domePixels.strips"
+					"domePixels.rings"
 				]
 			}
 		]
@@ -60,7 +42,7 @@
 			{
 				"name": "ray",
 				"targets": [
-					"domePixels.strips"
+					"domePixels.rings"
 				]
 			}
 		]
@@ -69,12 +51,12 @@
 		"name": "Wave",
 		"module": "../effects/PixelNode_Effect_TwoWave",
 		"scale": 4,
-		"waveBase": 0.25,
+		"waveBase": 0.5,
 		"outputs": [
 			{
 				"name": "ray",
 				"targets": [
-					"domePixels.strips"
+					"domePixels.rings"
 				]
 			}
 		]
@@ -100,7 +82,7 @@
 			{
 				"name": "rainbow",
 				"targets": [
-					"domePixels.strips"
+					"domePixels.rings"
 				]
 			}
 		]
@@ -119,34 +101,7 @@
 			}
 		]
 	},
-	{
-		"name": "RainBowPlayer1",
-		"module": "../effects/PixelNode_Effect_Rainbow",
-		"scale": 1,
-		"speed": 100,
-		"outputs": [
-			{
-				"name": "rainbow",
-				"targets": [
-					"player1.rings"
-				]
-			}
-		]
-	},
-	{
-		"name": "RainBowPlayer2",
-		"module": "../effects/PixelNode_Effect_Rainbow",
-		"scale": 1,
-		"speed": 100,
-		"outputs": [
-			{
-				"name": "rainbow",
-				"targets": [
-					"player2.rings"
-				]
-			}
-		]
-	},
+
 	{
 		"name": "RedBlue",
 		"module": "../effects/PixelNode_Effect_RedBlue",
@@ -155,7 +110,7 @@
 			{
 				"name": "glow",
 				"targets": [
-					"domePixels.strips"
+					"domePixels.rings"
 				]
 			}
 		]
@@ -167,7 +122,7 @@
 			{
 				"name": "glow",
 				"targets": [
-					"domePixels.strips"
+					"domePixels.rings"
 				]
 			}
 		]
@@ -180,7 +135,7 @@
 			{
 				"name": "glow",
 				"targets": [
-					"domePixels.strips"
+					"domePixels.rings"
 				]
 			}
 		]
@@ -193,20 +148,23 @@
 			{
 				"name": "glow",
 				"targets": [
-					"domePixels.strips"
+					"domePixels.rings"
 				]
 			}
 		]
 	},
-	{
+  {
 		"name": "Rain",
-		"module": "../effects/PixelNode_Effect_Rain",
+		"module": "../effects/PixelNode_Effect_ColouredRain",
 		"speed": 0.75,
+    "direction": 1,
+    "intensity": 0.5,
+    "fixedColor": [0,0,255],
 		"outputs": [
 			{
 				"name": "glow",
 				"targets": [
-					"domePixels.strips"
+					"domePixels.rings"
 				]
 			}
 		]
@@ -215,6 +173,7 @@
 		"name": "ColouredRain",
 		"module": "../effects/PixelNode_Effect_ColouredRain",
 		"speed": 0.75,
+    "intensity": 0.2,
     "direction": -1,
 		"outputs": [
 			{
@@ -226,38 +185,25 @@
 		]
 	},
 	{
-		"name": "OffTouch",
-		"module": "../effects/PixelNode_Effect_Off",
-		"outputs": [
-			{
-				"name": "glow",
-				"targets": [
-					"touch.strips"
-				]
-			}
-		]
-	},
-	{
 		"name": "Off",
 		"module": "../effects/PixelNode_Effect_Off",
 		"outputs": [
 			{
 				"name": "glow",
 				"targets": [
-					"domePixels.strips"
+					"domePixels.rings"
 				]
 			}
 		]
 	},
 	{
-		"name": "OffColor",
-		"module": "../effects/PixelNode_Effect_Off",
+		"name": "Title",
+		"module": "../effects/PixelNode_Effect_Spielmaschine",
 		"outputs": [
 			{
 				"name": "glow",
 				"targets": [
-					"player1.strips",
-					"player2.strips"
+					"domePixels.rings"
 				]
 			}
 		]

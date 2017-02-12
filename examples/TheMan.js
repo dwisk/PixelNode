@@ -1,8 +1,8 @@
 /**
  * Example
- * 
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -13,7 +13,7 @@ process.env.NODE_ENV = 'production';
  * -------------------------------------------------------------------------------------------------------------------- */
 
 var PixelNode = require('../index.js');
-var b = require('bonescript');
+//var b = require('bonescript');
 
 
 /* Config
@@ -95,7 +95,7 @@ var testPixelNode = new PixelNode({
 					{ "effect": "Off", "duration": 100000 }
 				],
 				"effects": [
-					
+
 					{
 						"name": "Off",
 						"module": "../../effects/PixelNode_Effect_Off",
@@ -110,7 +110,7 @@ var testPixelNode = new PixelNode({
 						]
 					}
 				]
-			}	
+			}
 		]
 
 	},
@@ -132,12 +132,12 @@ var testPixelNode = new PixelNode({
 // setInterval(function() {
 // 	time = new Date();
 // 	hour = time.getHours();
-// 
+//
 // 	if (((hour >= 20) || (hour < 7))) {
 // 		global.pixelNode.data.set("games.force_off", false);
 // 	} else {
 // 		global.pixelNode.data.set("games.force_off", true);
 // 	}
-// 	
+//
 // },1000*1);
-// 
+//

@@ -1,32 +1,54 @@
 [
-	{
-		"name": "theman",
-		"default": true,
-		"title": "Two colored",
-		"icon": "entypo/adjust",
-		"module": "../games/PixelNode_Game_EffectQueue",
-		"inputs": {
-			"color_left": "inputs.rgb.color_left",
-			"color_right": "inputs.rgb.color_right",
-			"touches": "touch.touches"
-		},
-		"queue": [
-      { "effect": "Off", "duration": 10000 },
-			{ "effect": "ColouredRain", "duration": 10000 },
-			{ "effect": "Fire", "duration": 10000 },
-			{ "effect": "Wave", "duration": 10000 },
-			{ "effect": "Glitter", "duration": 10000 },
-			{ "effect": "RainBow", "duration": 10000 },
-			{ "effect": "Rain", "duration": 10000 },
-			{ "effect": "Ray", "duration": 10000 },
-			{ "effect": "RainBowRings", "duration": 10000 },
-			{ "effect": "RedBlue", "duration": 10000 },
-			{ "effect": "Wall", "duration": 10000 },
-			{ "effect": "Clock", "duration": 10000 }
+  {
+    "name": "Spielmaschine",
+    "default": true,
+    "title": "Spielmaschine",
+    "icon": "entypo/adjust",
+    "module": "../games/PixelNode_Game_EffectQueue",
+    "inputs": {
+      "color_left": "inputs.rgb.color_left",
+      "color_right": "inputs.rgb.color_right",
+      "touches": "touch.touches"
+    },
+    "afterEffect": "Title",
+    "queue": [
+      { "effect": "ColouredRain", "duration": 5000 },
+      { "effect": "Fire", "duration": 5000 },
+      { "effect": "Rain", "duration": 5000 },
+      { "effect": "RedBlue", "duration": 5000 },
+      { "effect": "Glitter", "duration": 5000 }
+    ],
+    "queue2": [
+      { "effect": "Rain", "duration": 10000 },
+      { "effect": "Wave", "duration": 10000 },
+      { "effect": "Fire", "duration": 10000 },
+      { "effect": "Glitter", "duration": 10000 },
+      { "effect": "RainBow", "duration": 10000 },
+      { "effect": "Rain", "duration": 10000 },
+      { "effect": "Ray", "duration": 10000 },
+      { "effect": "RedBlue", "duration": 10000 },
+      { "effect": "Wall", "duration": 10000 },
+      { "effect": "Clock", "duration": 10000 }
 
 
-		]
-	},
+    ]
+  },
+  {
+    "name": "Fire",
+    "title": "Fire",
+    "icon": "openiconic/fire",
+    "module": "../games/PixelNode_Game_Intensity",
+    "effect": "Fire",
+    "inputs": {
+      "color_left": "inputs.rgb.color_left",
+      "color_right": "inputs.rgb.color_right",
+      "touches": "touch.touches"
+    },
+    "speed": 0.0001,
+    "touch_input": true,
+    "color_input": false
+  },
+
 	{
 		"name": "ColouredRain",
 		"title": "Coloured Rain",
@@ -43,21 +65,7 @@
 		"color_input": true
 	},
 
-	{
-		"name": "Fire",
-		"title": "Fire",
-		"icon": "openiconic/fire",
-		"module": "../games/PixelNode_Game_Intensity",
-		"effect": "Fire",
-		"inputs": {
-			"color_left": "inputs.rgb.color_left",
-			"color_right": "inputs.rgb.color_right",
-			"touches": "touch.touches"
-		},
-		"speed": 0.01,
-		"touch_input": true,
-		"color_input": false
-	},
+
 	{
 		"name": "glitter",
 		"default": true,
