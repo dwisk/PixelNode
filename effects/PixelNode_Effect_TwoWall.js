@@ -83,8 +83,8 @@ PixelNode_Effect_TwoWall.prototype.drawTarget = function(target) {
 	});
 
 	var speed = 100;
-	position = Math.floor(((self.counter - self.counterOffset) / speed) % 12);
-	height = Math.floor(((self.counter - self.counterOffset) / speed) / 12) * self.options.scale;
+	position = Math.floor(((self.counter - self.counterOffset) / speed) % target[0].length);
+	height = Math.floor(((self.counter - self.counterOffset) / speed) / target[0].length) * self.options.scale;
 	if (height >= target.length) {
 		self.counterOffset = self.counter;
 		height = 0;
