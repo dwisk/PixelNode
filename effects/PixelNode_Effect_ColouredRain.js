@@ -1,8 +1,6 @@
 /**
  * PixelNode_Effect_ColouredRain
  *
- * Ported fadecandy example
- *
  * --------------------------------------------------------------------------------------------------------------------
  *
  * @author Amely Kling <mail@dwi.sk>
@@ -44,7 +42,9 @@ module.exports = PixelNode_Effect_ColouredRain;
 PixelNode_Effect_ColouredRain.prototype.default_options = {
  	speed: 1.5,
  	gravity: 1,
- 	direction: 1
+ 	direction: 1,
+  intensity : 0.9,
+  fixedCcolor: null
 }
 PixelNode_Effect_ColouredRain.prototype.intensity = []
 PixelNode_Effect_ColouredRain.prototype.drops = []
@@ -52,8 +52,7 @@ PixelNode_Effect_ColouredRain.prototype.color1 = false
 PixelNode_Effect_ColouredRain.prototype.dropPrototype = {
   index: null,
 	position: -2,
-	timerPosition: -2,
-	color: [0,0,0]
+	timerPosition: -2
 };
 
 
@@ -77,7 +76,7 @@ PixelNode_Effect_ColouredRain.prototype.initTarget = function(target, output, ta
 	var self = this;
 
 	for (var ring = 0; ring < target.length;ring++) {
-		self.intensity[ring] = Math.random(1)*0.1+0.9;
+		self.intensity[ring] = Math.random(1)*0.1+self.options.intensity;
 	}
 
 	self.dropPrototype.position = target[0].length;
@@ -106,8 +105,12 @@ PixelNode_Effect_ColouredRain.prototype.drawTarget = function(target, output, ta
 
 			var drop = _.clone(self.dropPrototype);
 			drop.index = ring;
-			drop.color = self.color1 ? c1 : c2;
-			drop.position = self.options.direction<0 ? target_length-1 : 0;
+      if (this.options.fixedColor) {
+          drop.color = this.options.fixedColor;
+      } else {
+			    drop.color = self.color1 ? c1 : c2;
+      }
+			drop.position = self.options.direction<0 ? 0: target_length-1;
       drop.timerPosition = self.options.direction<0 ? 0 : -2;
 
 			self.drops[target_name].push( drop);
