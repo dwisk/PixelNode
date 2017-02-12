@@ -1,10 +1,10 @@
 /**
- * PixelNode_Game_EffectQueue 
- * 
- * Animation Game 
- * 
+ * PixelNode_Game_EffectQueue
+ *
+ * Animation Game
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -28,7 +28,7 @@ function PixelNode_Game_EffectQueue(options, effects) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Game_EffectQueue, PixelNode_Game);
 
 // module export
@@ -42,6 +42,7 @@ module.exports = PixelNode_Game_EffectQueue;
 
 PixelNode_Game_EffectQueue.prototype.effects = [];
 PixelNode_Game_EffectQueue.prototype.effect = null;
+PixelNode_Game_EffectQueue.prototype.afterEffect = null;
 PixelNode_Game_EffectQueue.prototype.queueEffect = null;
 PixelNode_Game_EffectQueue.prototype.queueId = 0;
 
@@ -55,6 +56,11 @@ PixelNode_Game_EffectQueue.prototype.init = function() {
 	var self = this;
 
 	self.setEffectByQueueId(0);
+
+  if (self.options.afterEffect) {
+    self.afterEffect = self.getEffectByName(self.options.afterEffect);
+  }
+
 
 	if (global.config.inputMode == "server") {
 		global.pixelNode.data.on("changed_inputs_buttons_button_back", function(paths, value) {
@@ -88,9 +94,10 @@ PixelNode_Game_EffectQueue.prototype.pixelDataOff = function() {
 PixelNode_Game_EffectQueue.prototype.draw = function() {
 	var self = this;
 	self.effect.draw();
+  if (self.afterEffect) self.afterEffect.draw();
 
 	var counter = global.pixelNode.clock.get();
-	
+
 	if (global.config.inputMode == "server" && counter >=(self.queueEffect.duration || 10000)) {
 		console.log("Game Animation: autoplay".grey)
 		self.nextEffect();
@@ -144,4 +151,3 @@ PixelNode_Game_EffectQueue.prototype.setEffectByName = function(name) {
 	console.log(("Changed Effect to " + this.effect.options.name.white + (" (" + this.effect.options.module + ")").grey).grey);
 	global.pixelNode.data.set("gameAnimation.effect", this.effect.options);
 };
-
