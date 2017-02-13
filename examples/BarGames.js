@@ -55,22 +55,10 @@ var testPixelNode = new PixelNode({
     // FONTS ----------------------------------------------------------------------------------------------------
 
 		"fonts": [
-			{
-        name: "8bitwonder",
-        module: "../fonts/8bitwonder"
-      },
-			{
-        name: "commonpixel",
-        module: "../fonts/commonpixel"
-      },
-			{
-        name: "04b3",
-        module: "../fonts/04b3"
-      },
-			{
-        name: "hachicro",
-        module: "../fonts/hachicro"
-      }
+			"../fonts/8bitwonder",
+      "../fonts/04b3",
+			"../fonts/commonpixel",
+  		"../fonts/hachicro"
 		],
 
 
