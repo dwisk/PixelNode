@@ -1,10 +1,10 @@
 /**
- * PixelNode_Effect_Colorset 
- * 
+ * PixelNode_Effect_Colorset
+ *
  * Ported fadecandy example
- * 
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -29,7 +29,7 @@ function PixelNode_Effect_Colorset(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_Colorset, PixelNode_Effect);
 
 // module export
@@ -56,7 +56,7 @@ PixelNode_Effect.prototype.default_options = {
 
 // init effect – override
 PixelNode_Effect_Colorset.prototype.init = function() {
-	console.log("Init Effect Rainbow".grey);
+	console.log("Init Effect ColorSet".grey);
 }
 
 // draw effect on target
@@ -65,16 +65,14 @@ PixelNode_Effect_Colorset.prototype.drawTarget = function(target, output) {
 	var colors = [];
 
 	var i = 0;
-	
+
 	for (var ring = 0; ring < target.length;ring++) {
 		if (output == "rainbow") {
-			self.fillArray(target[ring], self.options.colorset);		    
-			
+			self.fillArray(target[ring], self.options.colorset);
+
 		} else {
-			self.fillColor(target[ring], [0,0,0]);		    
+			self.fillColor(target[ring], [0,0,0]);
 		}
 	}
 
 }
-
-

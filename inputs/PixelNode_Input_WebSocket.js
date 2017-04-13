@@ -137,7 +137,7 @@ PixelNode_Input_WebSocket.prototype.sendStatus = function(paths, value) {
 	this.sockets.forEach(function(socket) {
 		// just send pixels if socket is still connected
 		if(socket.connected) {
-			if (global.pixelNode.data.get("changeTrigger") != socket.id) {
+			if (global.pixelNode.data.fastGet("changeTrigger") != socket.id) {
 				socket.emit('data_changed', {
 					path: paths,
 					data: global.pixelNode.data.get(paths)

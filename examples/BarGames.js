@@ -1,8 +1,8 @@
 /**
  * Example
- * 
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -20,7 +20,7 @@ var PixelNode = require('../index.js');
 var testPixelNode = new PixelNode({
 	config: {
 		"title": "Lightcave Dome",
-		"inputMode": "client",
+		"inputMode": "server",
 
 		"webServer": {
 			"start": false,
@@ -36,17 +36,12 @@ var testPixelNode = new PixelNode({
 				"delay": 25,
 				"dimmer": 1
 			}
-			//,{
-			//	"module": "pixelnode-driver-websimulator",
-			//	"delay": 50,
-			//	"dimmer": 1
-			//}
 		],
 
 
 		// EFFECTS ----------------------------------------------------------------------------------------------------
 
-		"effects": PixelNode.requireFile("LightcaveDome_effects.json"),
+		"effects": PixelNode.requireFile("BarGames_effects.json"),
 		"after_effects": [
 		],
 
@@ -54,82 +49,35 @@ var testPixelNode = new PixelNode({
 		// INPUTS ----------------------------------------------------------------------------------------------------
 
 		"inputs": [
-			{
-				"name": "socketclient",
-				"module": "../inputs/PixelNode_Input_WebSocket_Client.js",
-				"server": "http://192.168.3.56:3001"
-			},
-			{
-				"name": "rgb",
-				"module": "../inputs/PixelNode_Input_TouchRGB"
-			}
-
-
 		],
-		
+
+
+    // FONTS ----------------------------------------------------------------------------------------------------
+
+		"fonts": [
+			"../fonts/8bitwonder",
+      "../fonts/04b3",
+			"../fonts/commonpixel",
+  		"../fonts/hachicro"
+		],
 
 
 		// GAMES  ----------------------------------------------------------------------------------------------------
-		"games": PixelNode.requireFile("Lightcave_Games.json"),
+		"games": PixelNode.requireFile("BarGames_Games.json"),
 
-		"future_games": [
-			{
-				"name": "FourRows",
-				"module": "../games/PixelNode_Game_FourRows",
-				"mappings": {
-					"color1": "player1.rings",
-					"color2": "player2.rings",
-					"canvas": "domePixels.strips"
-				},
-				"inputs": {
-					"color_left": "inputs.rgb.color_left",
-					"color_right": "inputs.rgb.color_right",
-					"touches": "touch.touches"
-				}
-			},
-			{
-				"name": "off",
-				"title": "OFF",
-				"module": "../games/PixelNode_Game_Animation",
-				"mappings": {
-					"color1": "player1.rings",
-					"color2": "player2.rings",
-					"canvas": "domePixels.strips"
-				},
-				"inputs": {
-					"color_left": "inputs.rgb.color_left",
-					"color_right": "inputs.rgb.color_right",
-					"touches": "touch.touches"
-				},
-				"queue": [
-					{ "effect": "Off", "duration": 100000 }
-				],
-				"effects": [
-					
-					{
-						"name": "Off",
-						"module": "../../effects/PixelNode_Effect_Off",
-						"outputs": [
-							{
-								"name": "ray",
-								"targets": [
-									"domePixels.rings",
-									"inside.rings"
-								]
-							}
-						]
-					}
-				]
-			}	
-		]
 
 	},
 
-	mapping: "LightcaveDome_mapping.json"
+	mapping: "BarGames_mapping.json"
 });
 
 
 
+// testPixelNode.gameManager.on("drawGame_after", function() {
+//
+// 	// show rainbow for player 1 if button is pressed
+// 	testPixelNode.gameManager.getEffectByName("Off").draw();
+// });
 
 /* Check for autooff
  * -------------------------------------------------------------------------------------------------------------------- */
@@ -143,5 +91,5 @@ var testPixelNode = new PixelNode({
 //	} else {
 //		global.pixelNode.data.set("games.force_off", true);
 //	}
-//	
+//
 //},1000*1);

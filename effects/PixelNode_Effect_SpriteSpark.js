@@ -1,10 +1,8 @@
 /**
- * PixelNode_Effect_SpriteSpark 
- * 
- * Rainbow Effect (TOOD: Performance)
- * 
+ * PixelNode_Effect_SpriteSpark
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -30,7 +28,7 @@ function PixelNode_Effect_SpriteSpark(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_SpriteSpark, PixelNode_Effect);
 
 // module export
@@ -63,30 +61,30 @@ module.exports = PixelNode_Effect_SpriteSpark;
 
 // init effect – override
 PixelNode_Effect_SpriteSpark.prototype.init = function() {
-	console.log("Init Effect Rainbow".grey);
+	console.log("Init Effect Sprite Spark".grey);
 }
 
 // draw effect on target
 PixelNode_Effect_SpriteSpark.prototype.drawTarget = function(target, output) {
 	var self = this;
-	var c, c1, c2; 
+	var c, c1, c2;
 
 	// get color 1
-	c1 = self.getColor("inputs.rgb.color_right", {
+	c1 = self.getColor(["inputs","rgb","color_right"], {
 		offset: 90
 	});
-	c2 = self.getColor("inputs.rgb.color_left");
-	
+	c2 = self.getColor(["inputs","rgb","color_left"]);
+
 	self.spritePrototype.color1 = c1;
 	self.spritePrototype.color2 = c2;
 
 	// get color 1
-	cc1 = self.getColor("inputs.rgb.color_right", {
+	cc1 = self.getColor(["inputs","rgb","color_right"], {
 		offset: 90,
 		dimmer: 0.25
 	});
 	// get color 2
-	cc2 = self.getColor("inputs.rgb.color_left", {
+	cc2 = self.getColor(["inputs","rgb","color_left"], {
 		dimmer: 0.25
 	});
 
@@ -96,20 +94,6 @@ PixelNode_Effect_SpriteSpark.prototype.drawTarget = function(target, output) {
 		onetwo = ringoffseted / target.length < 0.5;
 
 		self.fillColor(target[ring],  onetwo ? cc2 : cc1);
-
-
-		//for (var pixel = target[ring].length; pixel >= 0 ; pixel--) {
-		//	var dimmer = 1;
-		//	sprite = _.find(self.sprites, {index:ring, position:pixel});
-//
-		//	if (sprite != undefined) {
-		//		color = onetwo ? sprite.color2 : sprite.color1;
-		//		if (pixel > 1) target[ring][pixel-1] = self.dimmColor(color, 0.75);
-		//		if (pixel > 2) target[ring][pixel-2] = self.dimmColor(color, 0.5);
-		//	}
-		//	target[ring][pixel] = color;
-//
-		//}
 	}
 
 	for (var i = 0; i < self.sprites.length; i++) {
@@ -124,7 +108,7 @@ PixelNode_Effect_SpriteSpark.prototype.drawTarget = function(target, output) {
 			ringoffseted = sprite.index -1;
 			if ( ringoffseted < 0 ) ringoffseted = ringoffseted + target.length;
 			onetwo = ringoffseted / target.length < 0.5;
-			
+
 			color = onetwo ? sprite.color2 : sprite.color1;
 			target[sprite.index][sprite.position] = color;
 			if (sprite.position > 1) target[sprite.index][sprite.position-1] = self.dimmColor(color, 0.75);
@@ -137,5 +121,3 @@ PixelNode_Effect_SpriteSpark.prototype.drawTarget = function(target, output) {
 PixelNode_Effect_SpriteSpark.prototype.reset = function() {
 	this.sprites = [];
 }
-
-

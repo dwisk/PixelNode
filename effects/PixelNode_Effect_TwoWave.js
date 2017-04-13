@@ -1,10 +1,10 @@
 /**
- * PixelNode_Effect_Wave 
- * 
+ * PixelNode_Effect_Wave
+ *
  * Ported fadecandy example
- * 
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -30,7 +30,7 @@ function PixelNode_Effect_Wave(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_Wave, PixelNode_Effect);
 
 // module export
@@ -54,7 +54,7 @@ module.exports = PixelNode_Effect_Wave;
 
 // init effect – override
 PixelNode_Effect_Wave.prototype.init = function() {
-	console.log("Init Effect RedBlue".grey);
+	console.log("Init Effect TwoWave".grey);
 }
 
 // draw effect on target
@@ -64,10 +64,10 @@ PixelNode_Effect_Wave.prototype.drawTarget = function(target) {
 	var self = this;
 
 	// get color 1
-	var c1 = self.getColor("inputs.rgb.color_left");
+	var c1 = self.getColor(["inputs","rgb","color_left"]);
 
 	// get color 2
-	var c2 = self.getColor("inputs.rgb.color_right", {
+	var c2 = self.getColor(["inputs","rgb","color_right"], {
 		dimmer: 0.5,
 		offset: 90
 	});
@@ -79,7 +79,7 @@ PixelNode_Effect_Wave.prototype.drawTarget = function(target) {
 		for (var pixel = 0; pixel < target[ring].length; pixel++) {
 			var wave = base + height * Math.sin(t);
 
-			if (global.pixelNode.data.get(["inputs","buttons","btn_"+ring])) {
+			if (global.pixelNode.data.fastGet(["inputs","buttons","btn_"+ring])) {
 				c = c1;
 			} else if (pixel <= wave) {
 				c = self.options.waveTop ? c2: c1;
@@ -88,9 +88,7 @@ PixelNode_Effect_Wave.prototype.drawTarget = function(target) {
 			}
 
 			target[ring][pixel] = c;
-		}			    
+		}
 	}
 
 }
-
-

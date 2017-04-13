@@ -1,0 +1,208 @@
+[
+  {
+    "name": "Spielmaschine",
+    "default": true,
+    "title": "Spielmaschine",
+    "icon": "entypo/adjust",
+    "module": "../games/PixelNode_Game_EffectQueue",
+    "inputs": {
+      "color_left": "inputs.rgb.color_left",
+      "color_right": "inputs.rgb.color_right",
+      "touches": "touch.touches"
+    },
+    "afterEffect": "Title",
+    "queue": [
+      { "effect": "ColouredRain", "duration": 5000 },
+      { "effect": "Fire", "duration": 5000 },
+      { "effect": "Rain", "duration": 5000 },
+      { "effect": "RedBlue", "duration": 5000 },
+      { "effect": "Glitter", "duration": 5000 }
+    ],
+    "queue2": [
+      { "effect": "Rain", "duration": 10000 },
+      { "effect": "Wave", "duration": 10000 },
+      { "effect": "Fire", "duration": 10000 },
+      { "effect": "Glitter", "duration": 10000 },
+      { "effect": "RainBow", "duration": 10000 },
+      { "effect": "Rain", "duration": 10000 },
+      { "effect": "Ray", "duration": 10000 },
+      { "effect": "RedBlue", "duration": 10000 },
+      { "effect": "Wall", "duration": 10000 },
+      { "effect": "Clock", "duration": 10000 }
+
+
+    ]
+  },
+  {
+    "name": "Fire",
+    "title": "Fire",
+    "icon": "openiconic/fire",
+    "module": "../games/PixelNode_Game_Intensity",
+    "effect": "Fire",
+    "inputs": {
+      "color_left": "inputs.rgb.color_left",
+      "color_right": "inputs.rgb.color_right",
+      "touches": "touch.touches"
+    },
+    "speed": 0.0001,
+    "touch_input": true,
+    "color_input": false
+  },
+
+	{
+		"name": "ColouredRain",
+		"title": "Coloured Rain",
+		"icon": "entypo/water",
+		"module": "../games/PixelNode_Game_Intensity",
+		"effect": "ColouredRain",
+		"inputs": {
+			"color_left": "inputs.rgb.color_left",
+			"color_right": "inputs.rgb.color_right",
+			"touches": "touch.touches"
+		},
+		"speed": 0.1,
+		"touch_input": true,
+		"color_input": true
+	},
+
+
+	{
+		"name": "glitter",
+		"default": true,
+		"title": "Glitter",
+		"icon": "entypo/star-outlined",
+		"module": "../games/PixelNode_Game_EffectQueue",
+		"inputs": {
+			"color_left": "inputs.rgb.color_left",
+			"color_right": "inputs.rgb.color_right",
+			"touches": "touch.touches"
+		},
+		"touch_input": false,
+		"color_input": true,
+		"queue": [
+			{ "effect": "Glitter", "duration": 30000000 }
+		]
+	},
+	{
+		"name": "SpriteSpark",
+		"title": "Shooting Star",
+		"icon": "entypo/paper-plane",
+		"module": "../games/PixelNode_Game_Sprites",
+		"effect": "SpriteSpark",
+		"inputs": {
+			"color_left": "inputs.rgb.color_left",
+			"color_right": "inputs.rgb.color_right",
+			"touches": "touch.touches"
+		},
+		"speed": 0.01,
+		"touch_input": true,
+		"color_input": true
+	},
+{
+	"name": "Rain",
+	"title": "Rain",
+	"icon": "entypo/water",
+	"module": "../games/PixelNode_Game_Intensity",
+	"effect": "Rain",
+	"inputs": {
+		"color_left": "inputs.rgb.color_left",
+		"color_right": "inputs.rgb.color_right",
+		"touches": "touch.touches"
+	},
+	"speed": 0.1,
+	"touch_input": true,
+	"color_input": false
+},
+
+{
+	"name": "SpriteGrow",
+	"title": "Little Painter",
+	"icon": "openiconic/brush",
+	"module": "../games/PixelNode_Game_Sprites",
+	"effect": "SpriteGrow",
+	"inputs": {
+		"color_left": "inputs.rgb.color_left",
+		"color_right": "inputs.rgb.color_right",
+		"touches": "touch.touches"
+	},
+	"speed": 0.01,
+	"touch_input": true,
+	"color_input": true
+},{
+	"name": "2colored",
+	"default": true,
+	"title": "Two colored",
+	"icon": "entypo/adjust",
+	"module": "../games/PixelNode_Game_EffectQueue",
+	"inputs": {
+		"color_left": "inputs.rgb.color_left",
+		"color_right": "inputs.rgb.color_right",
+		"touches": "touch.touches"
+	},
+	"touch_input": true,
+	"color_input": true,
+	"queue": [
+		{ "effect": "Color", "duration": 30000 },
+		{ "effect": "Ray", "duration": 30000 },
+		{ "effect": "Wall", "duration": 30000 },
+		{ "effect": "Wave", "duration": 30000 }
+	]
+},
+
+
+	{
+		"name": "rainbows",
+		"title": "Rainbows and more",
+		"icon": "custom/rainbow",
+		"module": "../games/PixelNode_Game_EffectQueue",
+		"inputs": {
+			"color_left": "inputs.rgb.color_left",
+			"color_right": "inputs.rgb.color_right",
+			"touches": "touch.touches"
+		},
+		"touch_input": false,
+		"color_input": false,
+		"queue": [
+			{ "effect": "RainBow", "duration": 30000 },
+			{ "effect": "RainBowRings", "duration": 30000 },
+			{ "effect": "RedBlue", "duration": 30000 }
+		]
+	},
+
+	{
+		"name": "wave",
+		"default": true,
+		"title": "Wave",
+		"icon": "entypo/air",
+		"module": "../games/PixelNode_Game_EffectQueue",
+		"inputs": {
+			"color_left": "inputs.rgb.color_left",
+			"color_right": "inputs.rgb.color_right",
+			"touches": "touch.touches"
+		},
+		"touch_input": true,
+		"color_input": true,
+		"queue": [
+			{ "effect": "Wave", "duration": 30000000 }
+		]
+	},
+	{
+		"name": "clock",
+		"default": true,
+		"title": "Clock",
+		"icon": "openiconic/clock",
+		"module": "../games/PixelNode_Game_EffectQueue",
+		"inputs": {
+			"color_left": "inputs.rgb.color_left",
+			"color_right": "inputs.rgb.color_right",
+			"touches": "touch.touches"
+		},
+		"touch_input": true,
+		"color_input": true,
+		"queue": [
+			{ "effect": "Clock", "duration": 30000000 }
+		]
+	}
+
+
+]

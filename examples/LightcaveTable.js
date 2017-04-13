@@ -40,7 +40,7 @@ var testPixelNode = new PixelNode({
 			"module": "pixelnode-driver-fadecandy",
 			"address": "127.0.0.1",
 			"port": 7890,
-			"delay": 50,
+			"delay": 25,
 			"dimmer": 1
 			}
 		],

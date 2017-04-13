@@ -1,10 +1,10 @@
 /**
- * PixelNode_Effect_TwoGlitter 
- * 
+ * PixelNode_Effect_TwoGlitter
+ *
  * Ported fadecandy example
- * 
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -30,7 +30,7 @@ function PixelNode_Effect_TwoGlitter(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_TwoGlitter, PixelNode_Effect);
 
 // module export
@@ -47,28 +47,29 @@ module.exports = PixelNode_Effect_TwoGlitter;
 
 // init effect – override
 PixelNode_Effect_TwoGlitter.prototype.init = function() {
-	console.log("Init Effect Glitter".grey);
+	console.log("Init Effect TwoGlitter".grey);
 }
 
 // draw effect on target
 PixelNode_Effect_TwoGlitter.prototype.drawTarget = function(target) {
 	var self = this;
 	var ran;
-	var c, c1, c2; 
+	var c, c1, c2;
 
 	// get color 1
-	c1 = self.getColor("inputs.rgb.color_left");
+	c1 = self.getColor(["inputs","rgb","color_left"]);
 
 	// get color 2
-	c2 = self.getColor("inputs.rgb.color_right", {
+	c2 = self.getColor(["inputs","rgb","color_right"], {
 		dimmer: 0.5,
 		offset: 90
 	});
 
 
 	var intensity;
-	if (global.pixelNode.data.get("inputs.intensity") != null) {
-		intensity = global.pixelNode.data.get("inputs.intensity")/2.5 + 0.6;
+	var rawIntensity = global.pixelNode.data.fastGet(["inputs","intensity"]);
+	if (rawIntensity != null) {
+		intensity = rawIntensity/2.5 + 0.6;
 	} else {
 		intensity = 0.6;
 	}
@@ -76,17 +77,16 @@ PixelNode_Effect_TwoGlitter.prototype.drawTarget = function(target) {
 //	console.log(intensity);
 
 	for (var ring = 0; ring < target.length;ring++) {
-		
+
 		for (var pixel = 0; pixel < target[ring].length; pixel++) {
 			ran = Math.round(Math.random()*intensity/1);
-			
-			if (ran == 1 || global.pixelNode.data.get(["inputs","touch","touches",pixel])) {
+
+			if (ran == 1 || global.pixelNode.data.fastGet(["inputs","touch","touches",pixel])) {
 				target[ring][pixel] = c1
 			} else {
 				target[ring][pixel] = c2
 			}
-		}			    
+		}
 	}
 
 }
-

@@ -1,0 +1,75 @@
+[
+	{
+		"name": "left_leg",
+		"rings": [
+			{"px": [[0,14,true]]},
+			{"px": [[0,13,true]]},
+			{"px": [[0,12,true]]},
+			{"px": [[0,11,true]]},
+			{"px": [[0,10,true]]},
+			{"px": [[0,9,true]]},
+			{"px": [[0,8,true]]},
+			{"px": [[0,7,true]]},
+			{"px": [[0,6,true]]},
+			{"px": [[0,5,true]]},
+			{"px": [[0,4,true]]},
+			{"px": [[0,3,true]]},
+			{"px": [[0,2,true]]},
+			{"px": [[0,1,true]]},
+			{"px": [[0,0,true]]}
+		],
+		"strips": [
+				{"px": [ [0,14,true], [0,13,true],	[0,12,true],	[0,11,true],	[0,10,true],	[0,9,true],	[0,8,true],	[0,7,true],	[0,6,true],	[0,5,true],	[0,4,true],	[0,3,true],	[0,2,true],	[0,1,true],	[0,0,true] 
+			]}
+		]
+	},
+	{
+		"name": "right_leg",
+		"rings": [
+			{"px": [[0,15,true]]},
+			{"px": [[0,16,true]]},
+			{"px": [[0,17,true]]},
+			{"px": [[0,18,true]]},
+			{"px": [[0,19,true]]},
+			{"px": [[0,20,true]]},
+			{"px": [[0,21,true]]},
+			{"px": [[0,22,true]]},
+			{"px": [[0,23,true]]},
+			{"px": [[0,24,true]]},
+			{"px": [[0,25,true]]},
+			{"px": [[0,26,true]]},
+			{"px": [[0,27,true]]},
+			{"px": [[0,28,true]]},
+			{"px": [[0,29,true]]}
+		],
+		"strips": [
+			{"px": [ 
+				[0,15,true], [0,16,true],	[0,17,true],	[0,18,true],	[0,19,true],	[0,20,true],	[0,21,true],	[0,22,true],	[0,23,true],	[0,24,true],	[0,25,true],	[0,26,true],	[0,27,true],	[0,28,true],	[0,29,true]
+			]}
+		]
+	},
+	{
+		"name": "head",
+		"rings": [
+			{"px": [[0,42,true],[1,99,true],[1,99,true],[1,99,true],[1,99,true],[1,99,true],[1,99,true],[1,99,true],[1,99,true],[1,99,true],[1,99,true],[1,99,true]]},
+			{"px": [[1,99,true],[0,43,true],[1,99,true],[0,44,true],[1,99,true],[0,45,true],[1,99,true],[0,46,true],[1,99,true],[0,47,true],[1,99,true],[0,48,true]]},
+			{"px": [[0,30,true],[0,31,true],[0,32,true],[0,33,true],[0,34,true],[0,35,true],[0,36,true],[0,37,true],[0,38,true],[0,39,true],[0,40,true],[0,41,true]]}
+		],
+		"strips": [
+			{"px": [ [0,30,true],	[1,99,true], [0,42,true]]},
+			{"px": [ [0,31,true],	[0,43,true], [1,99,true]]},
+			{"px": [ [0,32,true],	[1,99,true], [1,99,true]]},
+			{"px": [ [0,33,true],	[0,44,true], [1,99,true]]},
+			{"px": [ [0,34,true],	[1,99,true], [1,99,true]]},
+			{"px": [ [0,35,true],	[0,45,true], [1,99,true]]},
+			{"px": [ [0,36,true],	[1,99,true], [1,99,true]]},
+			{"px": [ [0,37,true],	[0,46,true], [1,99,true]]},
+			{"px": [ [0,38,true],	[1,99,true], [1,99,true]]},
+			{"px": [ [0,39,true],	[0,47,true], [1,99,true]]},
+			{"px": [ [0,40,true],	[1,99,true], [1,99,true]]},
+			{"px": [ [0,41,true],	[0,48,true], [1,99,true]]}
+		]
+	}
+]
+
+

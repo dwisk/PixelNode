@@ -40,7 +40,7 @@
 		"color_right": "inputs.rgb.color_right",
 		"touches": "touch.touches"
 	},
-	"touch_input": true,
+	"touch_input": false,
 	"color_input": true,
 	"queue": [
 		{ "effect": "Glitter", "duration": 30000000 }
@@ -109,8 +109,8 @@
 		"touch_input": false,
 		"color_input": false,
 		"queue": [
-			{ "effect": "RainBowRings", "duration": 30000 },
 			{ "effect": "RainBow", "duration": 30000 },
+			{ "effect": "RainBowRings", "duration": 30000 },
 			{ "effect": "RedBlue", "duration": 30000 }
 		]
 	},

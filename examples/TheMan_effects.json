@@ -1,0 +1,177 @@
+[
+	{
+		"name": "Clock",
+		"module": "../effects/PixelNode_Effect_TwoClock",
+		"outputs": [
+			{
+				"name": "clock",
+				"targets": [
+					"left_leg.rings",
+					"right_leg.rings",
+					"head.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "Wall",
+		"module": "../effects/PixelNode_Effect_TwoWall",
+		"outputs": [
+			{
+				"name": "ray",
+				"targets": [
+					"left_leg.strips",
+					"right_leg.strips",
+					"head.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "Color",
+		"module": "../effects/PixelNode_Effect_TwoColor",
+		"outputs": [
+			{
+				"name": "both",
+				"targets": [
+					"left_leg.strips",
+					"right_leg.strips",
+					"head.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "Ray",
+		"module": "../effects/PixelNode_Effect_TwoRay",
+		"outputs": [
+			{
+				"name": "ray",
+				"targets": [
+					"left_leg.strips",
+					"right_leg.strips",
+					"head.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "Wave",
+		"module": "../effects/PixelNode_Effect_TwoWave",
+		"outputs": [
+			{
+				"name": "ray",
+				"targets": [
+					"left_leg.strips",
+					"right_leg.strips",
+					"head.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "Glitter",
+		"module": "../effects/PixelNode_Effect_TwoGlitter",
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"left_leg.strips",
+					"right_leg.strips",
+					"head.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "RainBow",
+		"module": "../effects/PixelNode_Effect_Rainbow",
+		"scale": 10,
+		"speed": 50,
+		"outputs": [
+			{
+				"name": "rainbow",
+				"targets": [
+					"left_leg.strips",
+					"right_leg.strips",
+					"head.rings"
+				]
+			}
+		]
+	},
+	{
+		"name": "RainBowRings",
+		"module": "../effects/PixelNode_Effect_Rainbow",
+		"scale": 1,
+		"speed": 100,
+		"outputs": [
+			{
+				"name": "rainbow",
+				"targets": [
+					"left_leg.strips",
+					"right_leg.strips",
+					"head.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "RedBlue",
+		"module": "../effects/PixelNode_Effect_RedBlue",
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"left_leg.strips",
+					"right_leg.strips",
+					"head.strips"
+				]
+			}
+		]
+	},	{
+		"name": "Fire",
+		"module": "../effects/PixelNode_Effect_Fire",
+		"speed": 0,
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"left_leg.strips",
+					"right_leg.strips",
+					"head.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "ColouredRain",
+		"module": "../effects/PixelNode_Effect_ColouredRain",
+		"scale": 0,
+		"speed": 0,
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"left_leg.strips",
+					"right_leg.strips",
+					"head.strips"
+				]
+			}
+		]
+	},
+	{
+		"name": "Off",
+		"module": "../effects/PixelNode_Effect_Off",
+		"outputs": [
+			{
+				"name": "glow",
+				"targets": [
+					"left_leg.strips"				,
+					"left_leg.rightps"				,
+					"left_leg.head"
+				]
+			}
+		]
+	}
+
+]

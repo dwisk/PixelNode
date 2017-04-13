@@ -8,35 +8,8 @@ block foot
 	script(src='/simulator.js')
 
 block body
-	h1 Simulator
 	div(ng-controller="SimulatorCtrl" class="pixels")
 		div(ng-repeat="map in mapping")
-			h2 {{map.name}} 
 			table(class="pixelPreview")
 				tr(ng-repeat="strip in map.rings")
-					td(ng-repeat="pixel in strip.px" style="background-color: {{getColor(pixel)}};")
-
-	div(ng-controller="SimulatorCtrl2" class="container")
-		h2 {{effect.name}}
-		p autoplay
-			input(type='checkbox' ng-model='autoplay')
-		p force_off
-			input(type='checkbox' ng-model='force_off')
-		p buttons
-			input(type='checkbox' ng-model='inputs.button1') 
-			input(type='checkbox' ng-model='inputs.button2')
-			input(type='checkbox' ng-model='inputs.button3')
-		p Touches
-			input(type='checkbox' ng-model='inputs.touches[0]') 
-			input(type='checkbox' ng-model='inputs.touches[1]') 
-			input(type='checkbox' ng-model='inputs.touches[2]')
-			input(type='checkbox' ng-model='inputs.touches[3]')
-			input(type='checkbox' ng-model='inputs.touches[4]')
-			input(type='checkbox' ng-model='inputs.touches[5]')
-			input(type='checkbox' ng-model='inputs.touches[6]')
-			input(type='checkbox' ng-model='inputs.touches[7]')
-			input(type='checkbox' ng-model='inputs.touches[8]')
-			input(type='checkbox' ng-model='inputs.touches[9]')
-			input(type='checkbox' ng-model='inputs.touches[10]')
-			input(type='checkbox' ng-model='inputs.touches[11]')
-
+					td(ng-repeat="pixel in strip.px" style="background-color: {{getColor(pixel,$index)}};")

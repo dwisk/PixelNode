@@ -1,17 +1,19 @@
 /**
  * Example
- * 
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
 
+process.env.NODE_ENV = 'production';
 
 /* Includes
  * -------------------------------------------------------------------------------------------------------------------- */
 
 var PixelNode = require('../index.js');
+//var b = require('bonescript');
 
 
 /* Config
@@ -19,58 +21,46 @@ var PixelNode = require('../index.js');
 
 var testPixelNode = new PixelNode({
 	config: {
-		"title": "Lightcave Dome",
-		"inputMode": "client",
+		"title": "Lightcave Table",
+		"inputMode": "server",
 
 		"webServer": {
 			"start": false,
 			"port": 3001
 		},
 
+		"gameManager": {
+			"idletime": 20 * 60
+		},
 
 		// DRIVERS ----------------------------------------------------------------------------------------------------
 
 		"pixelDrivers": [
-			{
-				"module": "pixelnode-driver-pixelpusher",
-				"delay": 25,
-				"dimmer": 1
+		{
+			"module": "pixelnode-driver-fadecandy",
+			"address": "127.0.0.1",
+			"port": 7890,
+			"delay": 50,
+			"dimmer": 0.5
 			}
-			//,{
-			//	"module": "pixelnode-driver-websimulator",
-			//	"delay": 50,
-			//	"dimmer": 1
-			//}
 		],
 
 
 		// EFFECTS ----------------------------------------------------------------------------------------------------
 
-		"effects": PixelNode.requireFile("LightcaveDome_effects.json"),
+		"effects": PixelNode.requireFile("TheMan_effects.json"),
 		"after_effects": [
 		],
 
 
 		// INPUTS ----------------------------------------------------------------------------------------------------
 
-		"inputs": [
-			{
-				"name": "socketclient",
-				"module": "../inputs/PixelNode_Input_WebSocket_Client.js",
-				"server": "http://192.168.3.56:3001"
-			},
-			{
-				"name": "rgb",
-				"module": "../inputs/PixelNode_Input_TouchRGB"
-			}
-
-
-		],
-		
+		//"inputs": PixelNode.requireFile("LightcaveTable_inputs.json"),
+		inputs: [],
 
 
 		// GAMES  ----------------------------------------------------------------------------------------------------
-		"games": PixelNode.requireFile("Lightcave_Games.json"),
+		"games": PixelNode.requireFile("TheMan_Games.json"),
 
 		"future_games": [
 			{
@@ -105,7 +95,7 @@ var testPixelNode = new PixelNode({
 					{ "effect": "Off", "duration": 100000 }
 				],
 				"effects": [
-					
+
 					{
 						"name": "Off",
 						"module": "../../effects/PixelNode_Effect_Off",
@@ -120,13 +110,18 @@ var testPixelNode = new PixelNode({
 						]
 					}
 				]
-			}	
+			}
 		]
 
 	},
 
-	mapping: "LightcaveDome_mapping.json"
+	mapping: "TheMan_mapping.json"
 });
+
+
+
+/* Events
+ * -------------------------------------------------------------------------------------------------------------------- */
 
 
 
@@ -134,14 +129,15 @@ var testPixelNode = new PixelNode({
 /* Check for autooff
  * -------------------------------------------------------------------------------------------------------------------- */
 
-//setInterval(function() {
-//	time = new Date();
-//	hour = time.getHours();
+// setInterval(function() {
+// 	time = new Date();
+// 	hour = time.getHours();
 //
-//	if (((hour >= 20) || (hour < 7))) {
-//		global.pixelNode.data.set("games.force_off", false);
-//	} else {
-//		global.pixelNode.data.set("games.force_off", true);
-//	}
-//	
-//},1000*1);
+// 	if (((hour >= 20) || (hour < 7))) {
+// 		global.pixelNode.data.set("games.force_off", false);
+// 	} else {
+// 		global.pixelNode.data.set("games.force_off", true);
+// 	}
+//
+// },1000*1);
+//

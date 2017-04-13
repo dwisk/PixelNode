@@ -1,10 +1,8 @@
 /**
- * PixelNode_Effect_White 
- * 
- * Rainbow Effect (TOOD: Performance)
- * 
+ * PixelNode_Effect_White
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -29,7 +27,7 @@ function PixelNode_Effect_White(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_White, PixelNode_Effect);
 
 // module export
@@ -47,17 +45,15 @@ module.exports = PixelNode_Effect_White;
 
 // init effect – override
 PixelNode_Effect_White.prototype.init = function() {
-	console.log("Init Effect Rainbow".grey);
+	console.log("Init Effect White".grey);
 }
 
 // draw effect on target
 PixelNode_Effect_White.prototype.drawTarget = function(target, output) {
 	var self = this;
-	
+
 	for (var ring = 0; ring < target.length;ring++) {
-		self.fillColor(target[ring], [255,255,255]);		    
+		self.fillColor(target[ring], [255,255,255]);
 	}
 
 }
-
-

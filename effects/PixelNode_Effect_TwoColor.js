@@ -1,10 +1,8 @@
 /**
- * PixelNode_Effect_TwoColor 
- * 
- * Rainbow Effect (TOOD: Performance)
- * 
+ * PixelNode_Effect_TwoColor
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -28,7 +26,7 @@ function PixelNode_Effect_TwoColor(options,pixelData) {
   self.public_dir = __dirname;
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Effect_TwoColor, PixelNode_Effect);
 
 // module export
@@ -52,7 +50,7 @@ PixelNode_Effect_TwoColor.prototype.hueSelect = 0;
 
 // init effect – override
 PixelNode_Effect_TwoColor.prototype.init = function() {
-	console.log("Init Effect Rainbow".grey);
+	console.log("Init Effect TwoColor".grey);
 }
 
 
@@ -62,13 +60,13 @@ var lastTouches = [];
 PixelNode_Effect_TwoColor.prototype.drawTarget = function(target, output) {
 	var self = this;
 
-	var c, c1, c2; 
+	var c, c1, c2;
 
 	// get color 1
-	c1 = self.getColor("inputs.rgb.color_left");
+	c1 = self.getColor(["inputs","rgb","color_left"]);
 
 	// get color 2
-	c2 = self.getColor("inputs.rgb.color_right", {
+	c2 = self.getColor(["inputs","rgb","color_right"], {
 		dimmer: 0.5,
 		offset: 90
 	});
@@ -83,7 +81,7 @@ PixelNode_Effect_TwoColor.prototype.drawTarget = function(target, output) {
 			} else if (output == "color2") {
 				target[ring][pixel] = c2;
 			} else if (output == "both") {
-				if (global.pixelNode.data.get(["inputs","buttons","btn_"+ring])) {
+				if (global.pixelNode.data.fastGet(["inputs","buttons","btn_"+ring])) {
 					target[ring][pixel] = c1;
 				} else {
 					target[ring][pixel] = c2;
@@ -91,7 +89,6 @@ PixelNode_Effect_TwoColor.prototype.drawTarget = function(target, output) {
 			} else {
 				target[ring][pixel] = [0,0,0];
 			}
-		}			    
+		}
 	}
 }
-
