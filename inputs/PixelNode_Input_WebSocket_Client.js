@@ -1,10 +1,10 @@
 /**
- * PixelNode_Input_WebSocket_Client 
- * 
+ * PixelNode_Input_WebSocket_Client
+ *
  * Ported fadecandy example
- * 
+ *
  * --------------------------------------------------------------------------------------------------------------------
- * 
+ *
  * @author Amely Kling <mail@dwi.sk>
  *
  */
@@ -30,7 +30,7 @@ function PixelNode_Input_WebSocket_Client(options,pixelData) {
   this.className = "PixelNode_Input_WebSocket_Client";
 }
 
-// class inheritance 
+// class inheritance
 util.inherits(PixelNode_Input_WebSocket_Client, PixelNode_Input);
 
 // module export
@@ -54,7 +54,7 @@ PixelNode_Input_WebSocket_Client.prototype.status_interval = 0;
 PixelNode_Input_WebSocket_Client.prototype.init = function() {
 	// start
 	console.log("Init Input WebSocket Client".grey);
-	
+
 	this.initSockets();
 }
 
@@ -74,10 +74,10 @@ PixelNode_Input_WebSocket_Client.prototype.initSockets = function() {
 		console.log('WebSocket Connected!'.green);
 	});
 
-	// event listener for initialization 
+	// event listener for initialization
 	socket.on('data_init', function (data) {
 	  console.log("Websocket Init");
-	  
+
 	  // save data
 	  global.pixelNode.data.replace(_.extend(data.data,{clockSet: data.timestamp}));
 
@@ -86,12 +86,12 @@ PixelNode_Input_WebSocket_Client.prototype.initSockets = function() {
 	});
 
 	// event listener for new data
-	socket.on('data_changed', function (data) {	  
-	  console.log("Websocket: data changed", data.path, data.data);
+	socket.on('data_changed', function (data) {
+	  //console.log("Websocket: data changed", data.path, data.data);
 
-	  global.pixelNode.data.set(data.path, data.data);
+	  global.pixelNode.data.set(data.path, data.data, true);
 	  // replace data
 	  //global.pixelNode.data.replace(data);
 	});
-	
+
 }
