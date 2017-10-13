@@ -67,7 +67,7 @@ PixelNode_Effect_TwoRay.prototype.drawTarget = function(target, output_name) {
 	// draw effect
 	for (var ring = 0; ring < target.length;ring++) {
 		// console.log(ring,Math.round(self.counter/10/target.length) % 12);
-		if(ring,Math.round(self.counter/10/target.length) % target.length == ring) {
+		if(ring,Math.round(self.counter/100/target.length) % target.length == ring) {
 			c = c1;
 		} else if (global.pixelNode.data.fastGet(["inputs","buttons","btn_"+ring])) {
 			c = c1;
