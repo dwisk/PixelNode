@@ -1,0 +1,11 @@
+.pixelPreview {
+  border-collapse: separate;
+  border-spacing: 1px;
+  width: 100%;
+  height: 100%;
+  background: #333;
+  position: absolute;
+}
+.pixels {
+  background-color: #333;
+}

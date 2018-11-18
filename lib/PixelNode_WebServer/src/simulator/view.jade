@@ -1,0 +1,15 @@
+extends /layout/basic
+
+block head
+	link(rel='stylesheet', href='/simulator.css')
+
+block foot
+	script(src='/socket.io/socket.io.js')
+	script(src='/simulator.js')
+
+block body
+	div(ng-controller="SimulatorCtrl" class="pixels")
+		div(ng-repeat="map in mapping")
+			table(class="pixelPreview")
+				tr(ng-repeat="strip in map.rings")
+					td(ng-repeat="pixel in strip.px" style="background-color: {{getColor(pixel,$index)}};")

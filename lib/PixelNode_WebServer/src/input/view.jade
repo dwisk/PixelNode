@@ -1,0 +1,32 @@
+extends /layout/basic
+
+block head
+	link(rel='stylesheet', href='/input.css')
+
+block foot
+	script(src='/socket.io/socket.io.js')
+	script(src='/input.js')
+
+block body
+	div(ng-controller="SimulatorCtrl" class="container")
+		div(class='slider col-xs-12 responsive')
+			slick(infinite="true", 
+				slides-to-show="3",
+				slides-to-scroll="1",
+				arrows="false",
+				swipe="false",
+				center-mode="true",
+				current-index="listId",
+				focus-on-select="true",
+				center-padding="0px",
+				padding="10px")
+
+				each game in config.games
+					div
+						div.icon
+							!= templateRender('../lib/PixelNode_WebServer/public/icons/'+game.icon+'.svg', local)
+							//!= templateRender('/Users/atrox/Documents/_remote_projects/PixelNode/lib/PixelNode_WebServer/src/simulator/view.jade', local)
+
+		h2 {{game.title}}
+		//h3 {{game.subtitle}}
+		
