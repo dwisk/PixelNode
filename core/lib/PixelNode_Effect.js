@@ -12,14 +12,12 @@
 /* Node Inclues
  * ==================================================================================================================== */
 
-var _ = require('underscore');
-
 
 /* Class Constructor
  * ==================================================================================================================== */
 
 function PixelNode_Effect(options) {	
-	this.options = _.extend({},this.base_options, this.default_options, options);
+	this.options = {...this.base_options, ...this.default_options, ...options};
 	this.name = this.options.name;
 	this.init();
 	this.initTargets();
@@ -180,12 +178,15 @@ PixelNode_Effect.prototype.getColor = function(data_path, options) {
 	var self = this;
 
 	// options
-	var opts = _.extend({
-		speed: 50,
-		dimmer: 1,
-		offset: 0,
-		saturation: 100
-	}, options);
+	var opts = {
+		...{
+			speed: 50,
+			dimmer: 1,
+			offset: 0,
+			saturation: 100
+		}, 
+		...options
+	};
 
 	// get color
 	c = global.pixelNode.data.fastGet(data_path);

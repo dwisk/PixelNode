@@ -79,7 +79,7 @@ PixelNode_Input_WebSocket_Client.prototype.initSockets = function() {
 	  console.log("Websocket Init");
 
 	  // save data
-	  global.pixelNode.data.replace(_.extend(data.data,{clockSet: data.timestamp}));
+	  global.pixelNode.data.replace({...data.data, ...{clockSet: data.timestamp}});
 
 	  // emit success
 	  socket.emit('data_client_inited', {success:true});

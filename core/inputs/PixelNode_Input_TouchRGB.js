@@ -67,28 +67,31 @@ PixelNode_Input_TouchRGB.prototype.init = function() {
 	console.log("Init Input TouchRGB".grey);
 	
 	// init inputs
-	global.pixelNode_data.inputs = _.extend(global.pixelNode_data.inputs, {
-		rgb: {
-			color_left:null,
-			color_right: null
+	global.pixelNode_data.inputs = {...global.pixelNode_data.inputs, ...{
+			rgb: {
+				color_left:null,
+				color_right: null
+			}
 		}
-  	});
+	};
 
 	if (typeof global.pixelNode_data.inputs.touch == "undefined") {
-		global.pixelNode_data.inputs = _.extend(global.pixelNode_data.inputs, {
-			touch: {
-				touches: []
+		global.pixelNode_data.inputs = {...global.pixelNode_data.inputs, ...{
+				touch: {
+					touches: []
+				}
 			}
-	  	});
+		};
 	}
 
 	if (typeof global.pixelNode_data.inputs.buttons == "undefined") {
-		global.pixelNode_data.inputs = _.extend(global.pixelNode_data.inputs, {
-			buttons: {
-				button_left: false,
-				button_right: false
+		global.pixelNode_data.inputs = {...global.pixelNode_data.inputs, ...{
+				buttons: {
+					button_left: false,
+					button_right: false
+				}
 			}
-	  	});
+		};
 	}
 
 	lastTouches = global.pixelNode_data.inputs.touch.touches;

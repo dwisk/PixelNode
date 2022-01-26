@@ -107,7 +107,7 @@ class PixelNode_Data extends EventEmitter {
 	// extend data
 	extend(path, value) {
 		var old_value = this.get(path);
-		var new_value = _.extend(old_value, value)
+		var new_value = {...old_value, ...value}
 
 		this.set(path, new_value);
 	}
@@ -115,9 +115,9 @@ class PixelNode_Data extends EventEmitter {
 	// create copy of data (sub)objects
 	copy(path) {
 		if (!path) {
-			return _.extend({},global.pixelNode_data);
+			return {...{}, ...global.pixelNode_data};
 		} else {
-			return _.extend({},this.get(path));
+			return {...{}, ...this.get(path) };
 		}
 	}
 

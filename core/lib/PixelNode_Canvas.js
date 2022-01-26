@@ -12,14 +12,11 @@
 /* Node Inclues
  * ==================================================================================================================== */
 
-var _ = require('underscore');
-
-
 /* Class Constructor
  * ==================================================================================================================== */
 
 function PixelNode_Canvas(canvas, options) {
-	this.options = _.extend({}, this.default_options, options);
+	this.options = { ...this.default_options, ...options };
 	this.name = this.options.name;
 	this.init(canvas);
 }

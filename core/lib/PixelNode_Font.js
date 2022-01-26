@@ -24,11 +24,14 @@ const _ = require('underscore'),
 class PixelNode_Font {
   constructor (callback, options) {
 
-  	this.options = _.extend({
-      name: "Unnamed",
-      image: __dirname + "/letters.png",
-      mapping: " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?"
-    }, options);
+  	this.options = {
+      ...{
+        name: "Unnamed",
+        image: __dirname + "/letters.png",
+        mapping: " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!?"
+      }, 
+      ...options
+    };
 
     this.letters = [];
     this.spacing = [];

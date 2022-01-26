@@ -46,12 +46,12 @@ class PixelNode_GameManager extends EventEmitter {
 			self.initObserver();
 
 			global.config.effects.forEach(function(effect) {
-				var Effect = global.pixelnodeRequireFile(effect.module);
+				var Effect = global.PixelNode.getOption(effect.module);
 				self.effects.push(new Effect(effect));
 			})
 
 			global.config.games.forEach(function(game) {
-				var Game = global.pixelnodeRequireFile(game.module);
+				var Game = global.PixelNode.getOption(game.module);
 				self.games.push(new Game(game, self.effects));
 			})
 

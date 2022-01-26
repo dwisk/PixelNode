@@ -2,7 +2,7 @@
   "name": "pixelnode",
   "version": "0.6.3",
   "description": "Controlling LED strips with different drivers.",
-  "main": "index.js",
+  "main": "lib/PixelNode.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
