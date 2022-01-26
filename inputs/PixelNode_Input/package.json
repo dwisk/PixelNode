@@ -1,0 +1,26 @@
+{
+  "name": "pixelnode-input",
+  "version": "0.0.3",
+  "description": "Base class for PixelNode input sources",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dwisk/PixelNode_Input.git"
+  },
+  "author": {
+    "name": "Amely Kling",
+    "email": "mail@dwi.sk",
+    "url": "http://dwi.sk"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dwisk/PixelNode_Input/issues"
+  },
+  "homepage": "https://github.com/dwisk/PixelNode_Input",
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
+}
