@@ -1,0 +1,28 @@
+{
+  "name": "pixelnode-input-tinkerforgetouch",
+  "version": "0.0.1",
+  "description": "Inputs from Tinkerforge touch sensor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwisk/PixelNode_Input_MPR121.git"
+  },
+  "author": {
+    "name": "Amely Kling",
+    "email": "mail@dwi.sk",
+    "url": "http://dwi.sk"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dwisk/PixelNode_Input_MPR121/issues"
+  },
+  "homepage": "https://github.com/dwisk/PixelNode_Input_MPR121#readme",
+  "dependencies": {
+    "pixelnode-input": "0.0.2",
+    "underscore": "^1.8.3",
+    "tinkerforge": "^2.1.33"
+  }
+}
