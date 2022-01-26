@@ -18,7 +18,7 @@ var util = require("util");
  * ==================================================================================================================== */
 
 // extending Game
-PixelNode_Game = require('../../lib/PixelNode_Game.js');
+PixelNode_Game = require('../lib/PixelNode_Game.js');
 
 // define the Student class
 function PixelNode_Game_Intensity(options, effects) {
