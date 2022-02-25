@@ -1,8 +1,6 @@
 /**
  * PixelNode_Effect_Colorset
  *
- * Ported fadecandy example
- *
  * --------------------------------------------------------------------------------------------------------------------
  *
  * @author Amely Kling <mail@dwi.sk>
@@ -15,7 +13,23 @@
 const PixelNode_Effect = require('./PixelNode_Effect.js');
 
 
+/* Class Defintion
+ * ==================================================================================================================== */
+
 class PixelNode_Effect_Colorset extends PixelNode_Effect {
+
+	/* Class Constructor
+	* ==================================================================================================================== */
+
+	// define the Student class
+	constructor(options,pixelData) {
+		super(options, pixelData);
+
+		this.n = 1;
+	}
+
+	/* Variables
+	* ==================================================================================================================== */
 
 	static default_options = {
 		scale: 1,
@@ -33,17 +47,6 @@ class PixelNode_Effect_Colorset extends PixelNode_Effect {
 		]
 	}
 
-	/* Class Constructor
-	* ==================================================================================================================== */
-
-	// define the Student class
-	constructor(options,pixelData) {
-		super(options, pixelData);
-
-		this.n = 1;
-	}
-
-
 	/* Overridden Methods
 	* ==================================================================================================================== */
 
@@ -56,12 +59,14 @@ class PixelNode_Effect_Colorset extends PixelNode_Effect {
 	drawTarget(target, output) {
 		var self = this;
 		for (var ring = 0; ring < target.length;ring++) {
-			// self.fillColor(target[ring], [0,0,0]);
 			self.fillArray(target[ring], self.options.colorset);
 		}
 	}
 
 }
 
-// module export
+
+/* Module exports
+ * ==================================================================================================================== */
+
 module.exports = PixelNode_Effect_Colorset;

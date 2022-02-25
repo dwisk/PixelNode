@@ -9,18 +9,10 @@
  *
  */
 
-/* Node Includes
+/* Class Defintion
  * ==================================================================================================================== */
 
 class PixelNode_Effect {
-
-	static base_options = {}
-	static default_options = { "parent": true}
-
-	static get defaultOptions() {
-		return this.default_options;
-	}
-
 
 	/* Class Constructor
 	* ==================================================================================================================== */
@@ -38,6 +30,12 @@ class PixelNode_Effect {
 	/* Variables
 	* ==================================================================================================================== */
 
+	static base_options = {}
+	static default_options = { "parent": true}
+
+	static get defaultOptions() {
+		return this.default_options;
+	}
 
 
 	/* Override Methods
@@ -173,9 +171,6 @@ class PixelNode_Effect {
 		}
 	}
 
-
-
-
 	// draw rainbow
 	getColor(data_path, options) {
 		var c, c2;
@@ -213,7 +208,10 @@ class PixelNode_Effect {
 
 }
 
-// module export
+
+/* Module exports
+ * ==================================================================================================================== */
+
 module.exports = PixelNode_Effect;
 
 

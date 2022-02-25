@@ -14,6 +14,10 @@
 
 const PixelNode_Effect = require('./PixelNode_Effect.js');
 
+
+/* Class Defintion
+ * ==================================================================================================================== */
+
 class PixelNode_Effect_Rainbow extends PixelNode_Effect {
 
 	/* Class Constructor
@@ -57,5 +61,9 @@ class PixelNode_Effect_Rainbow extends PixelNode_Effect {
 
 
 }
+
+
+/* Module exports
+ * ==================================================================================================================== */
 
 module.exports = PixelNode_Effect_Rainbow;

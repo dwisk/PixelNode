@@ -7,18 +7,16 @@
  *
  */
 
+/* Includes
+* ==================================================================================================================== */
+
 const PixelNode_Effect = require('./PixelNode_Effect.js');
 
 
-/* Includes
+/* Class Defintion
  * ==================================================================================================================== */
 
 class PixelNode_Effect_Fire extends PixelNode_Effect {
-
-	static default_options = {
-		scale: 1,
-		speed: 0.5
-	}
 
 	/* Class Constructor
 	* ==================================================================================================================== */
@@ -35,6 +33,11 @@ class PixelNode_Effect_Fire extends PixelNode_Effect {
 
 	/* Variables
 	* ==================================================================================================================== */
+
+	static default_options = {
+		scale: 1,
+		speed: 0.5
+	}
 
 	/* Overridden Methods
 	* ==================================================================================================================== */
@@ -120,5 +123,8 @@ class PixelNode_Effect_Fire extends PixelNode_Effect {
 
 }
 
-// module export
+
+/* Module exports
+ * ==================================================================================================================== */
+
 module.exports = PixelNode_Effect_Fire;

@@ -14,6 +14,10 @@
 
 const PixelNode_Effect = require('./PixelNode_Effect.js');
 
+
+/* Class Defintion
+ * ==================================================================================================================== */
+
 class PixelNode_Effect_TwoClock extends PixelNode_Effect {
 
 	/* Class Constructor
@@ -97,5 +101,8 @@ class PixelNode_Effect_TwoClock extends PixelNode_Effect {
 
 }
 
-// module export
+
+/* Module exports
+ * ==================================================================================================================== */
+
 module.exports = PixelNode_Effect_TwoClock;
