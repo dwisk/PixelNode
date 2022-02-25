@@ -28,60 +28,60 @@
  */
 
 
-/* Node Includes
+/* Class Defintion
  * ==================================================================================================================== */
 
-var extend = require('util')._extend;
+class PixelNode_FontManager {
+
+  /* Class Constructor
+  * ==================================================================================================================== */
+
+  constructor(options, fonts) {
+    this.options = {...PixelNode_FontManager.default_options, ...options};
+
+    this.fonts = [];
+
+    // configured inputs
+    this.loadFonts();
+
+    // call init
+    this.init();
+  }
+
+  /* Variables
+  * ==================================================================================================================== */
+
+  static default_options = {}
 
 
-/* Class Constructor
- * ==================================================================================================================== */
+  /* Methods
+  * ==================================================================================================================== */
 
-function PixelNode_FontManager(options, fonts) {
-	this.options = extend(extend(this.base_options, this.default_options), options);
+  init() {
+    console.log("Init PixelNode_FontManager".grey);
 
-	var self = this;
+  };
 
-	// configured inputs
-  this.loadFonts();
+  loadFonts() {
+    var self = this;
+    if (self.fonts.length < global.config.fonts.length) {
+      var FontModule = global.PixelNode.getOption(global.config.fonts[self.fonts.length]);
+      self.fonts.push(new FontModule(self.loadFonts.bind(self)));
+    }
+  }
 
-	// call init
-	this.init();
+  getFont(name) {
+    for (var i = 0; i < this.fonts.length; i++) {
+      if (this.fonts[i].name == name) return this.fonts[i];
+    }
+    console.log(("Pixelnode_FontManager:").grey,("Font '"+name+"' not found!").yellow);
+    return false;
+  }
+
 }
 
-// module export
+
+/* Module exports
+ * ==================================================================================================================== */
+
 module.exports = PixelNode_FontManager;
-
-
-/* Variables
- * ==================================================================================================================== */
-
-PixelNode_FontManager.prototype.base_options = {}
-PixelNode_FontManager.prototype.default_options = {}
-PixelNode_FontManager.prototype.options = {}
-PixelNode_FontManager.prototype.fonts = [];
-
-
-/* Methods
- * ==================================================================================================================== */
-
-PixelNode_FontManager.prototype.init = function() {
-	console.log("Init PixelNode_FontManager".grey);
-
-};
-
-PixelNode_FontManager.prototype.loadFonts = function() {
-  var self = this;
-  if (self.fonts.length < global.config.fonts.length) {
-    var FontModule = global.pixelnodeRequireFile(global.config.fonts[self.fonts.length]);
-  	self.fonts.push(new FontModule(self.loadFonts.bind(self)));
-  }
-}
-
-PixelNode_FontManager.prototype.getFont = function(name) {
-  for (var i = 0; i < this.fonts.length; i++) {
-    if (this.fonts[i].name == name) return this.fonts[i];
-  }
-  console.log(("Pixelnode_FontManager:").grey,("Font '"+name+"' not found!").yellow);
-  return false;
-}

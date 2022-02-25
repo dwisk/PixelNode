@@ -9,202 +9,207 @@
  *
  */
 
-/* Node Includes
+/* Class Defintion
  * ==================================================================================================================== */
 
-/* Class Constructor
- * ==================================================================================================================== */
+class PixelNode_Canvas {
 
-function PixelNode_Canvas(canvas, options) {
-	this.options = { ...this.default_options, ...options };
-	this.name = this.options.name;
-	this.init(canvas);
-}
+  /* Class Constructor
+  * ==================================================================================================================== */
 
-// module export
-module.exports = PixelNode_Canvas;
+  constructor(canvas, options) {
+    this.options = { ...PixelNode_Canvas.default_options, ...options };
 
-
-/* Variables
- * ==================================================================================================================== */
-
-PixelNode_Canvas.prototype.default_options = {}
-PixelNode_Canvas.prototype.options = {}
-PixelNode_Canvas.prototype.canvas = [
-  [ [0,0,0],  [0,0,0],  [0,0,0] ],
-  [ [0,0,0],  [0,0,0],  [0,0,0] ],
-  [ [0,0,0],  [0,0,0],  [0,0,0] ]
-]
-PixelNode_Canvas.prototype.canvasWidth = 3
-PixelNode_Canvas.prototype.canvasHeight = 3
-
-
-/* Override Methods
- * ==================================================================================================================== */
-
-// init effect – override
-PixelNode_Canvas.prototype.init = function(canvas) {
-  this.canvas = canvas;
-  this.canvasHeight = canvas.length;
-  this.canvasWidth = canvas[0].length;
-}
-
-
-
-/* Methods
- * ==================================================================================================================== */
-
-
-// fill
-PixelNode_Canvas.prototype.fill = function(color) {
-  for (var y = 0; y < this.canvas.length; y++) {
-    for (var x = 0; x < this.canvas[y].length; x++) {
-      this.dot(x, y, color);
-    }
+    this.canvas = [
+      [ [0,0,0],  [0,0,0],  [0,0,0] ],
+      [ [0,0,0],  [0,0,0],  [0,0,0] ],
+      [ [0,0,0],  [0,0,0],  [0,0,0] ]
+    ]
+    this.canvasWidth = 3
+    this.canvasHeight = 3
+  
+    this.init(canvas);
   }
-}
 
-// rectangle
-PixelNode_Canvas.prototype.rectangle = function(x1, y1, w, h, color) {
-	if (y1 < 0) y1 = 0;
-	if (x1 < 0) x1 = 0;
+  /* Variables
+  * ==================================================================================================================== */
 
-  var y2 = y1 + h-1;
-  var x2 = x1 + w;
+  static default_options = {}
+  static options = {}
 
-	// if (y2 > this.canvasHeight) y2 = this.canvasHeight-1;
-	// if (x2 > this.canvasWidth) x2 = this.canvasWidth-1;
 
-  for (var y = y1; y <= y2; y++) {
-    for (var x = x1; x < x2; x++) {
-      this.dot(x, y, color);
-    }
+  /* Override Methods
+  * ==================================================================================================================== */
+
+  // init effect – override
+  init(canvas) {
+    this.canvas = canvas;
+    this.canvasHeight = canvas.length;
+    this.canvasWidth = canvas[0].length;
   }
-  //console.log(this.canvas[10]);
-}
 
 
-PixelNode_Canvas.prototype.dot = function (x, y, color) {
-  try {
-    if (color.length == 4) {
-      var oldColor = this.canvas[x][y];
-      var alpha = color[3]
-      var r = alpha * color[0] + (1 - alpha) * oldColor[0]
-      var g = alpha * color[1] + (1 - alpha) * oldColor[1]
-      var b = alpha * color[2] + (1 - alpha) * oldColor[2]
-      this.canvas[x][y] = [r,g,b];
-    } else {
-      this.canvas[x][y] = color;
-    }
-  } catch(e) {
-    //console.log("Canvas Error".red, "Dot out of scope:", x,y);
-  }
-}
+  /* Methods
+  * ==================================================================================================================== */
 
-PixelNode_Canvas.prototype.absDot = function (x, y, color) {
-  this.dot(Math.round(x), Math.round(y), color);
-}
 
-PixelNode_Canvas.prototype.circle = function (x0, y0, radius, color) {
-  var x = radius;
-  var y = 0;
-  var radiusError = 1 - x;
-
-  while (x >= y) {
-    this.dot(x + x0, y + y0, color);
-    this.dot(y + x0, x + y0, color);
-    this.dot(-x + x0, y + y0, color);
-    this.dot(-y + x0, x + y0, color);
-    this.dot(-x + x0, -y + y0, color);
-    this.dot(-y + x0, -x + y0, color);
-    this.dot(x + x0, -y + y0, color);
-    this.dot(y + x0, -x + y0, color);
-    y++;
-
-    if (radiusError < 0) {
-        radiusError += 2 * y + 1;
-    }
-    else {
-        x--;
-        radiusError+= 2 * (y - x + 1);
-    }
-  }
-};
-
-PixelNode_Canvas.prototype.oval = function(x, y, w, h, color) {
-   var x0 = y0 = 0;
-   var x1 = x0 + w;
-   var y1 = y0 + h;
-
-   var a = Math.abs(x1-x0), b = Math.abs(y1-y0), b1 = b&1; /* values of diameter */
-   var dx = 4*(1-a)*b*b, dy = 4*(b1+1)*a*a; /* error increment */
-   var err = dx+dy+b1*a*a, e2; /* error of 1.step */
-
-   if (x0 > x1) { x0 = x1; x1 += a; } /* if called with swapped points */
-   if (y0 > y1) y0 = y1; /* .. exchange them */
-   y0 += (b+1)/2; y1 = y0-b1;   /* starting pixel */
-   a *= 8*a; b1 = 8*b*b;
-
-   var map = PixelNode_Canvas.rect([],0,0,w, h, false);
-
-   while (x0 <= x1){
-       PixelNode_Canvas.rect(map, Math.round(x0), Math.round(y1), Math.round(x1), Math.round(y0), true);
-      //  this.absDot(x1, y0, color); /*   I. Quadrant */
-      //  this.absDot(x0, y0, color); /*  II. Quadrant */
-      //  this.absDot(x0, y1, color); /* III. Quadrant */
-      //  this.absDot(x1, y1, color); /*  IV. Quadrant */
-       e2 = 2*err;
-       if (e2 <= dy) { y0++; y1--; err += dy += a; }  /* y step */
-       if (e2 >= dx || 2*err > dy) { x0++; x1--; err += dx += b1; } /* x step */
-   }
-
-   while (y0-y1 < b) {  /* too early stop of flat ellipses a=1 */
-       map[x0-1][y0] = true;
-       map[x1+1][y0++] = true;
-       map[x0-1][y1] = true;
-       map[x1+1][y1--] = true;
-   }
-   this.drawMap(map, x, y, color);
-};
-
-PixelNode_Canvas.prototype.drawMap = function(map, x0, y0, color) {
-  for (var x = 0; x < map.length; x++) {
-    for (var y = 0; y < map[x].length; y++) {
-      if (map[x][y]) {
-        this.dot(x0 + x, y0 + y, color);
+  // fill
+  fill(color) {
+    for (var y = 0; y < this.canvas.length; y++) {
+      for (var x = 0; x < this.canvas[y].length; x++) {
+        this.dot(x, y, color);
       }
     }
   }
-}
 
-// rectangle
-PixelNode_Canvas.rect = function(map, x1, y1, x2, y2, value) {
-  for (var x = x1; x < x2; x++) {
+  // rectangle
+  rectangle(x1, y1, w, h, color) {
+    if (y1 < 0) y1 = 0;
+    if (x1 < 0) x1 = 0;
+
+    var y2 = y1 + h-1;
+    var x2 = x1 + w;
+
+    // if (y2 > this.canvasHeight) y2 = this.canvasHeight-1;
+    // if (x2 > this.canvasWidth) x2 = this.canvasWidth-1;
+
     for (var y = y1; y <= y2; y++) {
-      if (!map[x]) { map[x] = []; }
-      map[x][y] = value;
+      for (var x = x1; x < x2; x++) {
+        this.dot(x, y, color);
+      }
+    }
+    //console.log(this.canvas[10]);
+  }
+
+
+  dot (x, y, color) {
+    try {
+      if (color.length == 4) {
+        var oldColor = this.canvas[x][y];
+        var alpha = color[3]
+        var r = alpha * color[0] + (1 - alpha) * oldColor[0]
+        var g = alpha * color[1] + (1 - alpha) * oldColor[1]
+        var b = alpha * color[2] + (1 - alpha) * oldColor[2]
+        this.canvas[x][y] = [r,g,b];
+      } else {
+        this.canvas[x][y] = color;
+      }
+    } catch(e) {
+      //console.log("Canvas Error".red, "Dot out of scope:", x,y);
     }
   }
-  return map;
-  //console.log(this.canvas[10]);
+
+  absDot (x, y, color) {
+    this.dot(Math.round(x), Math.round(y), color);
+  }
+
+  circle (x0, y0, radius, color) {
+    var x = radius;
+    var y = 0;
+    var radiusError = 1 - x;
+
+    while (x >= y) {
+      this.dot(x + x0, y + y0, color);
+      this.dot(y + x0, x + y0, color);
+      this.dot(-x + x0, y + y0, color);
+      this.dot(-y + x0, x + y0, color);
+      this.dot(-x + x0, -y + y0, color);
+      this.dot(-y + x0, -x + y0, color);
+      this.dot(x + x0, -y + y0, color);
+      this.dot(y + x0, -x + y0, color);
+      y++;
+
+      if (radiusError < 0) {
+          radiusError += 2 * y + 1;
+      }
+      else {
+          x--;
+          radiusError+= 2 * (y - x + 1);
+      }
+    }
+  };
+
+  oval(x, y, w, h, color) {
+    var x0 = y0 = 0;
+    var x1 = x0 + w;
+    var y1 = y0 + h;
+
+    var a = Math.abs(x1-x0), b = Math.abs(y1-y0), b1 = b&1; /* values of diameter */
+    var dx = 4*(1-a)*b*b, dy = 4*(b1+1)*a*a; /* error increment */
+    var err = dx+dy+b1*a*a, e2; /* error of 1.step */
+
+    if (x0 > x1) { x0 = x1; x1 += a; } /* if called with swapped points */
+    if (y0 > y1) y0 = y1; /* .. exchange them */
+    y0 += (b+1)/2; y1 = y0-b1;   /* starting pixel */
+    a *= 8*a; b1 = 8*b*b;
+
+    var map = PixelNode_Canvas.rect([],0,0,w, h, false);
+
+    while (x0 <= x1){
+        PixelNode_Canvas.rect(map, Math.round(x0), Math.round(y1), Math.round(x1), Math.round(y0), true);
+        //  this.absDot(x1, y0, color); /*   I. Quadrant */
+        //  this.absDot(x0, y0, color); /*  II. Quadrant */
+        //  this.absDot(x0, y1, color); /* III. Quadrant */
+        //  this.absDot(x1, y1, color); /*  IV. Quadrant */
+        e2 = 2*err;
+        if (e2 <= dy) { y0++; y1--; err += dy += a; }  /* y step */
+        if (e2 >= dx || 2*err > dy) { x0++; x1--; err += dx += b1; } /* x step */
+    }
+
+    while (y0-y1 < b) {  /* too early stop of flat ellipses a=1 */
+        map[x0-1][y0] = true;
+        map[x1+1][y0++] = true;
+        map[x0-1][y1] = true;
+        map[x1+1][y1--] = true;
+    }
+    this.drawMap(map, x, y, color);
+  };
+
+  drawMap(map, x0, y0, color) {
+    for (var x = 0; x < map.length; x++) {
+      for (var y = 0; y < map[x].length; y++) {
+        if (map[x][y]) {
+          this.dot(x0 + x, y0 + y, color);
+        }
+      }
+    }
+  }
+
+  // rectangle
+  static rect(map, x1, y1, x2, y2, value) {
+    for (var x = x1; x < x2; x++) {
+      for (var y = y1; y <= y2; y++) {
+        if (!map[x]) { map[x] = []; }
+        map[x][y] = value;
+      }
+    }
+    return map;
+    //console.log(this.canvas[10]);
+  }
+
+  line(x0, y0, x1, y1, color){
+    var dx = Math.abs(x1-x0);
+    var dy = Math.abs(y1-y0);
+    var sx = (x0 < x1) ? 1 : -1;
+    var sy = (y0 < y1) ? 1 : -1;
+    var err = dx-dy;
+
+    while(x0!=x1 || y0!=y1) {
+      this.dot(x0,y0,color);  // Do what you need to for this
+
+      var e2 = 2*err;
+      if (e2 >-dy){ err -= dy; x0  += sx; }
+      if (e2 < dx){ err += dx; y0  += sy; }
+    }
+  }
+
 }
 
-PixelNode_Canvas.prototype.line = function(x0, y0, x1, y1, color){
-   var dx = Math.abs(x1-x0);
-   var dy = Math.abs(y1-y0);
-   var sx = (x0 < x1) ? 1 : -1;
-   var sy = (y0 < y1) ? 1 : -1;
-   var err = dx-dy;
 
-   while(x0!=x1 || y0!=y1) {
-     this.dot(x0,y0,color);  // Do what you need to for this
+/* Module exports
+ * ==================================================================================================================== */
 
-     var e2 = 2*err;
-     if (e2 >-dy){ err -= dy; x0  += sx; }
-     if (e2 < dx){ err += dx; y0  += sy; }
-   }
-}
-
+module.exports = PixelNode_Canvas;
 
 
 /* Embedded Helper
