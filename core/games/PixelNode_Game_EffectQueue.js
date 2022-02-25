@@ -13,7 +13,7 @@
  * ==================================================================================================================== */
 
 // extending Game
-PixelNode_Game = require('../lib/PixelNode_Game.js');
+PixelNode_Game = require('./PixelNode_Game.js');
 
 class PixelNode_Game_EffectQueue extends PixelNode_Game {
 
@@ -22,8 +22,6 @@ class PixelNode_Game_EffectQueue extends PixelNode_Game {
 	/* Class Constructor
 	* ==================================================================================================================== */
 
-
-	// define the Student class
 	constructor(options, effects) {
 		super(options, effects);
 
@@ -137,7 +135,7 @@ class PixelNode_Game_EffectQueue extends PixelNode_Game {
 			self.effect.reset();
 		}
 
-		console.log(("Changed Effect to " + this.effect.options.name.white + (" (" + this.effect.options.module + ")").grey).grey);
+		console.log(("Changed Effect to " + this.effect.options.name.white + (" (" + this.effect.options.module.name + ")").grey).grey);
 		global.pixelNode.data.set("gameAnimation.effect", this.effect.options);
 	};
 

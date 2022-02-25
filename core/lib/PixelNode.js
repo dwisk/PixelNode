@@ -19,7 +19,7 @@ var fs = require('fs');
 /* Local Includes
  * ==================================================================================================================== */
 
-const PixelNode_WebServer = require('./PixelNode_WebServer');
+const PixelNode_WebSocket = require('./PixelNode_WebSocket');
 const PixelNode_GameManager = require('./PixelNode_GameManager.js');
 const PixelNode_Data = require('./PixelNode_Data.js');
 const PixelNode_Clock = require('./PixelNode_Clock.js');
@@ -91,8 +91,8 @@ class PixelNode extends EventEmitter {
 		// init gameManager
 		self.gameManager = new PixelNode_GameManager(config.gameManager);
 
-		// init webserver
-		self.webServer = new PixelNode_WebServer(config.webServer);
+		// init webSocket
+		self.webSocket = new PixelNode_WebSocket(config.webSocket || config.webServer);
 
 		// init pixeldriver
 		global.config.pixelDrivers.forEach(function(pixelDriverConfig) {

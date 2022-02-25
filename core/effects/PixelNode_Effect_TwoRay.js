@@ -20,7 +20,7 @@ var util = require("util");
  * ==================================================================================================================== */
 
 // extending Effect
-PixelNode_Effect = require('../lib/PixelNode_Effect.js');
+PixelNode_Effect = require('./PixelNode_Effect.js');
 
 // define the Student class
 function PixelNode_Effect_TwoRay(options,pixelData) {

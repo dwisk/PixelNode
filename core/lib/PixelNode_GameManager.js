@@ -221,7 +221,7 @@ class PixelNode_GameManager extends EventEmitter {
 
 		global.pixelNode.clock.reset();
 
-		console.log(("Changed Game to " + this.game.options.name.white + (" (" + this.game.options.module + ")").grey).grey);
+		console.log(("Changed Game to " + this.game.options.name.white + (" (" + this.game.options.module.name + ")").grey).grey);
 		global.pixelNode.data.set("game", this.game.options);
 	};
 
