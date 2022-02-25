@@ -1,0 +1,40 @@
+{
+  "name": "pixelnode-driver-fadecandy",
+  "version": "0.0.4",
+  "description": "Pixel Driver for FadeCandy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwisk/PixelNode_Driver_FadeCandy.git"
+  },
+  "author": {
+    "name": "Amely Kling",
+    "email": "mail@dwi.sk",
+    "url": "http://dwi.sk"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dwisk/PixelNode_Driver_FadeCandy/issues"
+  },
+  "homepage": "https://github.com/dwisk/PixelNode_Driver_FadeCandy#readme",
+  "dependencies": {
+    "colors": "^1.0.3",
+    "pixelnode-driver": "0.1.x"
+  },
+  "devDependencies": {
+    "pixelnode-driver": "file:../PixelNode_Driver"
+  },
+  "readme": "# PixelNode_Driver_FadeCandy\nPixel Driver for FadeCandy\n",
+  "readmeFilename": "README.md",
+  "gitHead": "afd1c57dba217ac4beebc50626099c93cd5e0868",
+  "_id": "pixelnode-driver-fadecandy@0.0.2",
+  "_shasum": "460a63f42aff23eafbd2b9abe4d80256fa96d4bb",
+  "_from": "pixelnode-driver-fadecandy@0.0.2",
+  "dist": {
+    "shasum": "460a63f42aff23eafbd2b9abe4d80256fa96d4bb"
+  },
+  "_resolved": "https://registry.npmjs.org/pixelnode-driver-fadecandy/-/pixelnode-driver-fadecandy-0.0.2.tgz"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "pixelnode-driver-tinkerforgeled2",
+  "version": "0.0.1",
+  "description": "Pixel Driver for Tinkerforge LED Bricklet 2.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dwisk/PixelNode_Driver_TinkerforgeLED2.git"
+  },
+  "author": {
+    "name": "Amely Kling",
+    "email": "mail@dwi.sk",
+    "url": "http://dwi.sk"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dwisk/PixelNode_Driver_TinkerforgeLED2/issues"
+  },
+  "homepage": "https://github.com/dwisk/PixelNode_Driver_TinkerforgeLED2",
+  "dependencies": {
+    "colors": "^1.0.3",
+    "pixelnode-driver": "0.1.x",
+    "tinkerforge": "^2.1.33"
+  },
+  "devDependencies": {
+    "pixelnode-driver": "file:../PixelNode_Driver"
+  }
+}
