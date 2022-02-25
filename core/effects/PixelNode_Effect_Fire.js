@@ -13,7 +13,7 @@
 const PixelNode_Effect = require('./PixelNode_Effect.js');
 
 
-/* Class Defintion
+/* Class Definition
  * ==================================================================================================================== */
 
 class PixelNode_Effect_Fire extends PixelNode_Effect {

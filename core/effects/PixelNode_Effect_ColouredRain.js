@@ -15,7 +15,7 @@ const _ = require("underscore");
 const PixelNode_Effect = require('./PixelNode_Effect.js');
 
 
-/* Class Defintion
+/* Class Definition
  * ==================================================================================================================== */
 
 class PixelNode_Effect_ColouredRain extends PixelNode_Effect {

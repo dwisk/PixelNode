@@ -62,7 +62,7 @@ const PixelNode_Canvas = require('../lib/PixelNode_Canvas.js');
 const PixelNode_Effect = require('./PixelNode_Effect.js');
 
 
-/* Class Defintion
+/* Class Definition
  * ==================================================================================================================== */
 
 class PixelNode_Effect_Canvas extends PixelNode_Effect {

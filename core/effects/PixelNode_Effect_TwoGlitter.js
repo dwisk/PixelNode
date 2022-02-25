@@ -14,7 +14,7 @@
 const PixelNode_Effect = require('./PixelNode_Effect.js');
 
 
-/* Class Defintion
+/* Class Definition
  * ==================================================================================================================== */
 
 class PixelNode_Effect_TwoGlitter extends PixelNode_Effect {

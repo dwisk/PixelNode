@@ -1,8 +1,6 @@
 /**
  * PixelNode_Input_WebSocket_Client
  *
- * Ported fadecandy example
- *
  * --------------------------------------------------------------------------------------------------------------------
  *
  * @author Amely Kling <mail@dwi.sk>
