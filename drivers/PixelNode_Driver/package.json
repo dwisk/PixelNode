@@ -15,8 +15,5 @@
   "bugs": {
     "url": "https://github.com/dwisk/PixelNode_Driver/issues"
   },
-  "homepage": "https://github.com/dwisk/PixelNode_Driver",
-  "dependencies": {
-    "underscore": "~1.8.3"
-  }
+  "homepage": "https://github.com/dwisk/PixelNode_Driver"
 }

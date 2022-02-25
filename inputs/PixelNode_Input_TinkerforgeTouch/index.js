@@ -14,7 +14,6 @@
  * ==================================================================================================================== */
 
 var util = require("util");
-var _ = require('underscore');
 var Tinkerforge = require('tinkerforge');
 
 /* Class Constructor

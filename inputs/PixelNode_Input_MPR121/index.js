@@ -14,7 +14,6 @@
  * ==================================================================================================================== */
 
 var util = require("util");
-var _ = require('underscore');
 var MPR121 = require('mpr121');
 
 /* Class Constructor

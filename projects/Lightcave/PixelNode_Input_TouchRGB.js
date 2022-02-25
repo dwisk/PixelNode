@@ -14,7 +14,6 @@
  * ==================================================================================================================== */
 
 var util = require("util");
-var _ = require('underscore');
 
 
 /* Class Constructor
@@ -183,14 +182,14 @@ PixelNode_Input_TouchRGB.prototype.reader = function() {
 
 
 	if (global.pixelNode_data.inputs.buttons.button_left == true) {
-		global.pixelNode_data.inputs.rgb.color_left = _.clone(c1);
+		global.pixelNode_data.inputs.rgb.color_left = [...c1];
 		lastColor1 = c1;
 	} else {
 		global.pixelNode_data.inputs.rgb.color_left = lastColor1;
 	}
 
 	if (global.pixelNode_data.inputs.buttons.button_right == true) {
-		global.pixelNode_data.inputs.rgb.color_right = _.clone(c2);
+		global.pixelNode_data.inputs.rgb.color_right = [...c2];
 		lastColor2 = c2;
 	} else {
 		global.pixelNode_data.inputs.rgb.color_right = lastColor2;

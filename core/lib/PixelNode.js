@@ -117,7 +117,7 @@ class PixelNode extends EventEmitter {
 		} else if (typeof option == "function") {
 			return option;
 		} else {
-			console.log(typeof option)
+			// console.log(typeof option)
 			return null;
 		}
 	}
@@ -216,7 +216,6 @@ class PixelNode extends EventEmitter {
 					}
 				});
 				console.log("Created Matrix with", map.strips.length+"x"+map.rings.length, "pixels");
-				console.log(map.strips[0])
 
 			} else if (map.zigzag) {
 				var strips = [];
@@ -266,7 +265,6 @@ class PixelNode extends EventEmitter {
 
 				}
 				console.log("Created Zigzag with", map.strips.length+"x"+map.rings.length, "pixels");
-				console.log(map.strips[0])
 				
 			} else if (map.csv) {
 				map.rings = [];

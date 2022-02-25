@@ -11,7 +11,6 @@
 /* Includes
  * ==================================================================================================================== */
 
-const _ = require("underscore");
 const PixelNode_Effect = require('./PixelNode_Effect.js');
 
 
@@ -96,7 +95,7 @@ class PixelNode_Effect_ColouredRain extends PixelNode_Effect {
 			if (ran) {
 				self.color1 = !self.color1;
 
-				var drop = _.clone(self.dropPrototype);
+				var drop = {...self.dropPrototype};
 				drop.index = ring;
 				if (this.options.fixedColor) {
 					drop.color = this.options.fixedColor;

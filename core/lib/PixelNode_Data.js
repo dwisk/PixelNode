@@ -14,7 +14,6 @@
  * ==================================================================================================================== */
 
 var EventEmitter = require('events').EventEmitter;
-var _ = require('underscore');
 var objectPath = require("object-path");
 
 class PixelNode_Data extends EventEmitter {
@@ -67,7 +66,7 @@ class PixelNode_Data extends EventEmitter {
 
 			if (no_log != true) {
 				var paths;
-				if (_.isArray(path)) {
+				if (Array.isArray(path)) {
 					paths = path;
 				} else {
 					paths = path.split(".");
@@ -84,7 +83,7 @@ class PixelNode_Data extends EventEmitter {
 			this.setSilent(path, value, no_log);
 
 			var paths;
-			if (_.isArray(path)) {
+			if (Array.isArray(path)) {
 				paths = path;
 			} else {
 				paths = path.split(".");

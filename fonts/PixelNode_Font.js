@@ -13,8 +13,7 @@
 /* Node Includes
  * ==================================================================================================================== */
 
-const _ = require('underscore'),
-   fs = require('fs'),
+const fs = require('fs'),
    PNG = require('pngjs').PNG;
 
 
@@ -187,8 +186,6 @@ mapChar(char, withSpacing = false) {
         row += map[x][y] ? "█": " ";
       }
       row += " ";
-
-      console.log(row);
     }
   }
 

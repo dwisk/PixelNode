@@ -81,7 +81,6 @@ class PixelNode_Game_Intensity extends PixelNode_Game {
 			if (value && found != null) {
 
 				index = parseInt(paths[0].split("_")[1]);
-				console.log(index);
 
 				if (self.effect.intensity[index] <= 1- self.options.addAmount) {
 					self.addFire(index, self.options.addAmount);
