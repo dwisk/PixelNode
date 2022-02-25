@@ -10,50 +10,41 @@
 /* Includes
  * ==================================================================================================================== */
 
-var util = require("util");
+const PixelNode_Effect = require('./PixelNode_Effect.js');
+
+class PixelNode_Effect_Off extends PixelNode_Effect {
+
+	/* Class Constructor
+	* ==================================================================================================================== */
+
+	// define the Student class
+	constructor(options,pixelData) {
+		super(options, pixelData);
+	}
+
+	/* Variables
+	* ==================================================================================================================== */
 
 
-/* Class Constructor
- * ==================================================================================================================== */
+	/* Overridden Methods
+	* ==================================================================================================================== */
 
-// extending Effect
-PixelNode_Effect = require('./PixelNode_Effect.js');
+	// init effect – override
+	init() {
+		console.log("Init Effect Off".grey);
+	}
 
-// define the Student class
-function PixelNode_Effect_Off(options,pixelData) {
-  var self = this;
-  PixelNode_Effect_Off.super_.call(self, options, pixelData);
-  self.className = "PixelNode_Effect_Off";
-  self.public_dir = __dirname;
-}
+	// draw effect on target
+	drawTarget(target, output) {
+		var self = this;
 
-// class inheritance
-util.inherits(PixelNode_Effect_Off, PixelNode_Effect);
+		for (var ring = 0; ring < target.length;ring++) {
+			self.fillColor(target[ring], [0,0,0]);
+		}
 
-// module export
-module.exports = PixelNode_Effect_Off;
-
-
-/* Variables
- * ==================================================================================================================== */
-
- PixelNode_Effect_Off.prototype.n = 1;
-
-
-/* Overridden Methods
- * ==================================================================================================================== */
-
-// init effect – override
-PixelNode_Effect_Off.prototype.init = function() {
-	console.log("Init Effect Off".grey);
-}
-
-// draw effect on target
-PixelNode_Effect_Off.prototype.drawTarget = function(target, output) {
-	var self = this;
-
-	for (var ring = 0; ring < target.length;ring++) {
-		self.fillColor(target[ring], [0,0,0]);
 	}
 
 }
+
+	// module export
+	module.exports = PixelNode_Effect_Off;

@@ -10,83 +10,73 @@
 /* Includes
  * ==================================================================================================================== */
 
-var util = require("util");
-
-/* Class Constructor
- * ==================================================================================================================== */
-
 // extending Effect
-PixelNode_Effect = require('./PixelNode_Effect.js');
+const PixelNode_Effect = require('./PixelNode_Effect.js');
 
-// define the Student class
-function PixelNode_Effect_Heartbeat(options,pixelData) {
-  var self = this;
-  PixelNode_Effect_Heartbeat.super_.call(self, options, pixelData);
-  self.className = "PixelNode_Effect_Heartbeat";
-  self.public_dir = __dirname;
-}
+class PixelNode_Effect_Heartbeat extends PixelNode_Effect {
 
-// class inheritance
-util.inherits(PixelNode_Effect_Heartbeat, PixelNode_Effect);
+  /* Class Constructor
+  * ==================================================================================================================== */
 
-// module export
-module.exports = PixelNode_Effect_Heartbeat;
+  // define the Student class
+  constructor(options,pixelData) {
+    super(options, pixelData);
 
-
-/* Variables
- * ==================================================================================================================== */
-
-PixelNode_Effect_Heartbeat.prototype.default_options = {
-  dimmer: 1
-}
-PixelNode_Effect_Heartbeat.prototype.colorSelect = false;
-PixelNode_Effect_Heartbeat.prototype.hueSelect = 0;
-
-
-/* Overridden Methods
- * ==================================================================================================================== */
-
-// init effect – override
-PixelNode_Effect_Heartbeat.prototype.init = function() {
-	console.log("Init Effect Heartbeat".grey);
-}
-
-
-var lastTouches = [];
-
-// draw effect on target
-PixelNode_Effect_Heartbeat.prototype.drawTarget = function(target, output) {
-	var self = this;
-
-  var red = self.getRed();
-
-	for (var ring = 0; ring < target.length;ring++) {
-    for (var pixel = 0; pixel < target[ring].length; pixel++) {
-      target[ring][pixel] = [red,0,0];
-    }
-	}
-}
-
-PixelNode_Effect_Heartbeat.prototype.getRed = function() {
-  var counter = global.pixelNode.clock.get();
-  var f = 1.5;
-  var t = (counter % (1000 * f)) / 1000 / f; // Zehntelsekunden
-  var red = 100;
-  if (t >= 0 && t < 0.2 ) {
-    red = 100 * EasingFunctions.easeInOutCubic(t*5);
-  } else if (t >= 0.2  && t < 0.4 ) {
-    red = 100 - 60 * EasingFunctions.easeInOutCubic(t*5-1);
-  } else if (t >= 0.4  && t < 0.6 ) {
-    red = 40 + 40 * EasingFunctions.easeInOutCubic(t*5-2);
-  } else if (t >= 0.6  && t < 0.8 ) {
-    red = 80 - 80 * EasingFunctions.easeInOutCubic(t*5-3);
-  } else {
-    red = 0
+    this.colorSelect = false;
+    this.hueSelect = 0;
   }
 
-  return (100 + Math.round(red*1.55))* this.options.dimmer;
-}
 
+  /* Variables
+  * ==================================================================================================================== */
+
+  static default_options = {
+    dimmer: 1
+  }
+
+
+  /* Overridden Methods
+  * ==================================================================================================================== */
+
+  // init effect – override
+  init() {
+    console.log("Init Effect Heartbeat".grey);
+  }
+
+  // draw effect on target
+  drawTarget(target, output) {
+    var self = this;
+
+    var red = self.getRed();
+
+    for (var ring = 0; ring < target.length;ring++) {
+      for (var pixel = 0; pixel < target[ring].length; pixel++) {
+        target[ring][pixel] = [red,0,0];
+      }
+    }
+  }
+
+  getRed() {
+    var counter = global.pixelNode.clock.get();
+    var f = 1.5;
+    var t = (counter % (1000 * f)) / 1000 / f; // Zehntelsekunden
+    var red = 100;
+    if (t >= 0 && t < 0.2 ) {
+      red = 100 * EasingFunctions.easeInOutCubic(t*5);
+    } else if (t >= 0.2  && t < 0.4 ) {
+      red = 100 - 60 * EasingFunctions.easeInOutCubic(t*5-1);
+    } else if (t >= 0.4  && t < 0.6 ) {
+      red = 40 + 40 * EasingFunctions.easeInOutCubic(t*5-2);
+    } else if (t >= 0.6  && t < 0.8 ) {
+      red = 80 - 80 * EasingFunctions.easeInOutCubic(t*5-3);
+    } else {
+      red = 0
+    }
+
+    return (100 + Math.round(red*1.55))* this.options.dimmer;
+  }
+
+}
 
 /* Easing
  * ==================================================================================================================== */
@@ -119,3 +109,7 @@ EasingFunctions = {
   // acceleration until halfway, then deceleration
   easeInOutQuint: function (t) { return t<.5 ? 16*t*t*t*t*t : 1+16*(--t)*t*t*t*t }
 }
+
+  // module export
+  module.exports = PixelNode_Effect_Heartbeat;
+

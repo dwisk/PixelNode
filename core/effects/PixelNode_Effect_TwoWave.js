@@ -1,5 +1,5 @@
 /**
- * PixelNode_Effect_Wave
+ * PixelNode_Effect_TwoWave
  *
  * Ported fadecandy example
  *
@@ -13,82 +13,72 @@
 /* Includes
  * ==================================================================================================================== */
 
-var util = require("util");
+const PixelNode_Effect = require('./PixelNode_Effect.js');
 
+class PixelNode_Effect_TwoWave extends PixelNode_Effect {
+	/* Class Constructor
+	* ==================================================================================================================== */
 
-/* Class Constructor
- * ==================================================================================================================== */
+	constructor (options,pixelData) {
+		super (options, pixelData);
+	}
 
-// extending Effect
-PixelNode_Effect = require('./PixelNode_Effect.js');
+	/* Variables
+	* ==================================================================================================================== */
 
-// define the Student class
-function PixelNode_Effect_Wave(options,pixelData) {
-  var self = this;
-  PixelNode_Effect_Wave.super_.call(self, options, pixelData);
-  this.className = "PixelNode_Effect_Wave";
-  self.public_dir = __dirname;
-}
+	static default_options = {
+		scale: 0.5,
+		speed: 1,
+		waveBase: 0.25,
+		waveHeight: 0.25,
+		waveTop: false
+	}
 
-// class inheritance
-util.inherits(PixelNode_Effect_Wave, PixelNode_Effect);
+	/* Overridden Methods
+	* ==================================================================================================================== */
 
-// module export
-module.exports = PixelNode_Effect_Wave;
+	// init effect – override
+	init() {
+		console.log("Init Effect TwoWave".grey);
+	}
 
+	// draw effect on target
+	drawTarget(target) {
+		var self = this;
+		var millis = new Date().getTime();
+		var self = this;
 
-/* Variables
- * ==================================================================================================================== */
+		// get color 1
+		var c1 = self.getColor(["inputs","rgb","color_left"]);
 
- PixelNode_Effect_Wave.prototype.default_options = {
- 	scale: 0.5,
- 	speed: 1,
- 	waveBase: 0.25,
- 	waveHeight: 0.25,
- 	waveTop: false
- }
+		// get color 2
+		var c2 = self.getColor(["inputs","rgb","color_right"], {
+			dimmer: 0.5,
+			offset: 90
+		});
 
+		for (var ring = 0; ring < target.length;ring++) {
+			const base = target[ring].length * self.options.waveBase;
+			const height = target[ring].length* self.options.waveHeight;
+			var t = ring / self.options.scale * 0.5 + millis * 0.002 * self.options.speed;
+			for (var pixel = 0; pixel < target[ring].length; pixel++) {
+				var wave = base + height * Math.sin(t);
 
-/* Overridden Methods
- * ==================================================================================================================== */
+				if (global.pixelNode.data.fastGet(["inputs","buttons","btn_"+ring])) {
+					c = c1;
+				} else if (pixel <= wave) {
+					c = self.options.waveTop ? c2: c1;
+				} else {
+					c = self.options.waveTop ? c1: c2;
+				}
 
-// init effect – override
-PixelNode_Effect_Wave.prototype.init = function() {
-	console.log("Init Effect TwoWave".grey);
-}
-
-// draw effect on target
-PixelNode_Effect_Wave.prototype.drawTarget = function(target) {
-	var self = this;
-	var millis = new Date().getTime();
-	var self = this;
-
-	// get color 1
-	var c1 = self.getColor(["inputs","rgb","color_left"]);
-
-	// get color 2
-	var c2 = self.getColor(["inputs","rgb","color_right"], {
-		dimmer: 0.5,
-		offset: 90
-	});
-
-	for (var ring = 0; ring < target.length;ring++) {
-		base = target[ring].length * self.options.waveBase;
-		height = target[ring].length* self.options.waveHeight;
-		var t = ring / self.options.scale * 0.5 + millis * 0.002 * self.options.speed;
-		for (var pixel = 0; pixel < target[ring].length; pixel++) {
-			var wave = base + height * Math.sin(t);
-
-			if (global.pixelNode.data.fastGet(["inputs","buttons","btn_"+ring])) {
-				c = c1;
-			} else if (pixel <= wave) {
-				c = self.options.waveTop ? c2: c1;
-			} else {
-				c = self.options.waveTop ? c1: c2;
+				target[ring][pixel] = c;
 			}
-
-			target[ring][pixel] = c;
 		}
+
 	}
 
 }
+
+// module export
+module.exports = PixelNode_Effect_TwoWave;

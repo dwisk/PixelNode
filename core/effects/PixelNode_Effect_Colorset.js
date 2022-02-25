@@ -12,67 +12,56 @@
 /* Includes
  * ==================================================================================================================== */
 
-var util = require("util");
+const PixelNode_Effect = require('./PixelNode_Effect.js');
 
 
-/* Class Constructor
- * ==================================================================================================================== */
+class PixelNode_Effect_Colorset extends PixelNode_Effect {
 
-// extending Effect
-PixelNode_Effect = require('./PixelNode_Effect.js');
+	static default_options = {
+		scale: 1,
+		speed: 100,
+		colorset: [
+			[255,0,0],
+			[0,255,0],
+			[0,0,255],
+			[255,0,0],
+			[0,255,0],
+			[0,0,255],
+			[255,0,0],
+			[0,255,0],
+			[0,0,255],
+		]
+	}
 
-// define the Student class
-function PixelNode_Effect_Colorset(options,pixelData) {
-  var self = this;
-  PixelNode_Effect_Colorset.super_.call(self, options, pixelData);
-  self.className = "PixelNode_Effect_Colorset";
-  self.public_dir = __dirname;
-}
+	/* Class Constructor
+	* ==================================================================================================================== */
 
-// class inheritance
-util.inherits(PixelNode_Effect_Colorset, PixelNode_Effect);
+	// define the Student class
+	constructor(options,pixelData) {
+		super(options, pixelData);
 
-// module export
-module.exports = PixelNode_Effect_Colorset;
-
-
-/* Variables
- * ==================================================================================================================== */
-
-PixelNode_Effect_Colorset.prototype.n = 1;
-PixelNode_Effect.prototype.default_options = {
-	scale: 1,
-	speed: 100,
-	colorset: [
-		[255,0,0],
-		[0,255,0],
-		[0,0,255]
-	]
-}
+		this.n = 1;
+	}
 
 
-/* Overridden Methods
- * ==================================================================================================================== */
+	/* Overridden Methods
+	* ==================================================================================================================== */
 
-// init effect – override
-PixelNode_Effect_Colorset.prototype.init = function() {
-	console.log("Init Effect ColorSet".grey);
-}
+	// init effect – override
+	init() {
+		console.log("Init Effect ColorSet".grey);
+	}
 
-// draw effect on target
-PixelNode_Effect_Colorset.prototype.drawTarget = function(target, output) {
-	var self = this;
-	var colors = [];
-
-	var i = 0;
-
-	for (var ring = 0; ring < target.length;ring++) {
-		if (output == "rainbow") {
+	// draw effect on target
+	drawTarget(target, output) {
+		var self = this;
+		for (var ring = 0; ring < target.length;ring++) {
+			// self.fillColor(target[ring], [0,0,0]);
 			self.fillArray(target[ring], self.options.colorset);
-
-		} else {
-			self.fillColor(target[ring], [0,0,0]);
 		}
 	}
 
 }
+
+// module export
+module.exports = PixelNode_Effect_Colorset;

@@ -12,66 +12,50 @@
 /* Includes
  * ==================================================================================================================== */
 
-var util = require("util");
+const PixelNode_Effect = require('./PixelNode_Effect.js');
+
+class PixelNode_Effect_Rainbow extends PixelNode_Effect {
+
+	/* Class Constructor
+	* ==================================================================================================================== */
+
+	constructor(options,pixelData) {
+		super(options,pixelData);
+	}
+
+	/* Variables
+	* ==================================================================================================================== */
+
+	static default_options = {
+		scale: 1,
+		speed: 100
+	}
 
 
-/* Class Constructor
- * ==================================================================================================================== */
+	/* Overridden Methods
+	* ==================================================================================================================== */
 
-// extending Effect
-PixelNode_Effect = require('./PixelNode_Effect.js');
+	// init effect – override
+	init() {
+		console.log("Init Effect Rainbow".grey);
+	}
 
-// define the Student class
-function PixelNode_Effect_Rainbow(options,pixelData) {
-  var self = this;
-  PixelNode_Effect_Rainbow.super_.call(self, options, pixelData);
-  self.className = "PixelNode_Effect_Rainbow";
-  self.public_dir = __dirname;
-}
+	// draw effect on target
+	drawTarget(target, output) {
+		var self = this;
+		var colors = [];
 
-// class inheritance 
-util.inherits(PixelNode_Effect_Rainbow, PixelNode_Effect);
-
-// module export
-module.exports = PixelNode_Effect_Rainbow;
-
-
-/* Variables
- * ==================================================================================================================== */
-
-PixelNode_Effect_Rainbow.prototype.n = 1;
-PixelNode_Effect.prototype.default_options = {
-	scale: 1,
-	speed: 100
-}
-
-
-/* Overridden Methods
- * ==================================================================================================================== */
-
-// init effect – override
-PixelNode_Effect_Rainbow.prototype.init = function() {
-	console.log("Init Effect Rainbow".grey);
-}
-
-// draw effect on target
-PixelNode_Effect_Rainbow.prototype.drawTarget = function(target, output) {
-	var self = this;
-	var colors = [];
-
-	if (target[0]) {
-	colors = self.getRainbow(target[0].length, self.counter*self.options.speed/1000, self.options.scale);
-	
-	for (var ring = 0; ring < target.length;ring++) {
-		if (output == "rainbow") {
-			self.fillArray(target[ring], colors);		    
+		if (target[0]) {
+			colors = self.getRainbow(target[0].length, self.counter*self.options.speed/1000, self.options.scale);
 			
-		} else {
-			self.fillColor(target[ring], [0,0,0]);		    
+			for (var ring = 0; ring < target.length;ring++) {
+				self.fillArray(target[ring], colors);		    
+			}
 		}
+
 	}
-	}
+
 
 }
 
-
+module.exports = PixelNode_Effect_Rainbow;

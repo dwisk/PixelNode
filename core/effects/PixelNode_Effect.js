@@ -12,200 +12,211 @@
 /* Node Includes
  * ==================================================================================================================== */
 
+class PixelNode_Effect {
 
-/* Class Constructor
- * ==================================================================================================================== */
+	static base_options = {}
+	static default_options = { "parent": true}
 
-function PixelNode_Effect(options) {	
-	this.options = {...this.base_options, ...this.default_options, ...options};
-	this.name = this.options.name;
-	this.init();
-	this.initTargets();
+	static get defaultOptions() {
+		return this.default_options;
+	}
+
+
+	/* Class Constructor
+	* ==================================================================================================================== */
+
+	constructor(options) {	
+		this.options = {...PixelNode_Effect.base_options, ...this.constructor.defaultOptions, ...options};
+		this.counter = 0
+
+		this.name = this.options.name;
+
+		this.init();
+		this.initTargets();
+	}
+
+	/* Variables
+	* ==================================================================================================================== */
+
+
+
+	/* Override Methods
+	* ==================================================================================================================== */
+
+	// init effect – override
+	init() {
+		console.log("Init Effect".grey);
+	}
+
+	// reset effect – override
+	reset() {
+	}
+
+	// init targets – override for full control
+	initTargets() {
+		var self = this;
+		var target;
+		self.options.outputs.forEach(function(output){
+			output.targets.forEach(function(outputTarget) {
+				var path = outputTarget.split(".");
+				target = global.pixelNode.gameManager.pixelData;
+				var lastPart;
+				var secondLastPart;
+				let lastTarget;
+				path.forEach(function(part) {
+					lastTarget = target;
+					if (target[part]) {
+						target = target[part];
+						lastPart = part;
+					}
+				});
+
+				if (target) {
+					setImmediate(self.initTarget.bind(self), target, output.name, outputTarget);
+					lastTarget.mode = lastPart;
+
+				}
+			});
+
+		});
+
+		this.counter = global.pixelNode.clock.get();
+	}
+
+	// init target – override
+	initTarget(target, output, target_name) {
+
+	}
+
+
+	// draw effect – override for full control
+	draw() {
+		var self = this;
+		var target;
+		for (var i = 0; i < self.options.outputs.length;i++) {
+			for (var j = 0; j < self.options.outputs[i].targets.length;j++) {
+				var path = self.options.outputs[i].targets[j].split(".");
+				target = global.pixelNode.gameManager.pixelData;
+				var lastPart;
+				var secondLastPart;
+				let lastTarget;
+				path.forEach(function(part) {
+					lastTarget = target;
+					if (target[part]) {
+						target = target[part];
+						lastPart = part;
+					}
+				});
+
+				if (target) {
+					setImmediate(self.drawTarget.bind(self), target, self.options.outputs[i].name, self.options.outputs[i].targets[j]);
+					lastTarget.mode = lastPart;
+
+				}
+			}
+
+		}
+
+		this.counter = global.pixelNode.clock.get();
+	}
+
+	// draw effect on targets – override
+	drawTarget(target, output, target_name) {
+
+	}
+
+
+	/* Methods
+	* ==================================================================================================================== */
+
+	// draw rainbow
+	getRainbow(length, offset, scale) {
+		var pixels = [];
+		if (!scale) scale = 1;
+
+		for (var pixel = 0; pixel < length; pixel++) {
+			const c = new HSVColour(pixel/length*360/scale+offset, 100, 100).getRGB();
+			pixels[pixel] = [c.r, c.g, c.b];
+			//offset += 20;
+		}
+
+		return pixels;
+	}
+
+	// draw array values into target
+	fillArray(target, array) {
+		var length = target.length;
+		for (var pixel = 0; pixel < length; pixel++) {
+			if (pixel < array.length) {
+				target[pixel] = array[pixel];
+			} else {
+				target[pixel] = array[pixel - array.length ];
+			}
+		}
+	}
+
+
+	// fill color
+	fillColor(target, c) {
+		var length = target.length;
+		var color = {};
+		if (!c.r) {
+			color.r = c[0];
+			color.g = c[1];
+			color.b = c[2];
+		} else {
+			color = c;
+		}
+		for (var pixel = 0; pixel < length; pixel++) {
+			target[pixel] = [color.r, color.g, color.b];
+			//offset += 20;
+		}
+	}
+
+
+
+
+	// draw rainbow
+	getColor(data_path, options) {
+		var c, c2;
+		var self = this;
+
+		// options
+		var opts = {
+			...{
+				speed: 50,
+				dimmer: 1,
+				offset: 0,
+				saturation: 100
+			}, 
+			...options
+		};
+
+		// get color
+		c = global.pixelNode.data.fastGet(data_path);
+
+		// return if is set
+		if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {
+			c2 = new RGBColour(c[0]*opts.dimmer,c[1]*opts.dimmer,c[2]*opts.dimmer).getRGB();
+
+		// else return fading color
+		} else {
+			c2 = new HSVColour(self.counter/opts.speed+opts.offset, opts.saturation, 100*opts.dimmer).getRGB();
+		}
+
+		return [c2.r, c2.g, c2.b];
+	}
+
+	dimmColor(color, dimmer) {
+		return [color[0] * dimmer, color[1] * dimmer, color[2] * dimmer]
+	}
+
 }
 
 // module export
 module.exports = PixelNode_Effect;
 
 
-/* Variables
- * ==================================================================================================================== */
-
-PixelNode_Effect.prototype.base_options = {}
-PixelNode_Effect.prototype.default_options = {}
-PixelNode_Effect.prototype.options = {}
-PixelNode_Effect.prototype.counter = 0
-PixelNode_Effect.prototype.name = "unnamed"
-PixelNode_Effect.prototype.public_dir = null
-
-
-/* Override Methods
- * ==================================================================================================================== */
-
-// init effect – override
-PixelNode_Effect.prototype.init = function() {
-	console.log("Init Effect".grey);
-}
-
-// reset effect – override
-PixelNode_Effect.prototype.reset = function() {
-}
-
-// init targets – override for full control
-PixelNode_Effect.prototype.initTargets = function() {
-	var self = this;
-	var target;
-	self.options.outputs.forEach(function(output){
-		output.targets.forEach(function(outputTarget) {
-			var path = outputTarget.split(".");
-			target = global.pixelNode.gameManager.pixelData;
-			var lastPart;
-			var secondLastPart;
-			path.forEach(function(part) {
-				lastTarget = target;
-				if (target[part]) {
-					target = target[part];
-					lastPart = part;
-				}
-			});
-
-			if (target) {
-				setImmediate(self.initTarget.bind(self), target, output.name, outputTarget);
-				lastTarget.mode = lastPart;
-
-			}
-		});
-
-	});
-
-	this.counter = global.pixelNode.clock.get();
-}
-
-// init target – override
-PixelNode_Effect.prototype.initTarget = function(target, output, target_name) {
-
-}
-
-
-// draw effect – override for full control
-PixelNode_Effect.prototype.draw = function() {
-	var self = this;
-	var target;
-	for (var i = 0; i < self.options.outputs.length;i++) {
-		for (var j = 0; j < self.options.outputs[i].targets.length;j++) {
-			var path = self.options.outputs[i].targets[j].split(".");
-			target = global.pixelNode.gameManager.pixelData;
-			var lastPart;
-			var secondLastPart;
-			path.forEach(function(part) {
-				lastTarget = target;
-				if (target[part]) {
-					target = target[part];
-					lastPart = part;
-				}
-			});
-
-			if (target) {
-				setImmediate(self.drawTarget.bind(self), target, self.options.outputs[i].name, self.options.outputs[i].targets[j]);
-				lastTarget.mode = lastPart;
-
-			}
-		}
-
-	}
-
-	this.counter = global.pixelNode.clock.get();
-}
-
-// draw effect on targets – override
-PixelNode_Effect.prototype.drawTarget = function(target, output, target_name) {
-
-}
-
-
-/* Methods
- * ==================================================================================================================== */
-
-// draw rainbow
-PixelNode_Effect.prototype.getRainbow = function(length, offset, scale) {
-	var pixels = [];
-	if (!scale) scale = 1;
-
-	for (var pixel = 0; pixel < length; pixel++) {
-		c = new HSVColour(pixel/length*360/scale+offset, 100, 100).getRGB();
-		pixels[pixel] = [c.r, c.g, c.b];
-		//offset += 20;
-	}
-
-	return pixels;
-}
-
-// draw array values into target
-PixelNode_Effect.prototype.fillArray = function(target, array) {
-	var length = target.length;
-	for (var pixel = 0; pixel < length; pixel++) {
-		if (pixel < array.length) {
-			target[pixel] = array[pixel];
-		} else {
-			target[pixel] = array[pixel - array.length ];
-		}
-	}
-}
-
-
-// fill color
-PixelNode_Effect.prototype.fillColor = function(target, c) {
-	var length = target.length;
-	var color = {};
-	if (!c.r) {
-		color.r = c[0];
-		color.g = c[1];
-		color.b = c[2];
-	} else {
-		color = c;
-	}
-	for (var pixel = 0; pixel < length; pixel++) {
-		target[pixel] = [color.r, color.g, color.b];
-		//offset += 20;
-	}
-}
-
-
-
-
-// draw rainbow
-PixelNode_Effect.prototype.getColor = function(data_path, options) {
-	var c, c2;
-	var self = this;
-
-	// options
-	var opts = {
-		...{
-			speed: 50,
-			dimmer: 1,
-			offset: 0,
-			saturation: 100
-		}, 
-		...options
-	};
-
-	// get color
-	c = global.pixelNode.data.fastGet(data_path);
-
-	// return if is set
-	if (c && (c[0] != 0 || c[1] != 0 || c[2] != 0)) {
-		c2 = new RGBColour(c[0]*opts.dimmer,c[1]*opts.dimmer,c[2]*opts.dimmer).getRGB();
-
-	// else return fading color
-	} else {
-		c2 = new HSVColour(self.counter/opts.speed+opts.offset, opts.saturation, 100*opts.dimmer).getRGB();
-	}
-
-	return [c2.r, c2.g, c2.b];
-}
-
-PixelNode_Effect.prototype.dimmColor = function(color, dimmer) {
-	return [color[0] * dimmer, color[1] * dimmer, color[2] * dimmer]
-}
 
 
 /* Embedded Helper

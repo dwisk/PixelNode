@@ -1,7 +1,5 @@
 /**
- * PixelNode_Effect_TwoRay
- *
- * Ported fadecandy example
+ * PixelNode_Effect_Fill
  *
  * --------------------------------------------------------------------------------------------------------------------
  *
@@ -9,23 +7,26 @@
  *
  */
 
-
 /* Includes
  * ==================================================================================================================== */
 
 const PixelNode_Effect = require('./PixelNode_Effect.js');
 
-class PixelNode_Effect_TwoRay extends PixelNode_Effect {
+class PixelNode_Effect_Fill extends PixelNode_Effect {
 
 	/* Class Constructor
 	* ==================================================================================================================== */
 
 	constructor(options,pixelData) {
-		super(options,pixelData);
+		super(options, pixelData);
 	}
 
 	/* Variables
 	* ==================================================================================================================== */
+
+	static default_options = {
+		color: [255,255,255]
+	}
 
 
 	/* Overridden Methods
@@ -33,41 +34,21 @@ class PixelNode_Effect_TwoRay extends PixelNode_Effect {
 
 	// init effect – override
 	init() {
-		console.log("Init Effect TwoRay".grey);
+		console.log("Init Effect Fill".grey);
 	}
 
 	// draw effect on target
-	drawTarget(target, output_name) {
+	drawTarget(target, output) {
 		var self = this;
 
-		// get color 1
-		var c1 = self.getColor(["inputs","rgb","color_left"]);
-
-		// get color 2
-		var c2 = self.getColor(["inputs","rgb","color_right"], {
-			dimmer: 0.5,
-			offset: 90
-		});
-
-		// draw effect
 		for (var ring = 0; ring < target.length;ring++) {
-			// console.log(ring,Math.round(self.counter/10/target.length) % 12);
-			if(ring,Math.round(self.counter/100/target.length) % target.length == ring) {
-				c = c1;
-			} else if (global.pixelNode.data.fastGet(["inputs","buttons","btn_"+ring])) {
-				c = c1;
-			} else {
-				c = c2;
-			}
-
-			for (var pixel = 0; pixel < target[ring].length; pixel++) {
-				target[ring][pixel] = c;
-			}
+			self.fillColor(target[ring], self.options.color);
 		}
 
 	}
 
+
 }
 
 // module export
-module.exports = PixelNode_Effect_TwoRay;
+module.exports = PixelNode_Effect_Fill;
