@@ -274,6 +274,7 @@ class PixelNode extends EventEmitter {
 				var csvfile = fs.readFileSync(map.csv.file).toString();
 				var ringIds = csvfile.split("\n");
 				var group = map.csv.group || 10;
+				if (map.flip) ringIds = ringIds.reverse();
 
 				for (var i = 0; i < ringIds.length; i++) {
 					var stripIds = ringIds[i].split("\t");
