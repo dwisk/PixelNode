@@ -80,7 +80,7 @@ PixelNode_Driver_TinkerforgeLED2.prototype.init = function() {
 			// self.client.setChannelMapping(Tinkerforge.BrickletLEDStripV2.CHANNEL_MAPPING_GRB); // for spielmaschine dd
 			self.client.setChannelMapping(Tinkerforge.BrickletLEDStripV2.CHANNEL_MAPPING_RGB);
 			self.client.setFrameDuration(self.options.delay);
-			console.log("TinkerforgeLED2".grey, "RGB","sy");
+			console.log("TinkerforgeLED2".grey, "RGB");
 			self.startPainter.call(self);
 			// initially set one pixel
 			this.client.setLEDValues(0, [0, 0, 0]);
