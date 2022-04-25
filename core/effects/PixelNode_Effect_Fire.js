@@ -36,7 +36,7 @@ class PixelNode_Effect_Fire extends PixelNode_Effect {
 
 	static default_options = {
 		scale: 1,
-		speed: 0.5
+		speed: 0
 	}
 
 	/* Overridden Methods
@@ -56,10 +56,10 @@ class PixelNode_Effect_Fire extends PixelNode_Effect {
 	// init target – override
 	initTarget(target, output, target_name) {
 		var self = this;
-		target_name = target_name.replace(".", "_");
+		// target_name = target_name.replace(".", "_");
 
 		for (var ring = 0; ring < target.length;ring++) {
-			self.intensity[ring] = Math.random(1)*0.1+0.9;
+			self.intensity[ring] = Math.random(1)*0.1+1;
 		}
 
 	}
