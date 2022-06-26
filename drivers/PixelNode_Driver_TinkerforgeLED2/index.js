@@ -46,7 +46,8 @@ PixelNode_Driver_TinkerforgeLED2.prototype.default_options = {
 	dimmer: 1,
 	host: 'localhost',
 	port: 4223,
-	uid: 'xyz'
+	uid: 'xyz',
+	gammapow: 2.3
 
 };
 PixelNode_Driver_TinkerforgeLED2.prototype.client = {};
@@ -61,6 +62,16 @@ PixelNode_Driver_TinkerforgeLED2.prototype.pixelsFirstpart = true;
 PixelNode_Driver_TinkerforgeLED2.prototype.init = function() {
 	var self = this;
 	console.log("Init PixelDriver TinkerforgeLED2".grey);
+
+	self.gammatable = [];
+	for (var i=0; i<256; i++) {
+		var x = i;
+		x = x / 255;
+		x = Math.pow(x, self.options.gammapow);
+		x = x * 255;
+			
+		self.gammatable[i] = Math.round(x);      
+	}
 
 	// get new OPC / TinkerforgeLED2 client
 	var ipcon = new Tinkerforge.IPConnection(); // Create IP connection
@@ -107,9 +118,17 @@ PixelNode_Driver_TinkerforgeLED2.prototype.init = function() {
 
 // set's a pixel via TinkerforgeLED2 client
 PixelNode_Driver_TinkerforgeLED2.prototype.setPixel = function(strip, id, r,g,b) {
-	this.pixels[id * 3 + 0] = max255(r * this.options.dimmer);
-	this.pixels[id * 3 + 1] = max255(g * this.options.dimmer);
-	this.pixels[id * 3 + 2] = max255(b * this.options.dimmer);
+	var self = this;
+	const gamma  = true;
+	if (gamma) {
+		this.pixels[id * 3 + 0] = self.gammatable[max255(r * this.options.dimmer)];
+		this.pixels[id * 3 + 1] = self.gammatable[max255(g * this.options.dimmer)];
+		this.pixels[id * 3 + 2] = self.gammatable[max255(b * this.options.dimmer)];
+	} else {
+		this.pixels[id * 3 + 0] = max255(r * this.options.dimmer);
+		this.pixels[id * 3 + 1] = max255(g * this.options.dimmer);
+		this.pixels[id * 3 + 2] = max255(b * this.options.dimmer);
+	}
 }
 
 // tells TinkerforgeLED2 client to write pixels
@@ -121,5 +140,5 @@ PixelNode_Driver_TinkerforgeLED2.prototype.sendPixels = function() {
 // helper function for keeping values below 255
 function max255(value) {
 	if (value > 255) return 255;
-	return value
+	return Math.floor(value)
 }
