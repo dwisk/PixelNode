@@ -42,8 +42,7 @@ module.exports = PixelNode_Input_TinkerforgeTouch;
 PixelNode_Input_TinkerforgeTouch.prototype.default_options = {
 	"verbose": false,
 	"timer": 100,
-	"treshold_touch": 12,
-	"treshold_release": 6,
+	"sensitivty": 50,
 	"pincount": 12,
 	"offset": 0,
 	host: 'localhost',
@@ -65,7 +64,7 @@ PixelNode_Input_TinkerforgeTouch.prototype.init = function() {
 	var self = this;
 
 	// start
-	console.log("Init Input TinkerforgeTouch".grey, "on", self.options.i2c_address, self.options.i2c_bus);
+	console.log("Init Input TinkerforgeTouch".grey, "on", self.options.uid);
 
 	// get new OPC / TinkerforgeLED2 client
 	var ipcon = new Tinkerforge.IPConnection(); // Create IP connection
@@ -97,6 +96,9 @@ PixelNode_Input_TinkerforgeTouch.prototype.init = function() {
 		(connectReason) => {
 			console.log((`TinkerforgeTouch connected to ${self.client.deviceDisplayName} : ${self.client.deviceIdentifier}`).green);
 			// self.touchsensor.set_thresholds(self.options.treshold_touch, self.options.treshold_release);
+
+			self.client.setElectrodeSensitivity(50);
+			self.client.recalibrate();
 
 			// start effect
 			self.start(function(result) {
