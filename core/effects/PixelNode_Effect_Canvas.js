@@ -104,8 +104,14 @@ class PixelNode_Effect_Canvas extends PixelNode_Effect {
     for (var i = 0; i < this.options.draw.length; i++) {
       var element = this.options.draw[i];
       switch (element.type) {
+        case "dot":
+          canvas.dot(element.position[0], element.position[1], self.getValue(element.color));
+          break;
         case "fill":
           canvas.fill(element.color);
+          break;
+        case "fillAlpha":
+          canvas.fillAlpha();
           break;
 
         case "line":
@@ -186,6 +192,29 @@ class PixelNode_Effect_Canvas extends PixelNode_Effect {
       bounceConf.direction = -1;
     } else if (bounceConf.value <= bounceConf.min) {
       bounceConf.direction = 1;
+    }
+    bounceConf.value += bounceConf.direction * bounceConf.speed;
+    this.variables[name] = bounceConf;
+    return bounceConf.round ? Math.round(bounceConf.value) : bounceConf.value;
+  }
+
+  loop(name, conf) {
+    if (this.variables[name] == undefined) this.variables[name] =  {};
+    var bounceConf = Object.assign({
+      min: 0,
+      max: 100,
+      speed: 1,
+      initialValue: 50,
+      initialDirection: 1,
+      round: true
+    }, this.variables[name], conf);
+    if (bounceConf.value == undefined) bounceConf.value = bounceConf.initialValue;
+    if (bounceConf.direction == undefined) bounceConf.direction = bounceConf.initialDirection;
+
+    if (bounceConf.value >= bounceConf.max) {
+      bounceConf.value = bounceConf.min;
+    } else if (bounceConf.value <= bounceConf.min) {
+      bounceConf.value = bounceConf.max;
     }
     bounceConf.value += bounceConf.direction * bounceConf.speed;
     this.variables[name] = bounceConf;

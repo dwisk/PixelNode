@@ -62,6 +62,15 @@ class PixelNode_Canvas {
     }
   }
 
+  // fill
+  fillAlpha() {
+    for (var y = 0; y < this.canvas.length; y++) {
+      for (var x = 0; x < this.canvas[y].length; x++) {
+        this.canvas[x][y] = [0,0,0,0];
+      }
+    }
+  }
+
   // rectangle
   rectangle(x1, y1, w, h, color) {
     if (y1 < 0) y1 = 0;
