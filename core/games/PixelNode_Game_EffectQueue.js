@@ -68,13 +68,8 @@ class PixelNode_Game_EffectQueue extends PixelNode_Game {
 		});
 	}
 
-	pixelDataOff () {
-		var self = this;
-		if (global.pixelNode.gameManager) {
-			global.mapping.forEach(function(map) {
-				global.pixelNode.gameManager.pixelData[map.name].mode = "off";
-			});
-		}
+	pixelDataOff() {
+		global.pixelNode.gameManager.pixelDataOff();
 	}
 
 	// draw effect – override this

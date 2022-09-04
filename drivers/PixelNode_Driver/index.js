@@ -89,9 +89,18 @@ PixelNode_Driver.prototype.startPainter = function() {
 PixelNode_Driver.prototype.painter = function() {
     var self = this;
 
-    for (var i = 0; i < global.mapping.length;i++) {
-    	map = global.mapping[i];
-    	if (self.pixelData[map.name] && self.pixelData[map.name].mode !== "off") {
+	for (var m = 0; m < global.pixelNode.gameManager.pixelData.maps.length;m++) {
+		mapName = global.pixelNode.gameManager.pixelData.maps[m];
+		var map;
+		for (var i = 0; i < global.mapping.length;i++) {
+			if (global.mapping[i].name === mapName) {
+				map = global.mapping[i];
+
+			}
+			// break;
+		}
+
+		if (self.pixelData[map.name] && self.pixelData[map.name].mode !== "off") {
 	    	var ringI = 0;
 
 	    	for (var j = 0; j < map[self.pixelData[map.name].mode].length;j++) {
@@ -101,7 +110,7 @@ PixelNode_Driver.prototype.painter = function() {
 		    	ringI++;
 	    	}
     	}
-    }
+	}
 
     //setImmediate(self.sendPixels.bind(self));
     self.sendPixels();
@@ -118,14 +127,21 @@ PixelNode_Driver.prototype.paintRing = function(ring, ringI, map) {
 	for (var p = 0; p < pixels.length;p++) {
 		pixelConfig = pixels[p];
 
-		var red = self.pixelData[map.name][self.pixelData[map.name].mode][ringI][pixelI][0];
-		var green = self.pixelData[map.name][self.pixelData[map.name].mode][ringI][pixelI][1];
-		var blue = self.pixelData[map.name][self.pixelData[map.name].mode][ringI][pixelI][2];
+		const pixelDataMap = self.pixelData[map.name];
 
-		if (!self.options.pixelColorCorrection || pixelConfig[2] || ring.pixelColorCorrection || map.pixelColorCorrection) {
-			self.setPixel(pixelConfig[0], pixelConfig[1], red, green, blue);
-		} else {
-			self.setPixel(pixelConfig[0], pixelConfig[1], green, red, blue);
+		var red = pixelDataMap[pixelDataMap.mode][ringI][pixelI][0];
+		var green = pixelDataMap[pixelDataMap.mode][ringI][pixelI][1];
+		var blue = pixelDataMap[pixelDataMap.mode][ringI][pixelI][2];
+		var alpha = pixelDataMap[pixelDataMap.mode][ringI][pixelI][3];
+		// if (map.name == "panel2") console.log(pixelDataMap[pixelDataMap.mode][ringI][pixelI]);
+		if (typeof alpha === "undefined" || alpha !== 0) {
+			// pixelConfig[2] = [map.name, red, green, blue];
+
+			if (!self.options.pixelColorCorrection || pixelConfig[2] || ring.pixelColorCorrection || map.pixelColorCorrection) {
+				self.setPixel(pixelConfig[0], pixelConfig[1], red, green, blue);
+			} else {
+				self.setPixel(pixelConfig[0], pixelConfig[1], green, red, blue);
+			}
 		}
     	pixelI++;
 	}

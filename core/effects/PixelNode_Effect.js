@@ -109,6 +109,7 @@ class PixelNode_Effect {
 				if (target) {
 					setImmediate(self.drawTarget.bind(self), target, self.options.outputs[i].name, self.options.outputs[i].targets[j]);
 					lastTarget.mode = lastPart;
+					if (!global.pixelNode.gameManager.pixelData.maps.includes(path[0])) global.pixelNode.gameManager.pixelData.maps.push(path[0])
 
 				}
 			}

@@ -28,7 +28,7 @@ class PixelNode_GameManager extends EventEmitter {
 		var self = this;
 
 		this.options = {...this.constructor.default_options, ...options};
-		this.pixelData = {};
+		this.pixelData = { maps: []};
 		this.draw_interval = null;
 		this.game = null;
 		this.listGame = null;
@@ -137,6 +137,7 @@ class PixelNode_GameManager extends EventEmitter {
 		global.mapping.forEach(function(map) {
 			self.pixelData[map.name].mode = "off";
 		})
+		self.pixelData.maps = [];
 	}
 
 	// draw Games
