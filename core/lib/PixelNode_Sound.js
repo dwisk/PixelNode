@@ -54,6 +54,11 @@ PixelNode_Sound.prototype.init = function() {
 	console.log("Init PixelNode_Sound".grey);
 	var self = this;
 	if (this.options.enabled) {
+		// SIGINT hack
+		process.on('SIGINT', function () {
+			process.exit();
+		});
+
 		mpg321 = require('mpg321');
 	  this.player = mpg321().remote();
 	  process.on('SIGINT', function(code) {
@@ -70,7 +75,9 @@ PixelNode_Sound.prototype.play = function(file) {
 
 			console.log("PixelNode_Sound", ("play "+path.join(this.options.dir, file)).bold)
 	    self.player.play(path.join(process.cwd(), this.options.dir, file));
+		self.player.gain(100)
 	    self.playing = true;
+
 
 	}
 }
